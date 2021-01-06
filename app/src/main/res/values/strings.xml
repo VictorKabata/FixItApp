@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">FixIt App</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="register">Register</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username">Username</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="home">Home</string>
+    <string name="feeds">Feeds</string>
+    <string name="profile">Profile</string>
+    <string name="messages">Messages</string>
+    <string name="settings">Settings</string>
+
+    <string-array name="specialisations">
+        <item>Select Specialisation</item>
+        <item>Computer Repair</item>
+        <item>Automotive Repair</item>
+        <item>Furniture Repair</item>
+        <item>Plumbing</item>
+        <item>Electrical Repair</item>
+        <item>Phone Repair</item>
+    </string-array>
+</resources>
+

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/splash_fragment">
+    <fragment
+        android:id="@+id/splash_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.SplashFragment"
+        android:label="Splash Screen"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/splash_to_login"
+            app:destination="@id/login_fragment"
+            app:popUpTo="@id/splash_fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/splash_to_home"
+            app:destination="@id/home_fragment"
+            app:popUpTo="@id/splash_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/login_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.LoginFragment"
+        android:label="Login" >
+        <action
+            android:id="@+id/login_to_register"
+            app:destination="@id/register_fragment"
+            app:popUpTo="@id/login_fragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/login_to_home"
+            app:destination="@id/home_fragment"
+            app:popUpTo="@id/login_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/register_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.RegisterFragment"
+        android:label="@string/register" >
+        <action
+            android:id="@+id/register_to_home"
+            app:destination="@id/home_fragment"
+            app:popUpTo="@id/register_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/home_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
+</navigation>
