@@ -1,15 +1,11 @@
 package com.vickikbt.fixitapp.data.network
 
-import com.vickikbt.fixitapp.models.network.AuthResponse
-import com.vickikbt.fixitapp.models.network.LoginRequest
-import com.vickikbt.fixitapp.models.network.PhotoUploadResponse
-import com.vickikbt.fixitapp.models.network.RegistrationRequest
+import com.vickikbt.fixitapp.models.entity.Post
+import com.vickikbt.fixitapp.models.entity.User
+import com.vickikbt.fixitapp.models.network.*
 import okhttp3.MultipartBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -26,7 +22,7 @@ interface ApiService {
     @POST("register")
     suspend fun userRegistration(@Body user: RegistrationRequest): Response<AuthResponse>
 
-    /*//Endpoint to get a user based on the user id
+    //Endpoint to get a user based on the user id
     @GET("users/{id}")
     suspend fun getUser(@Path("id") id: Int): Response<User>
 
@@ -37,24 +33,24 @@ interface ApiService {
     //Endpoint to upload post picture to AWS and return the post image URL.
     @Multipart
     @POST("postpic")
-    suspend fun uploadPostPicture(@Part upload: MultipartBody.Part): Response<PhotoUploadResponseBody>
+    suspend fun uploadPostPicture(@Part upload: MultipartBody.Part): Response<PhotoUploadResponse>
 
     //Endpoint to upload a post to the database
     @POST("posts")
     suspend fun uploadPost(
         @Header("Authorization") token: String,
-        @Body uploadPost: UploadPostRequestBody
+        @Body uploadPost: UploadPostRequest
     ): Response<Post>
 
-    //Endpoint to update a specific post. TODO: Replace PUT with PATCH
+    //Endpoint to update a specific post.
     @PUT("post/{id}")
     suspend fun updatePost(
         @Path("id") id: Int,
         @Header("Authorization") token: String,
-        @Body uploadPost: UpdatePostRequestBody
+        @Body uploadPost: UpdatePostRequest
     ): Response<Post>
 
-    //Endpoint to book work.
+    /*//Endpoint to book work.
     @POST("booking")
     suspend fun bookWork(
         @Header("Authorization") token: String,

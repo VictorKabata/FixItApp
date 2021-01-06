@@ -9,8 +9,6 @@
             type="com.vickikbt.fixitapp.ui.viewmodels.UserViewModel" />
     </data>
 
-    <!--TODO: Add Scroll view-->
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

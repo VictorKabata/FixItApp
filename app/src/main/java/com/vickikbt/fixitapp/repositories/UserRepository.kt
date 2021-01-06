@@ -8,6 +8,7 @@ import com.vickikbt.fixitapp.models.network.LoginRequest
 import com.vickikbt.fixitapp.models.network.PhotoUploadResponse
 import com.vickikbt.fixitapp.models.network.RegistrationRequest
 import com.vickikbt.fixitapp.utils.SafeApiRequest
+import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
 import javax.inject.Inject
 
@@ -15,7 +16,7 @@ class UserRepository @Inject constructor(private val apiService: ApiService, pri
 
     suspend fun saveAuthenticatedUser(user: User)=appDatabase.userDAO().saveAuthenticatedUser(user)
 
-    fun getAuthenticatedUser()=appDatabase.userDAO().getAuthenticatedUser()
+    fun getAuthenticatedUser()= flow { emit(appDatabase.userDAO().getAuthenticatedUser()) }
 
     suspend fun logoutUser()=appDatabase.clearAllTables()
 

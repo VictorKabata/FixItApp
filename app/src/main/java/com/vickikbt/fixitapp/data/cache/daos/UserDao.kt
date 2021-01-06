@@ -11,7 +11,7 @@ interface UserDao {
     suspend fun saveAuthenticatedUser(user: User)
 
     @Query("SELECT * FROM user_table")
-    fun getAuthenticatedUser(): Flow<User>
+    fun getAuthenticatedUser(): User
 
     @Query("DELETE FROM user_table")
     suspend fun deleteAuthenticatedUser()
