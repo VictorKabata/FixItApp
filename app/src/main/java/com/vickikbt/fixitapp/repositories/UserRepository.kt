@@ -63,10 +63,10 @@ class UserRepository @Inject constructor(
         return appDatabase.reviewDao().getAllReviews()
     }*/
 
-    fun getCurrentUserReviews()=appDatabase.reviewDao().getAllReviews()
-
     private fun saveAllReviews(reviews: List<Review>) =
         Coroutines.io { appDatabase.reviewDao().saveAllReviews(reviews) }
+
+    fun getCurrentUserReviews()=appDatabase.reviewDao().getAllReviews()
 
     suspend fun fetchCurrentUserReviews(userId:Int){
         val reviewsRequest=safeApiRequest { apiService.getUserReviews(userId) }

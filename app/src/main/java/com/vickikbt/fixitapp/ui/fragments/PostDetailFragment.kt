@@ -46,7 +46,7 @@ class PostDetailFragment : Fragment(), StateListener {
 
         binding.postDetailToolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         binding.postDetailToolbar.setNavigationOnClickListener {
-            it.findNavController().navigateUp()
+            findNavController().navigateUp()
         }
 
         binding.buttonBook.setOnClickListener {

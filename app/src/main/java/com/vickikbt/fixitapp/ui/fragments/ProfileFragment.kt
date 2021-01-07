@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentProfileBinding
 import com.vickikbt.fixitapp.ui.viewmodels.UserViewModel
+import com.vickikbt.fixitapp.utils.log
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,7 +35,23 @@ class ProfileFragment : Fragment() {
             logoutUser()
         }
 
+        initUI()
+
         return binding.root
+    }
+
+    //Load up user ratings
+    private fun initUI(){
+        var ratings =0
+
+        viewModel.getCurrentUserReviews.observe(viewLifecycleOwner,{reviews->
+            reviews.forEach { review->
+                ratings+=review.rating
+                requireActivity().log("$ratings")
+            }
+            binding.ratingBarProfile.isEnabled=false
+            binding.ratingBarProfile.rating=ratings.toFloat()
+        })
     }
 
     private fun logoutUser() {
