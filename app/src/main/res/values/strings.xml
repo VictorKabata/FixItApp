@@ -31,6 +31,9 @@
     <string name="budget">Budget</string>
     <string name="book_work">Book Work</string>
     <string name="contact">Contact</string>
+    <string name="name_placeholder">Victor Kabata</string>
+    <string name="comment">Comment</string>
+    <string name="cancel">Cancel</string>
 
     <string-array name="specialisations">
         <item>Select Specialisation</item>

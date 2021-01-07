@@ -1,12 +1,19 @@
 package com.vickikbt.fixitapp.ui.fragments
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -36,6 +43,15 @@ class PostDetailFragment : Fragment(), StateListener {
         binding.buttonContact.setOnClickListener {
             //val action = PostDetailFragmentDirections.actionPostDetailFragmentToChatFragment(user.id)
             //findNavController().navigate(action)
+        }
+
+        binding.postDetailToolbar.setNavigationIcon(R.drawable.ic_arrow_back)
+        binding.postDetailToolbar.setNavigationOnClickListener {
+            it.findNavController().navigateUp()
+        }
+
+        binding.buttonBook.setOnClickListener {
+            bookWork() //TODO: apply work api
         }
 
         initUI()
@@ -71,6 +87,38 @@ class PostDetailFragment : Fragment(), StateListener {
 
         })
 
+    }
+
+    private fun bookWork() {
+        val dialog = Dialog(requireActivity())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_book_work)
+
+        val user = userViewModel.getLoggedInUser.value!!
+
+        val profileImage: ImageView = dialog.findViewById(R.id.imageView_book_work)
+        val userName: TextView = dialog.findViewById(R.id.textView_userName_book_work)
+        val phoneNumber: TextView = dialog.findViewById(R.id.textView_phoneNumber_book_work)
+        val budgetEt: EditText = dialog.findViewById(R.id.editText_budget_book_work)
+        val commentEt: EditText = dialog.findViewById(R.id.editText_comment_book_work)
+        val cancel: TextView = dialog.findViewById(R.id.textView_dialog_cancel_book_work)
+        val bookWork: Button = dialog.findViewById(R.id.button_dialog_book_work)
+
+        Glide.with(requireActivity()).load(user.imageUrl).into(profileImage)
+        userName.text = user.username
+        phoneNumber.text = user.phoneNumber
+        budgetEt.setText("0")
+
+        bookWork.setOnClickListener {
+            val budget = budgetEt.text.toString().toInt()
+            val comment = commentEt.text.toString()
+
+            //workViewModel.bookWork(postId, budget, comment)
+        }
+
+        cancel.setOnClickListener { dialog.dismiss() }
+
+        dialog.show()
     }
 
     override fun onLoading() {
