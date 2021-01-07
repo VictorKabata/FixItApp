@@ -8,11 +8,18 @@ class TimePreference constructor(private val context: Context) {
     private val sharedPref = context.getSharedPreferences(Constants.SHARED_PREF_NAME, 0)
     private val editor = sharedPref.edit()
 
-    fun saveSyncTime(syncTime: Long) {
-        editor.putLong(Constants.SHARED_PREF_KEY, syncTime)
+    fun savePostSyncTime(syncTime: Long) {
+        editor.putLong(Constants.POST_SHARED_PREF_KEY, syncTime)
         editor.commit()
     }
 
-    val getLastSyncTime = sharedPref.getLong(Constants.SHARED_PREF_KEY, 0)
+    val getLastPostSyncTime = sharedPref.getLong(Constants.POST_SHARED_PREF_KEY, 0)
+
+    fun saveReviewSyncTime(syncTime: Long) {
+        editor.putLong(Constants.REVIEW_SHARED_PREF_KEY, syncTime)
+        editor.commit()
+    }
+
+    val getLastReviewSyncTime = sharedPref.getLong(Constants.REVIEW_SHARED_PREF_KEY, 0)
 
 }

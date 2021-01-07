@@ -5,6 +5,8 @@ import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
+import com.vickikbt.fixitapp.models.entity.Post
+import com.vickikbt.fixitapp.models.entity.Review
 import com.vickikbt.fixitapp.repositories.UserRepository
 import com.vickikbt.fixitapp.utils.ApiException
 import com.vickikbt.fixitapp.utils.NoInternetException
@@ -30,7 +32,12 @@ class UserViewModel @ViewModelInject constructor(private val userRepository: Use
     @Bindable
     val password = MutableLiveData<String>()
 
-    val getLoggedInUser = userRepository.getAuthenticatedUser().asLiveData()
+    private val _reviewsMutableLiveData = MutableLiveData<List<Review>>()
+    val userReviews: LiveData<List<Review>> = _reviewsMutableLiveData
+
+    val getCurrentUser = userRepository.getAuthenticatedUser().asLiveData()
+
+    val getCurrentUserReviews = userRepository.getCurrentUserReviews().asLiveData()
 
     fun loginUser(view: View) {
         stateListener?.onLoading()
@@ -50,6 +57,7 @@ class UserViewModel @ViewModelInject constructor(private val userRepository: Use
                 authResponse.user.let {
                     stateListener?.onSuccess("Welcome, ${it.username}")
                     userRepository.saveAuthenticatedUser(it)
+                    userRepository.fetchCurrentUserReviews(it.id) //Fetch user reviews and save to sqlite
                     return@launch
                 }
             } catch (e: ApiException) {
@@ -163,27 +171,53 @@ class UserViewModel @ViewModelInject constructor(private val userRepository: Use
         }
     }
 
-    fun getUser(id:Int)= liveData {
+    fun fetchCurrentUserReviews(userId: Int) =
+        viewModelScope.launch { userRepository.fetchCurrentUserReviews(userId) }
+
+    fun fetchUser(id: Int) = liveData {
         stateListener?.onLoading()
 
         try {
-            val userResponse=userRepository.getUser(id)
+            val userResponse = userRepository.fetchUser(id)
+            fetchUserReviews(userResponse.id) //Fetch user reviews
             emit(userResponse)
             stateListener?.onSuccess("Fetched user details")
             return@liveData
-        }catch (e:ApiException){
+        } catch (e: ApiException) {
             stateListener?.onFailure("${e.message}")
             return@liveData
-        }catch (e:UnknownHostException){
+        } catch (e: UnknownHostException) {
             stateListener?.onFailure("Ensure you have an internet connection")
             return@liveData
-        }catch (e:Exception){
+        } catch (e: Exception) {
             stateListener?.onFailure("Error loading user profile")
             return@liveData
         }
     }
 
-    fun logoutUser()=userRepository.logoutUser()
+    fun fetchUserReviews(userId: Int)= viewModelScope.launch {
+        stateListener?.onLoading()
+
+        try {
+            val userReviewsResponse=userRepository.fetchUserReviews(userId)
+            userReviewsResponse.let {reviews->
+                _reviewsMutableLiveData.value=reviews
+                stateListener?.onSuccess("Fetched user's reviews")
+                return@launch
+            }
+        }catch (e:ApiException){
+            stateListener?.onFailure("${e.message}")
+            return@launch
+        }catch (e:UnknownHostException){
+            stateListener?.onFailure("Ensure you have an internet connection")
+            return@launch
+        }catch (e:Exception){
+            stateListener?.onFailure("Error loading users reviews")
+            return@launch
+        }
+    }
+
+    fun logoutUser() = userRepository.logoutUser()
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {}
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {}

@@ -33,7 +33,7 @@ class PostRepository @Inject constructor(
 
     suspend fun getAllPosts(): Flow<MutableList<Post>> {
         val isPostCacheAvailable = appDatabase.postDao().isPostCacheAvailable() > 0
-        val lastSyncTime = timePreference.getLastSyncTime
+        val lastSyncTime = timePreference.getLastPostSyncTime
         val isTimeSurpassed = TimeKeeper.isTimeWithinInterval(
             Constants.TimeInterval,
             System.currentTimeMillis(),
@@ -44,7 +44,7 @@ class PostRepository @Inject constructor(
 
         val postResponse = safeApiRequest { apiService.fetchAllPosts() }
         postMutableLiveData.value = postResponse
-        timePreference.saveSyncTime(System.currentTimeMillis())
+        timePreference.savePostSyncTime(System.currentTimeMillis())
 
         return appDatabase.postDao().getAllPosts()
     }
@@ -54,7 +54,7 @@ class PostRepository @Inject constructor(
     suspend fun fetchAllPosts() {
         val postResponse = safeApiRequest { apiService.fetchAllPosts() }
         postMutableLiveData.value = postResponse
-        timePreference.saveSyncTime(System.currentTimeMillis())
+        timePreference.savePostSyncTime(System.currentTimeMillis())
     }
 
     suspend fun uploadPostPicture(body: MultipartBody.Part)=safeApiRequest { apiService.uploadPostPicture(body) }

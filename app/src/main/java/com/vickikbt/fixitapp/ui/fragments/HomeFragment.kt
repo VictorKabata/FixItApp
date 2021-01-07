@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentHomeBinding
@@ -42,7 +41,7 @@ class HomeFragment : Fragment(),StateListener {
             if (posts.isNullOrEmpty()) requireActivity().toast("No posts") //TODO: Replace with no post textview
 
             else {
-                val currentUserId=userViewModel.getLoggedInUser.value!!.id
+                val currentUserId=userViewModel.getCurrentUser.value!!.id
                 requireActivity().log("Current User ID: $currentUserId")
                 binding.recyclerViewHome.adapter = HomeRecyclerviewAdapter(requireActivity(), posts, currentUserId)
             }

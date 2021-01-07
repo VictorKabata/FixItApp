@@ -12,7 +12,9 @@ object Constants {
 
     const val SHARED_PREF_NAME = "Time Keeper"
 
-    const val SHARED_PREF_KEY = "Time"
+    const val POST_SHARED_PREF_KEY = "Post_Time"
+
+    const val REVIEW_SHARED_PREF_KEY = "Review_Time"
 
     const val TimeInterval = 6L
 

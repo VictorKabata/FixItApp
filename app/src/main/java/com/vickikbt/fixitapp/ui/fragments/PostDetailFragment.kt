@@ -13,7 +13,6 @@ import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
@@ -74,7 +73,7 @@ class PostDetailFragment : Fragment(), StateListener {
             binding.textViewPostDescription.text = post.description
             binding.textViewPostBudget.text = post.budget
 
-            val currentUserId = userViewModel.getLoggedInUser.value!!.id
+            val currentUserId = userViewModel.getCurrentUser.value!!.id
             if (currentUserId != user.id) {
                 binding.userImageView.setOnClickListener {
                     val action = PostDetailFragmentDirections.postDetailToUserProfile(user.id)
@@ -94,7 +93,7 @@ class PostDetailFragment : Fragment(), StateListener {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_book_work)
 
-        val user = userViewModel.getLoggedInUser.value!!
+        val user = userViewModel.getCurrentUser.value!!
 
         val profileImage: ImageView = dialog.findViewById(R.id.imageView_book_work)
         val userName: TextView = dialog.findViewById(R.id.textView_userName_book_work)

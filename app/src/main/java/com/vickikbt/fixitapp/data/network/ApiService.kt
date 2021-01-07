@@ -1,6 +1,7 @@
 package com.vickikbt.fixitapp.data.network
 
 import com.vickikbt.fixitapp.models.entity.Post
+import com.vickikbt.fixitapp.models.entity.Review
 import com.vickikbt.fixitapp.models.entity.User
 import com.vickikbt.fixitapp.models.network.*
 import okhttp3.MultipartBody
@@ -49,6 +50,10 @@ interface ApiService {
         @Header("Authorization") token: String,
         @Body uploadPost: UpdatePostRequest
     ): Response<Post>
+
+    //Endpoint to get user reviews
+    @GET("review/{id}")
+    suspend fun getUserReviews(@Path("id")userId:Int):Response<List<Review>>
 
     /*//Endpoint to book work.
     @POST("booking")

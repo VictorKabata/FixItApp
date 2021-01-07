@@ -25,7 +25,7 @@ class SplashFragment : Fragment() {
         val root=inflater.inflate(R.layout.fragment_splash, container, false)
 
         Handler().postDelayed({
-            viewModel.getLoggedInUser.observe(viewLifecycleOwner, Observer { user->
+            viewModel.getCurrentUser.observe(viewLifecycleOwner, Observer { user->
                 if (user==null){
                     findNavController().navigate(R.id.splash_to_login)
                 }else{

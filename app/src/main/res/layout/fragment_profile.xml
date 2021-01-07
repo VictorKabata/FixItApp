@@ -86,7 +86,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="end"
-                                android:text="@{viewModel.getLoggedInUser.username}"
+                                android:text="@{viewModel.getCurrentUser.username}"
                                 android:maxLines="1"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="18sp"
@@ -106,7 +106,7 @@
                                 android:layout_height="wrap_content"
                                 android:ellipsize="end"
                                 android:maxLines="1"
-                                android:text="@{viewModel.getLoggedInUser.email}"
+                                android:text="@{viewModel.getCurrentUser.email}"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -125,7 +125,7 @@
                                 android:layout_height="wrap_content"
                                 android:ellipsize="end"
                                 android:maxLines="1"
-                                android:text="@{viewModel.getLoggedInUser.phoneNumber}"
+                                android:text="@{viewModel.getCurrentUser.phoneNumber}"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -144,7 +144,7 @@
                                 android:layout_height="wrap_content"
                                 android:ellipsize="end"
                                 android:maxLines="1"
-                                android:text="@{viewModel.getLoggedInUser.specialisation}"
+                                android:text="@{viewModel.getCurrentUser.specialisation}"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -191,7 +191,7 @@
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:text="@{viewModel.getLoggedInUser.address}"
+                            android:text="@{viewModel.getCurrentUser.address}"
                             android:textColor="@color/primaryColor"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -210,7 +210,7 @@
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:text="@{viewModel.getLoggedInUser.region}"
+                            android:text="@{viewModel.getCurrentUser.region}"
                             android:textColor="@color/primaryColor"
                             android:textSize="18sp"
                             android:textStyle="bold" />
@@ -229,7 +229,7 @@
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:text="@{viewModel.getLoggedInUser.country}"
+                            android:text="@{viewModel.getCurrentUser.country}"
                             android:textColor="@color/primaryColor"
                             android:textSize="18sp"
                             android:textStyle="bold" />

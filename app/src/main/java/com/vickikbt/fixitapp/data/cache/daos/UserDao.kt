@@ -13,7 +13,7 @@ interface UserDao {
     @Query("SELECT * FROM user_table")
     fun getAuthenticatedUser(): User
 
-    @Query("DELETE FROM user_table")
-    suspend fun deleteAuthenticatedUser()
+    //@Query("DELETE FROM user_table")
+    //suspend fun deleteAuthenticatedUser()
 
 }

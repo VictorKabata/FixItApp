@@ -36,7 +36,7 @@ class UserProfileFragment : Fragment(), StateListener {
 
     private fun initUI() {
         val userId = args.UserId
-        viewModel.getUser(userId).observe(viewLifecycleOwner, { user ->
+        viewModel.fetchUser(userId).observe(viewLifecycleOwner, { user ->
             Glide.with(requireActivity()).load(user.imageUrl).into(binding.userProfileImageView)
             binding.userProfileUsername.text = user.username
             binding.userProfileEmailAddress.text = user.email
