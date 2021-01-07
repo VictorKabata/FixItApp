@@ -11,6 +11,7 @@ import com.vickikbt.fixitapp.utils.NoInternetException
 import com.vickikbt.fixitapp.utils.StateListener
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
+import java.net.UnknownHostException
 
 class UserViewModel @ViewModelInject constructor(private val userRepository: UserRepository) :
     ViewModel(), Observable {
@@ -158,6 +159,26 @@ class UserViewModel @ViewModelInject constructor(private val userRepository: Use
             return@liveData
         } catch (e: Exception) {
             stateListener?.onFailure("Registration Failed")
+            return@liveData
+        }
+    }
+
+    fun getUser(id:Int)= liveData {
+        stateListener?.onLoading()
+
+        try {
+            val userResponse=userRepository.getUser(id)
+            emit(userResponse)
+            stateListener?.onSuccess("Fetched user details")
+            return@liveData
+        }catch (e:ApiException){
+            stateListener?.onFailure("${e.message}")
+            return@liveData
+        }catch (e:UnknownHostException){
+            stateListener?.onFailure("Ensure you have an internet connection")
+            return@liveData
+        }catch (e:Exception){
+            stateListener?.onFailure("Error loading user profile")
             return@liveData
         }
     }

@@ -7,8 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.vickikbt.fixitapp.R
@@ -62,8 +61,8 @@ class PostDetailFragment : Fragment(), StateListener {
             val currentUserId = userViewModel.getLoggedInUser.value!!.id
             if (currentUserId != user.id) {
                 binding.userImageView.setOnClickListener {
-                    //val action = PostDetailFragmentDirections.actionPostDetailFragmentToUserProfileFragment(user.id)
-                    //findNavController().navigate(action)
+                    val action = PostDetailFragmentDirections.postDetailToUserProfile(user.id)
+                    findNavController().navigate(action)
                 }
             } else {
                 binding.buttonBook.visibility = View.GONE

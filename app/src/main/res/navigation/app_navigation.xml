@@ -73,5 +73,18 @@
             android:name="PostId"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/post_detail_to_user_profile"
+            app:destination="@id/user_profile_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/user_profile_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.UserProfileFragment"
+        android:label="User Profile"
+        tools:layout="@layout/fragment_user_profile" >
+        <argument
+            android:name="UserId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>
