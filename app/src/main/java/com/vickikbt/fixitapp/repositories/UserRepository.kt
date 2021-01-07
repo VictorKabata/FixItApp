@@ -18,7 +18,7 @@ class UserRepository @Inject constructor(private val apiService: ApiService, pri
 
     fun getAuthenticatedUser()= flow { emit(appDatabase.userDAO().getAuthenticatedUser()) }
 
-    suspend fun logoutUser()=appDatabase.clearAllTables()
+    fun logoutUser()=appDatabase.clearAllTables()
 
     suspend fun loginUser(email:String, password:String): AuthResponse {
         val loginRequestBody=LoginRequest(email,password)

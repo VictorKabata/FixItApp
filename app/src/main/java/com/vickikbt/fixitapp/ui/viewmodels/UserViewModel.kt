@@ -162,6 +162,8 @@ class UserViewModel @ViewModelInject constructor(private val userRepository: Use
         }
     }
 
+    fun logoutUser()=userRepository.logoutUser()
+
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {}
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {}
 }

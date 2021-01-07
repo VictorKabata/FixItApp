@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.vickikbt.fixitapp.ui.viewmodels.UserViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragments.ProfileFragment">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/linearlayout_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_imageView"
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        android:layout_gravity="center"
+                        android:elevation="10dp" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardView_profile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-75dp"
+                        android:layout_marginBottom="5dp"
+                        app:cardCornerRadius="15dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="65dp"
+                            android:orientation="vertical"
+                            android:padding="15dp">
+
+                            <androidx.appcompat.widget.AppCompatRatingBar
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:numStars="5"
+                                android:rating="4.0"
+                                android:theme="@style/RatingBar" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="10dp"
+                                android:gravity="center"
+                                android:text="@string/personal_information"
+                                android:textColor="@color/primaryColor"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/username"
+                                android:textColor="@color/secondaryColor"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/profile_username"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:text="@{viewModel.getLoggedInUser.username}"
+                                android:maxLines="1"
+                                android:textColor="@color/primaryColor"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="18dp"
+                                android:text="@string/email"
+                                android:textColor="@color/secondaryColor"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/profile_emailAddress"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="@{viewModel.getLoggedInUser.email}"
+                                android:textColor="@color/primaryColor"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="18dp"
+                                android:text="@string/phone_number"
+                                android:textColor="@color/secondaryColor"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/profile_phoneNumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="@{viewModel.getLoggedInUser.phoneNumber}"
+                                android:textColor="@color/primaryColor"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="18dp"
+                                android:text="@string/specialisation"
+                                android:textColor="@color/secondaryColor"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:id="@+id/profile_specialisation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="@{viewModel.getLoggedInUser.specialisation}"
+                                android:textColor="@color/primaryColor"
+                                android:textSize="18sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="5dp"
+                    app:cardCornerRadius="15dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="15dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="10dp"
+                            android:gravity="center"
+                            android:text="@string/address_information"
+                            android:textColor="@color/primaryColor"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/address"
+                            android:textColor="@color/secondaryColor"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/profile_address"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="@{viewModel.getLoggedInUser.address}"
+                            android:textColor="@color/primaryColor"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:text="@string/region"
+                            android:textColor="@color/secondaryColor"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/profile_region"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="@{viewModel.getLoggedInUser.region}"
+                            android:textColor="@color/primaryColor"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="18dp"
+                            android:text="@string/country"
+                            android:textColor="@color/secondaryColor"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/profile_country"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="@{viewModel.getLoggedInUser.country}"
+                            android:textColor="@color/primaryColor"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <Button
+                    android:id="@+id/button_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginVertical="24dp"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Logout"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</layout>

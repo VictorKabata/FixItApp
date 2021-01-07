@@ -49,5 +49,29 @@
         android:id="@+id/home_fragment"
         android:name="com.vickikbt.fixitapp.ui.fragments.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/home_to_post_detail"
+            app:destination="@id/post_detail_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.ProfileFragment"
+        android:label="@string/profile" >
+        <action
+            android:id="@+id/profile_to_login"
+            app:destination="@id/login_fragment"
+            app:popUpTo="@id/profile_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/post_detail_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.PostDetailFragment"
+        android:label="Post Detail"
+        tools:layout="@layout/fragment_post_detail" >
+        <argument
+            android:name="PostId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>
