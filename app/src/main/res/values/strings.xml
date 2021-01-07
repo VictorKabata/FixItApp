@@ -2,10 +2,6 @@
     <string name="app_name">FixIt App</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -22,7 +18,7 @@
     <string name="profile">Profile</string>
     <string name="messages">Messages</string>
     <string name="settings">Settings</string>
-    <string name="personal_information">Presonal Information</string>
+    <string name="personal_information">Personal Information</string>
     <string name="specialisation">Specialisation</string>
     <string name="address_information">Address Information</string>
     <string name="address">Address</string>
@@ -31,7 +27,7 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="category">Category</string>
-    <string name="description">description</string>
+    <string name="description">Description</string>
     <string name="budget">Budget</string>
     <string name="book_work">Book Work</string>
     <string name="contact">Contact</string>

@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.ItemHomeBinding
 import com.vickikbt.fixitapp.models.entity.Post
+import com.vickikbt.fixitapp.ui.fragments.HomeFragmentDirections
 import com.vickikbt.fixitapp.utils.toast
 
 class HomeRecyclerviewAdapter constructor(
@@ -39,22 +40,22 @@ class HomeRecyclerviewAdapter constructor(
     }
 
     private fun postDetail(view: View, post: Post, currentUserId:Int) {
-        /*if (post.status.isEmpty() && post.user.id != currentUserId) {
-            val action = HomeFragmentDirections.actionHomeFragmentToPostDetailFragment(post.id)
+        if (post.status.isEmpty() && post.user.id != currentUserId) {
+            val action = HomeFragmentDirections.homeToPostDetail(post.id)
             view.findNavController().navigate(action)
         } else if (post.status.isEmpty() && post.user.id == currentUserId) {
-            val action = HomeFragmentDirections.actionHomeFragmentToWorkApplicationFragment(post.id)
-            view.findNavController().navigate(action)
+            //val action = HomeFragmentDirections.actionHomeFragmentToWorkApplicationFragment(post.id)
+            //view.findNavController().navigate(action)
         } else if (post.status == "In-Progress" && post.workerId == currentUserId) {
-            val action = HomeFragmentDirections.actionHomeFragmentToWorkFragment(post.id)
-            view.findNavController().navigate(action)
+            //val action = HomeFragmentDirections.actionHomeFragmentToWorkFragment(post.id)
+            //view.findNavController().navigate(action)
         } else if (post.status == "In-Progress" && post.user.id == currentUserId) {
-            val action = HomeFragmentDirections.actionHomeFragmentToWorkFragment(post.id)
-            view.findNavController().navigate(action)
+            //val action = HomeFragmentDirections.actionHomeFragmentToWorkFragment(post.id)
+            //view.findNavController().navigate(action)
         } else if (post.status == "In-Progress" && post.workerId != currentUserId || post.user.id != currentUserId) {
             //context.toast("No more application for this work")
             context.toast("Work applications closed")
-        }*/
+        }
     }
 
 }

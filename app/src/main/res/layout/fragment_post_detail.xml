@@ -107,7 +107,7 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/category"
                     android:textColor="@color/secondaryColor"
-                    android:textSize="15sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textView_post_category"
@@ -116,7 +116,7 @@
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textColor="@color/primaryColor"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -125,7 +125,7 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/description"
                     android:textColor="@color/secondaryColor"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textView_post_description"
@@ -133,7 +133,7 @@
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:textColor="@color/primaryColor"
-                    android:textSize="18sp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -141,7 +141,7 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/budget"
                     android:textColor="@color/secondaryColor"
-                    android:textSize="12sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textView_post_budget"

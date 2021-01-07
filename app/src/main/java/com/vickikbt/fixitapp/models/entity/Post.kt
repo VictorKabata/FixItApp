@@ -14,7 +14,7 @@ data class Post(
     val id: Int,
 
     @SerializedName("user_id")
-    @ColumnInfo(name = "User_ID")
+    //@ColumnInfo(name = "User_ID")
     val userId: Int,
 
     @SerializedName("worker_id")

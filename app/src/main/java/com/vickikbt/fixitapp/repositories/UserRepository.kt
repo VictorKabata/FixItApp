@@ -59,4 +59,6 @@ class UserRepository @Inject constructor(private val apiService: ApiService, pri
         return safeApiRequest { apiService.uploadProfilePicture(profilePicture) }
     }
 
+    suspend fun getUser(id:Int)=safeApiRequest { apiService.getUser(id) }
+
 }
