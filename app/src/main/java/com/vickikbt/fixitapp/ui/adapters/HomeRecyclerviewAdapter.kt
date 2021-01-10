@@ -47,12 +47,12 @@ class HomeRecyclerviewAdapter constructor(
             val action = HomeFragmentDirections.homeToPostBookings(post.id,post.budget.toInt())
             view.findNavController().navigate(action)
         } else if (post.status == "In-Progress" && post.workerId == currentUserId) {
-            //val action = HomeFragmentDirections.homeToWork(post.id)
-            val action = HomeFragmentDirections.homeToPostBookings(post.id,post.budget.toInt())
+            val action = HomeFragmentDirections.homeToWork(post.id)
+            //val action = HomeFragmentDirections.homeToPostBookings(post.id,post.budget.toInt())
             view.findNavController().navigate(action)
         } else if (post.status == "In-Progress" && post.user.id == currentUserId) {
-            //val action = HomeFragmentDirections.homeToWork(post.id)
-            val action = HomeFragmentDirections.homeToPostBookings(post.id,post.budget.toInt())
+            val action = HomeFragmentDirections.homeToWork(post.id)
+            //val action = HomeFragmentDirections.homeToPostBookings(post.id,post.budget.toInt())
             view.findNavController().navigate(action)
         } else if (post.status == "In-Progress" && post.workerId != currentUserId || post.user.id != currentUserId) {
             //context.toast("No more application for this work")

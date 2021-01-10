@@ -49,11 +49,17 @@ class UserProfileFragment : Fragment(), StateListener {
             binding.userProfileCountry.text = user.country
         })
 
-        viewModel.fetchUserReviews(userId)
-        viewModel.userReviews.observe(viewLifecycleOwner, {reviews->
-            reviews.forEach {review->
-                rating+=review.rating/reviews.size
 
+        viewModel.fetchUserReviews(userId).observe(viewLifecycleOwner, {reviews->
+            requireActivity().log("Reviews: $reviews")
+            if (reviews.isNullOrEmpty()){
+                rating=0
+                requireActivity().log("Reviews isNull: $rating")
+            }else{
+                reviews.forEach {review->
+                    rating+=review.rating/reviews.size
+                    requireActivity().log("Reviews isNotNull: $rating")
+                }
             }
             binding.userProfileRating.rating=rating.toFloat()
         })

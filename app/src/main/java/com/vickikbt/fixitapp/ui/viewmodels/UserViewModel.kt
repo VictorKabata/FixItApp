@@ -32,8 +32,8 @@ class UserViewModel @ViewModelInject constructor(private val userRepository: Use
     @Bindable
     val password = MutableLiveData<String>()
 
-    private val _reviewsMutableLiveData = MutableLiveData<List<Review>>()
-    val userReviews: LiveData<List<Review>> = _reviewsMutableLiveData
+    //private val _reviewsMutableLiveData = MutableLiveData<List<Review>>()
+    //val userReviews: LiveData<List<Review>> = _reviewsMutableLiveData
 
     val getCurrentUser = userRepository.getAuthenticatedUser().asLiveData()
 
@@ -195,25 +195,26 @@ class UserViewModel @ViewModelInject constructor(private val userRepository: Use
         }
     }
 
-    fun fetchUserReviews(userId: Int)= viewModelScope.launch {
+    fun fetchUserReviews(userId: Int)= liveData {
         stateListener?.onLoading()
 
         try {
             val userReviewsResponse=userRepository.fetchUserReviews(userId)
             userReviewsResponse.let {reviews->
-                _reviewsMutableLiveData.value=reviews
+                //_reviewsMutableLiveData.value=reviews
+                emit(reviews)
                 stateListener?.onSuccess("Fetched user's reviews")
-                return@launch
+                return@liveData
             }
         }catch (e:ApiException){
             stateListener?.onFailure("${e.message}")
-            return@launch
+            return@liveData
         }catch (e:UnknownHostException){
             stateListener?.onFailure("Ensure you have an internet connection")
-            return@launch
+            return@liveData
         }catch (e:Exception){
             stateListener?.onFailure("Error loading users reviews")
-            return@launch
+            return@liveData
         }
     }
 
