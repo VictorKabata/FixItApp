@@ -13,9 +13,11 @@ data class Booking(
     @SerializedName("post_id")
     val postId: Int,
     val status: String,
+    val comment:String,
+    val bid:String,
+    val user: User,
     @SerializedName("updated_at")
     val updatedAt: String,
-    val user: User,
     @SerializedName("user_id")
     val userId: Int
 )

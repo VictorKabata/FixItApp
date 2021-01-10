@@ -49,7 +49,6 @@
                 android:id="@+id/textView_post_booking_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_location"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@color/secondaryColor"
@@ -57,7 +56,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/imageView_post_booking_profile"
                 app:layout_constraintStart_toStartOf="@+id/textView_post_booking_email"
                 app:layout_constraintTop_toBottomOf="@+id/textView_post_booking_email"
-                tool:text="@string/location" />
+                tool:text="@string/location"
+                app:drawableStartCompat="@drawable/ic_location" />
 
             <View
                 android:id="@+id/view"
@@ -68,14 +68,14 @@
                 app:layout_constraintTop_toBottomOf="@+id/imageView_post_booking_profile" />
 
             <TextView
-                android:id="@+id/_textView_post_booking_comment"
+                android:id="@+id/textView_post_booking_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:textColor="@color/primaryColor"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view"
                 tool:text="Worker's comments" />
@@ -85,12 +85,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:textColor="@color/green"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/_textView_post_booking_comment"
+                app:layout_constraintTop_toBottomOf="@+id/textView_post_booking_comment"
                 tool:text="Ksh. 500" />
 
             <LinearLayout
@@ -143,12 +143,12 @@
                 android:layout_marginTop="10dp"
                 android:backgroundTint="@color/red"
                 android:padding="10dp"
-                android:visibility="gone"
                 android:text="@string/rejected"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@+id/textView_post_bookings_bid" />
 
 

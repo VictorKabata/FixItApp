@@ -65,7 +65,7 @@ interface ApiService {
 
     //Endpoint to get booking made for a particular post
     @GET("posts/booking/{id}")
-    suspend fun getPostBooking(@Path("id") id: Int): Response<List<Booking>>
+    suspend fun getPostBooking(@Path("id") id: Int): Response<MutableList<Booking>>
 
     //Endpoint to reject or accept post booking
     @PUT("booking/{id}")
