@@ -28,12 +28,12 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:backgroundTint="?attr/colorPrimary"
+            android:tint="@android:color/white"
             android:src="@drawable/ic_add"
             app:borderWidth="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:rippleColor="@color/secondaryColor" />
+            app:rippleColor="@color/colorAccent" />
 
         <ProgressBar
             android:id="@+id/progressBar_home"

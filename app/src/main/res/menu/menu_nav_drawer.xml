@@ -11,11 +11,14 @@
             <menu>
                 <item
                     android:id="@+id/home_fragment"
+                    android:checkable="true"
+                    android:checked="true"
                     android:icon="@drawable/ic_home"
                     android:title="@string/home" />
 
                 <item
                     android:id="@+id/feeds_fragment"
+                    android:checkable="true"
                     android:icon="@drawable/ic_feeds"
                     android:title="@string/feeds" />
             </menu>
@@ -25,6 +28,7 @@
             <menu>
                 <item
                     android:id="@+id/profile_fragment"
+                    android:checkable="true"
                     android:icon="@drawable/ic_profile"
                     android:title="@string/profile" />
             </menu>
@@ -34,6 +38,7 @@
             <menu>
                 <item
                     android:id="@+id/messages_fragment"
+                    android:checkable="true"
                     android:icon="@drawable/ic_messages"
                     android:title="@string/messages" />
             </menu>
@@ -43,6 +48,7 @@
             <menu>
                 <item
                     android:id="@+id/settings_fragment"
+                    android:checkable="true"
                     android:icon="@drawable/ic_settings"
                     android:title="@string/settings" />
             </menu>
