@@ -55,6 +55,9 @@
         <action
             android:id="@+id/home_to_post_bookings"
             app:destination="@id/post_booking_fragment" />
+        <action
+            android:id="@+id/home_to_work"
+            app:destination="@id/work_fragment" />
     </fragment>
     <fragment
         android:id="@+id/profile_fragment"
@@ -100,5 +103,18 @@
         <action
             android:id="@+id/post_booking_to_user_profile"
             app:destination="@id/user_profile_fragment" />
+        <action
+            android:id="@+id/post_bookings_to_work"
+            app:destination="@id/work_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/work_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.WorkFragment"
+        android:label="Work"
+        tools:layout="@layout/fragment_work" >
+        <argument
+            android:name="PostId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

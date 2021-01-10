@@ -39,6 +39,9 @@
     <string name="reject">Reject</string>
     <string name="accept">Accept</string>
     <string name="rejected">Rejected</string>
+    <string name="started">Started</string>
+    <string name="finished">Finished</string>
+    <string name="complete">Complete</string>
 
     <string-array name="specialisations">
         <item>Select Specialisation</item>

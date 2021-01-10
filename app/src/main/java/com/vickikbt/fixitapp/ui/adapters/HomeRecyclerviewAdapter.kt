@@ -47,11 +47,11 @@ class HomeRecyclerviewAdapter constructor(
             val action = HomeFragmentDirections.homeToPostBookings(post.id)
             view.findNavController().navigate(action)
         } else if (post.status == "In-Progress" && post.workerId == currentUserId) {
-            //val action = HomeFragmentDirections.actionHomeFragmentToWorkFragment(post.id)
-            //view.findNavController().navigate(action)
+            val action = HomeFragmentDirections.homeToWork(post.id)
+            view.findNavController().navigate(action)
         } else if (post.status == "In-Progress" && post.user.id == currentUserId) {
-            //val action = HomeFragmentDirections.actionHomeFragmentToWorkFragment(post.id)
-            //view.findNavController().navigate(action)
+            val action = HomeFragmentDirections.homeToWork(post.id)
+            view.findNavController().navigate(action)
         } else if (post.status == "In-Progress" && post.workerId != currentUserId || post.user.id != currentUserId) {
             //context.toast("No more application for this work")
             context.toast("Work applications closed")
@@ -69,7 +69,8 @@ class HomeRecyclerviewViewHolder(private val binding: ItemHomeBinding) :
         binding.postUserUsername.text = post.user.username
         binding.postDate.text = post.createdAt //TODO: Add date formatter later
         Glide.with(context).load(post.imageUrl).into(binding.postImageView)
-        binding.postLocationTextView.text = "${post.region}, ${post.country}"//"${post.address}, ${post.country}."
+        binding.postLocationTextView.text =
+            "${post.region}, ${post.country}"//"${post.address}, ${post.country}."
         binding.postCategoryTextView.text = post.category
         binding.postDescriptionTextView.text = post.description
     }
