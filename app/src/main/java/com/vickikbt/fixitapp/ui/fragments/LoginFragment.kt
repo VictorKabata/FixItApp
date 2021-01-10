@@ -45,13 +45,13 @@ class LoginFragment : Fragment(), StateListener {
 
     override fun onSuccess(message: String) {
         binding.progressBarLogin.hide()
-        requireActivity().toast(message)
+        if(isAdded) requireActivity().toast(message)
         findNavController().navigate(R.id.login_to_home)
     }
 
     override fun onFailure(message: String) {
         binding.progressBarLogin.hide()
-        requireActivity().toast(message)
+        if (isAdded) requireActivity().toast(message)
     }
 
 }

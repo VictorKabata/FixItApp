@@ -36,16 +36,16 @@ class HomeRecyclerviewAdapter constructor(
 
         holder.bind(post, context)
 
-        holder.itemView.setOnClickListener { postDetail(it,post,currentUserId) }
+        holder.itemView.setOnClickListener { postDetail(it, post, currentUserId) }
     }
 
-    private fun postDetail(view: View, post: Post, currentUserId:Int) {
+    private fun postDetail(view: View, post: Post, currentUserId: Int) {
         if (post.status.isEmpty() && post.user.id != currentUserId) {
             val action = HomeFragmentDirections.homeToPostDetail(post.id)
             view.findNavController().navigate(action)
         } else if (post.status.isEmpty() && post.user.id == currentUserId) {
-            //val action = HomeFragmentDirections.actionHomeFragmentToWorkApplicationFragment(post.id)
-            //view.findNavController().navigate(action)
+            val action = HomeFragmentDirections.homeToPostBookings(post.id)
+            view.findNavController().navigate(action)
         } else if (post.status == "In-Progress" && post.workerId == currentUserId) {
             //val action = HomeFragmentDirections.actionHomeFragmentToWorkFragment(post.id)
             //view.findNavController().navigate(action)
@@ -69,7 +69,7 @@ class HomeRecyclerviewViewHolder(private val binding: ItemHomeBinding) :
         binding.postUserUsername.text = post.user.username
         binding.postDate.text = post.createdAt //TODO: Add date formatter later
         Glide.with(context).load(post.imageUrl).into(binding.postImageView)
-        binding.postLocationTextView.text = "${post.address}, ${post.country}."
+        binding.postLocationTextView.text = "${post.region}, ${post.country}"//"${post.address}, ${post.country}."
         binding.postCategoryTextView.text = post.category
         binding.postDescriptionTextView.text = post.description
     }

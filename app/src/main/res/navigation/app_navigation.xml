@@ -27,8 +27,7 @@
         <action
             android:id="@+id/login_to_register"
             app:destination="@id/register_fragment"
-            app:popUpTo="@id/login_fragment"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/login_fragment" />
         <action
             android:id="@+id/login_to_home"
             app:destination="@id/home_fragment"
@@ -53,6 +52,9 @@
         <action
             android:id="@+id/home_to_post_detail"
             app:destination="@id/post_detail_fragment" />
+        <action
+            android:id="@+id/home_to_post_bookings"
+            app:destination="@id/post_booking_fragment" />
     </fragment>
     <fragment
         android:id="@+id/profile_fragment"
@@ -61,7 +63,7 @@
         <action
             android:id="@+id/profile_to_login"
             app:destination="@id/login_fragment"
-            app:popUpTo="@id/profile_fragment"
+            app:popUpTo="@id/login_fragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -86,5 +88,17 @@
             android:name="UserId"
             app:argType="integer"
             android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/post_booking_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.PostBookingsFragment"
+        android:label="Post Booking"
+        tools:layout="@layout/fragment_post_booking" >
+        <argument android:name="PostId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/post_booking_to_user_profile"
+            app:destination="@id/user_profile_fragment" />
     </fragment>
 </navigation>

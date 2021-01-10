@@ -73,6 +73,8 @@ class RegisterFragment : Fragment(), StateListener {
             pickerContent.launch("image/*")
         }
 
+        binding.linearlayoutRegister.setOnClickListener { findNavController().navigateUp() }
+
         requestPermission()
         getMyLocation()
 
@@ -182,9 +184,11 @@ class RegisterFragment : Fragment(), StateListener {
     }
 
     private fun getLocationNames() {
-        address = UserLocation.getAddressName(requireActivity(), latitude!!, longitude!!)
-        region = UserLocation.getRegionName(requireActivity(), latitude!!, longitude!!)
-        country = UserLocation.getCountryName(requireActivity(), latitude!!, longitude!!)
+        if (isAdded){
+            address = UserLocation.getAddressName(requireActivity(), latitude!!, longitude!!)
+            region = UserLocation.getRegionName(requireActivity(), latitude!!, longitude!!)
+            country = UserLocation.getCountryName(requireActivity(), latitude!!, longitude!!)
+        }
     }
 
     override fun onLoading() {

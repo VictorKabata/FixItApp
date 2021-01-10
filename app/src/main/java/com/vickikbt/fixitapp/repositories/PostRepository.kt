@@ -49,7 +49,7 @@ class PostRepository @Inject constructor(
         return appDatabase.postDao().getAllPosts()
     }
 
-    fun getPost(id:Int)=appDatabase.postDao().getPost(id)
+    fun getPost(id: Int) = appDatabase.postDao().getPost(id)
 
     suspend fun fetchAllPosts() {
         val postResponse = safeApiRequest { apiService.fetchAllPosts() }
@@ -57,7 +57,8 @@ class PostRepository @Inject constructor(
         timePreference.savePostSyncTime(System.currentTimeMillis())
     }
 
-    suspend fun uploadPostPicture(body: MultipartBody.Part)=safeApiRequest { apiService.uploadPostPicture(body) }
+    suspend fun uploadPostPicture(body: MultipartBody.Part) =
+        safeApiRequest { apiService.uploadPostPicture(body) }
 
     suspend fun uploadPost(
         category: String,
@@ -71,16 +72,26 @@ class PostRepository @Inject constructor(
         country: String
     ): Post {
         val user = appDatabase.userDAO().getAuthenticatedUser()
-        var token=user.token
-        var userId=user.id
+        var token = user.token
+        var userId = user.id
 
-        val uploadPostRequestBody= UploadPostRequest(userId,category,description,imageURL,budget,latitude,longitude,address,region,country)
+        val uploadPostRequestBody = UploadPostRequest(
+            userId,
+            category,
+            description,
+            imageURL,
+            budget,
+            latitude,
+            longitude,
+            address,
+            region,
+            country
+        )
 
-        return safeApiRequest { apiService.uploadPost(token!!,uploadPostRequestBody) }
+        return safeApiRequest { apiService.uploadPost(token!!, uploadPostRequestBody) }
     }
 
     //suspend fun getPostBookings(postId:Int)=safeApiRequest { apiService.getPostBookings(postId) }
-
 
 
 }

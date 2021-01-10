@@ -37,7 +37,7 @@ class UserViewModel @ViewModelInject constructor(private val userRepository: Use
 
     val getCurrentUser = userRepository.getAuthenticatedUser().asLiveData()
 
-    val getCurrentUserReviews = userRepository.getCurrentUserReviews().asLiveData()
+    suspend fun getCurrentUserReviews() =userRepository.getCurrentUserReviews().asLiveData()
 
     fun loginUser(view: View) {
         stateListener?.onLoading()

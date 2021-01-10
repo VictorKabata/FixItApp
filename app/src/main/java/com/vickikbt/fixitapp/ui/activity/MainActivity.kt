@@ -1,6 +1,7 @@
 package com.vickikbt.fixitapp.ui.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
@@ -40,6 +41,12 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.splash_fragment || destination.id == R.id.login_fragment || destination.id == R.id.register_fragment) {
+                toolbar.visibility = View.GONE
+            } else toolbar.visibility = View.VISIBLE
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

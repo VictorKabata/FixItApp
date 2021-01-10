@@ -1,5 +1,6 @@
 package com.vickikbt.fixitapp.ui.viewmodels
 
+import android.util.Log
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.hilt.lifecycle.ViewModelInject
@@ -20,10 +21,10 @@ class PostViewModel @ViewModelInject constructor(private val postRepository: Pos
     var stateListener: StateListener? = null
 
     @Bindable
-    val description=MutableLiveData<String>()
+    val description = MutableLiveData<String>()
 
     @Bindable
-    val budget=MutableLiveData<String>()
+    val budget = MutableLiveData<String>()
 
     private val _postMutableLiveData = MutableLiveData<MutableList<Post>>()
     val posts: LiveData<MutableList<Post>> = _postMutableLiveData
@@ -35,7 +36,8 @@ class PostViewModel @ViewModelInject constructor(private val postRepository: Pos
             try {
                 val postResponse = postRepository.getAllPosts()
                 postResponse.collect { posts ->
-                    _postMutableLiveData.value = posts
+                    Log.e("VickiKbt", "getAllPosts: $posts")
+                    _postMutableLiveData.postValue(posts)// = posts
                     stateListener?.onSuccess("Fetched all posts")
                 }
                 return@launch
@@ -46,17 +48,17 @@ class PostViewModel @ViewModelInject constructor(private val postRepository: Pos
                 stateListener?.onFailure("Ensure you have internet connection")
                 return@launch
             } catch (e: Exception) {
-                stateListener?.onFailure("Error fetching posts")
+                stateListener?.onFailure("${e.message}")
                 return@launch
             }
         }
     }
 
-    fun getPost(postId:Int)=postRepository.getPost(postId).asLiveData()
+    fun getPost(postId: Int) = postRepository.getPost(postId).asLiveData()
 
-    fun fetchAllPosts()= liveData { emit(postRepository.fetchAllPosts()) }
+    fun fetchAllPosts() = liveData { emit(postRepository.fetchAllPosts()) }
 
-    fun uploadPostPicture(body: MultipartBody.Part)= liveData {
+    fun uploadPostPicture(body: MultipartBody.Part) = liveData {
         stateListener?.onLoading()
 
         try {
@@ -80,7 +82,7 @@ class PostViewModel @ViewModelInject constructor(private val postRepository: Pos
     }
 
     fun uploadPost(
-        category:String,
+        category: String,
         imageURL: String,
         latitude: Double,
         longitude: Double,

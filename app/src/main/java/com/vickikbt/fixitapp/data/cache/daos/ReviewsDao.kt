@@ -13,7 +13,10 @@ interface ReviewsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveAllReviews(review: List<Review>)
 
-    @Query("SELECT * FROM review_table ORDER BY Created_At ASC") //TOD: Compare if latest first or last first
+    @Query("SELECT * FROM review_table ORDER BY Created_At ASC") //TODo: Compare if latest first or last first
     fun getAllReviews():Flow<MutableList<Review>>
+
+    @Query("SELECT COUNT(*) FROM review_table")
+    suspend fun isReviewCacheAvailable(): Int
 
 }

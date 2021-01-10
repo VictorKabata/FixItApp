@@ -34,6 +34,11 @@
     <string name="name_placeholder">Victor Kabata</string>
     <string name="comment">Comment</string>
     <string name="cancel">Cancel</string>
+    <string name="no_application">No Applications Yet</string>
+    <string name="location">Location</string>
+    <string name="reject">Reject</string>
+    <string name="accept">Accept</string>
+    <string name="rejected">Rejected</string>
 
     <string-array name="specialisations">
         <item>Select Specialisation</item>

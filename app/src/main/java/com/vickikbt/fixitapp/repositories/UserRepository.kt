@@ -46,27 +46,23 @@ class UserRepository @Inject constructor(
         return safeApiRequest { apiService.userLogin(loginRequestBody) }
     }
 
-    /*suspend fun getUserReviews(userId: Int): Flow<MutableList<Review>> {
-        val lastSyncTime = timePreference.getLastReviewSyncTime
-        val isTimeSurpassed = TimeKeeper.isTimeWithinInterval(
-            Constants.TimeInterval,
-            System.currentTimeMillis(),
-            lastSyncTime
-        )
-
-        if (!isTimeSurpassed) return appDatabase.reviewDao().getAllReviews()
-
-        val reviewsRequest = safeApiRequest { apiService.getUserReviews(userId) }
-        reviewMutableLiveData.value = reviewsRequest
-        timePreference.saveReviewSyncTime(System.currentTimeMillis())
-
-        return appDatabase.reviewDao().getAllReviews()
-    }*/
 
     private fun saveAllReviews(reviews: List<Review>) =
         Coroutines.io { appDatabase.reviewDao().saveAllReviews(reviews) }
 
-    fun getCurrentUserReviews()=appDatabase.reviewDao().getAllReviews()
+    suspend fun getCurrentUserReviews(): Flow<MutableList<Review>> {
+        val isReviewCacheAvailable=appDatabase.reviewDao().isReviewCacheAvailable()>0
+
+        if (isReviewCacheAvailable) return appDatabase.reviewDao().getAllReviews()
+
+        //TODO: Add check internet connectivity
+        val currentUserId=appDatabase.userDAO().getAuthenticatedUser().id
+        val userReviewsResponse=safeApiRequest { apiService.getUserReviews(currentUserId) }
+        reviewMutableLiveData.value=userReviewsResponse
+        timePreference.saveReviewSyncTime(System.currentTimeMillis())
+
+        return appDatabase.reviewDao().getAllReviews()
+    }
 
     suspend fun fetchCurrentUserReviews(userId:Int){
         val reviewsRequest=safeApiRequest { apiService.getUserReviews(userId) }
