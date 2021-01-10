@@ -117,4 +117,9 @@
             app:argType="integer"
             android:defaultValue="0" />
     </fragment>
+    <fragment
+        android:id="@+id/messages_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.MessagesFragment"
+        android:label="@string/messages"
+        tools:layout="@layout/fragment_messages" />
 </navigation>
