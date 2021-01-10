@@ -1,5 +1,6 @@
 package com.vickikbt.fixitapp.data.network
 
+import com.vickikbt.fixitapp.models.entity.Booking
 import com.vickikbt.fixitapp.models.entity.Post
 import com.vickikbt.fixitapp.models.entity.Review
 import com.vickikbt.fixitapp.models.entity.User
@@ -53,14 +54,14 @@ interface ApiService {
 
     //Endpoint to get user reviews
     @GET("review/{id}")
-    suspend fun getUserReviews(@Path("id")userId:Int):Response<List<Review>>
+    suspend fun getUserReviews(@Path("id") userId: Int): Response<List<Review>>
 
     /*//Endpoint to book work.
     @POST("booking")
     suspend fun bookWork(
         @Header("Authorization") token: String,
         @Body bookWorkRequestBody: BookWorkRequestBody
-    ): Response<Post>
+    ): Response<Post>*/
 
     //Endpoint to get booking made for a particular post
     @GET("posts/booking/{id}")
@@ -70,17 +71,17 @@ interface ApiService {
     @PUT("booking/{id}")
     suspend fun updateBooking(
         @Path("id") postId: Int,
-        @Body updateBooking: UpdateBookingRequestBody
+        @Body updateBooking: UpdateBookingRequest
     ): Response<Booking>
 
     //Create work
-    @POST("work")
-    suspend fun createWork(
-        @Header("Authorization") token: String,
-        @Body workRequestBody: WorkRequestBody
-    ): Response<Work>
+    /* @POST("work")
+     suspend fun createWork(
+         @Header("Authorization") token: String,
+         @Body workRequestBody: WorkRequestBody
+     ): Response<Work>
 
-    //Get work
-    @GET("work/{id}")
-    suspend fun getWork(@Path("id") id: Int): Response<Work>*/
+     //Get work
+     @GET("work/{id}")
+     suspend fun getWork(@Path("id") id: Int): Response<Work>*/
 }
