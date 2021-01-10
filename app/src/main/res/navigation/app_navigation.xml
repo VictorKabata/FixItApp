@@ -106,6 +106,10 @@
         <action
             android:id="@+id/post_bookings_to_work"
             app:destination="@id/work_fragment" />
+        <argument
+            android:name="Budget"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/work_fragment"

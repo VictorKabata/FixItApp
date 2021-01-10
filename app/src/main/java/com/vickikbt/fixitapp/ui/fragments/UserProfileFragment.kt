@@ -36,6 +36,8 @@ class UserProfileFragment : Fragment(), StateListener {
 
     private fun initUI() {
         val userId = args.UserId
+        var rating=0
+
         viewModel.fetchUser(userId).observe(viewLifecycleOwner, { user ->
             Glide.with(requireActivity()).load(user.imageUrl).into(binding.userProfileImageView)
             binding.userProfileUsername.text = user.username
@@ -47,6 +49,14 @@ class UserProfileFragment : Fragment(), StateListener {
             binding.userProfileCountry.text = user.country
         })
 
+        viewModel.fetchUserReviews(userId)
+        viewModel.userReviews.observe(viewLifecycleOwner, {reviews->
+            reviews.forEach {review->
+                rating+=review.rating/reviews.size
+
+            }
+            binding.userProfileRating.rating=rating.toFloat()
+        })
     }
 
     override fun onLoading() {

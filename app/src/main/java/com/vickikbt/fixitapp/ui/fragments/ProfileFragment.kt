@@ -49,7 +49,7 @@ class ProfileFragment : Fragment() {
 
         viewModel.getCurrentUserReviews().observe(viewLifecycleOwner,{reviews->
             reviews.forEach { review->
-                ratings+=review.rating
+                ratings+=review.rating/reviews.size
                 requireActivity().log("Rating: $ratings")
             }
             binding.ratingBarProfile.rating=ratings.toFloat()
