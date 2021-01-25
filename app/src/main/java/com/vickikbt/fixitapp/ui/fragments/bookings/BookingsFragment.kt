@@ -19,7 +19,7 @@ class BookingsFragment : Fragment(), StateListener {
 
     private lateinit var binding: FragmentPostBookingBinding
     private val viewModel by viewModels<BookingViewModel>()
-    private val args: PostBookingsFragmentArgs by navArgs()
+    private val args: BookingsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

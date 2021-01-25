@@ -16,7 +16,7 @@ import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.ItemPostBookingBinding
 import com.vickikbt.fixitapp.models.entity.Booking
 import com.vickikbt.fixitapp.ui.fragments.bookings.BookingViewModel
-import com.vickikbt.fixitapp.ui.fragments.bookings.PostBookingsFragmentDirections
+import com.vickikbt.fixitapp.ui.fragments.bookings.BookingsFragmentDirections
 import com.vickikbt.fixitapp.utils.Constants.REJECT_BOOKING
 import com.vickikbt.fixitapp.utils.StateListener
 import com.vickikbt.fixitapp.utils.toast
@@ -47,7 +47,7 @@ class PostBookingRecyclerviewAdapter constructor(
         holder.bind(booking, context, budget)
 
         holder.profilePic.setOnClickListener {
-            val action = PostBookingsFragmentDirections.postBookingToUserProfile(booking.userId)
+            val action = BookingsFragmentDirections.postBookingToUserProfile(booking.userId)
             it.findNavController().navigate(action)
         }
 
@@ -66,7 +66,7 @@ class PostBookingRecyclerviewAdapter constructor(
     private fun acceptBooking(postId: Int, userId: Int, view: View) {
         try {
             bookingViewModel.acceptBooking(postId, userId)
-            val action = PostBookingsFragmentDirections.postBookingsToWork(postId)
+            val action = BookingsFragmentDirections.postBookingsToWork(postId)
             view.findNavController().navigate(action)
         } catch (e: Exception) {
         }

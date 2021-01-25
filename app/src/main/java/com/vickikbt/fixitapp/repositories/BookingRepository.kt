@@ -22,9 +22,9 @@ class BookingRepository @Inject constructor(
     private val bookingsMutableLiveData = MutableLiveData<List<Booking>>()
 
     init {
-        bookingsMutableLiveData.observeForever { bookings ->
-            //saveBookings(bookings)
-        }
+        /*bookingsMutableLiveData.observeForever { bookings ->
+            saveBookings(bookings)
+        }*/
     }
 
     suspend fun getPostBookings(postId: Int) = safeApiRequest { apiService.getPostBooking(postId) }
