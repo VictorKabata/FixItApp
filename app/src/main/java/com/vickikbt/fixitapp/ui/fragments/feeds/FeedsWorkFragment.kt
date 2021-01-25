@@ -15,7 +15,7 @@ import com.vickikbt.fixitapp.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FeedsWorkFragment : Fragment(),StateListener {
+class FeedsWorkFragment : Fragment(), StateListener {
 
     private lateinit var binding: FragmentFeedsWorkBinding
     private val viewModel: FeedViewModel by activityViewModels()
@@ -25,16 +25,19 @@ class FeedsWorkFragment : Fragment(),StateListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feeds_work, container, false)
-        viewModel.stateListener=this
+        viewModel.stateListener = this
 
         initRecyclerview()
 
         return binding.root
     }
 
-    private fun initRecyclerview(){
-        viewModel.works.observe(viewLifecycleOwner, {works->
-
+    private fun initRecyclerview() {
+        viewModel.works.observe(viewLifecycleOwner, { works ->
+            if (works.isNullOrEmpty()) requireActivity().toast("No Works")
+            else {
+                //binding.recyclerviewFeedWork.adapter
+            }
         })
     }
 

@@ -1,9 +1,6 @@
 package com.vickikbt.fixitapp.data.network
 
-import com.vickikbt.fixitapp.models.entity.Booking
-import com.vickikbt.fixitapp.models.entity.Post
-import com.vickikbt.fixitapp.models.entity.Review
-import com.vickikbt.fixitapp.models.entity.User
+import com.vickikbt.fixitapp.models.entity.*
 import com.vickikbt.fixitapp.models.network.*
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -57,7 +54,10 @@ interface ApiService {
     suspend fun getUserReviews(@Path("id") userId: Int): Response<List<Review>>
 
     @GET("posts/user/{id}")
-    suspend fun getUserPosts(@Path("id")userId: Int):Response<List<Post>>
+    suspend fun getUserPosts(@Path("id") userId: Int): Response<List<Post>>
+
+    @GET("work/user/{id}")
+    suspend fun getUserWorks(@Path("id") userId: Int): Response<List<Work>>
 
     //Endpoint to book work.
     @POST("booking")
