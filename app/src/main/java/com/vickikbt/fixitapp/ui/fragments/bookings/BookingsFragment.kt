@@ -15,7 +15,7 @@ import com.vickikbt.fixitapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PostBookingsFragment : Fragment(), StateListener {
+class BookingsFragment : Fragment(), StateListener {
 
     private lateinit var binding: FragmentPostBookingBinding
     private val viewModel by viewModels<BookingViewModel>()

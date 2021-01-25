@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragments.bookings.PostBookingsFragment">
+        tools:context=".ui.fragments.bookings.BookingsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView_bookings"

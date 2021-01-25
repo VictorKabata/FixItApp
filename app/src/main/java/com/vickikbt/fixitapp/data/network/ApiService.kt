@@ -78,13 +78,13 @@ interface ApiService {
     ): Response<Booking>
 
     //Create work
-    /* @POST("work")
+     @POST("work")
      suspend fun createWork(
          @Header("Authorization") token: String,
-         @Body workRequestBody: WorkRequestBody
+         @Body workRequestBody: WorkRequest
      ): Response<Work>
 
      //Get work
      @GET("work/{id}")
-     suspend fun getWork(@Path("id") id: Int): Response<Work>*/
+     suspend fun getWork(@Path("id") id: Int): Response<Work>
 }

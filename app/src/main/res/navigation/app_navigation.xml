@@ -97,7 +97,7 @@
     </fragment>
     <fragment
         android:id="@+id/post_booking_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.bookings.PostBookingsFragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.bookings.BookingsFragment"
         android:label="Post Booking"
         tools:layout="@layout/fragment_post_booking" >
         <argument android:name="PostId"
