@@ -1,4 +1,4 @@
-package com.vickikbt.fixitapp.ui.fragments
+package com.vickikbt.fixitapp.ui.fragments.profile
 
 import android.app.Dialog
 import android.os.Bundle
@@ -15,7 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentProfileBinding
-import com.vickikbt.fixitapp.ui.viewmodels.UserViewModel
+import com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel
 import com.vickikbt.fixitapp.utils.Coroutines
 import com.vickikbt.fixitapp.utils.log
 import dagger.hilt.android.AndroidEntryPoint

@@ -1,21 +1,21 @@
-package com.vickikbt.fixitapp.ui.viewmodels
+package com.vickikbt.fixitapp.ui.fragments.upload
 
-import android.util.Log
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
-import com.vickikbt.fixitapp.models.entity.Post
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.vickikbt.fixitapp.repositories.PostRepository
 import com.vickikbt.fixitapp.utils.ApiException
 import com.vickikbt.fixitapp.utils.NoInternetException
 import com.vickikbt.fixitapp.utils.StateListener
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import java.net.UnknownHostException
 
-class PostViewModel @ViewModelInject constructor(private val postRepository: PostRepository) :
+class UploadViewModel @ViewModelInject constructor(private val postRepository: PostRepository) :
     ViewModel(), Observable {
 
     var stateListener: StateListener? = null
@@ -25,38 +25,6 @@ class PostViewModel @ViewModelInject constructor(private val postRepository: Pos
 
     @Bindable
     val budget = MutableLiveData<String>()
-
-    private val _postMutableLiveData = MutableLiveData<MutableList<Post>>()
-    val posts: LiveData<MutableList<Post>> = _postMutableLiveData
-
-    fun getAllPosts() {
-        stateListener?.onLoading()
-
-        viewModelScope.launch {
-            try {
-                val postResponse = postRepository.getAllPosts()
-                postResponse.collect { posts ->
-                    Log.e("VickiKbt", "getAllPosts: $posts")
-                    _postMutableLiveData.postValue(posts)// = posts
-                    stateListener?.onSuccess("Fetched all posts")
-                }
-                return@launch
-            } catch (e: ApiException) {
-                stateListener?.onFailure("${e.message}")
-                return@launch
-            } catch (e: UnknownHostException) {
-                stateListener?.onFailure("Ensure you have internet connection")
-                return@launch
-            } catch (e: Exception) {
-                stateListener?.onFailure("${e.message}")
-                return@launch
-            }
-        }
-    }
-
-    fun getPost(postId: Int) = postRepository.getPost(postId).asLiveData()
-
-    fun fetchAllPosts() = liveData { emit(postRepository.fetchAllPosts()) }
 
     fun uploadPostPicture(body: MultipartBody.Part) = liveData {
         stateListener?.onLoading()
@@ -120,4 +88,5 @@ class PostViewModel @ViewModelInject constructor(private val postRepository: Pos
 
     override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {}
     override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {}
+
 }

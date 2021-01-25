@@ -1,32 +1,28 @@
-package com.vickikbt.fixitapp.ui.fragments
+package com.vickikbt.fixitapp.ui.fragments.upload
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.*
 import com.vickikbt.fixitapp.R
-import com.vickikbt.fixitapp.databinding.FragmentRegisterBinding
-import com.vickikbt.fixitapp.ui.viewmodels.UserViewModel
+import com.vickikbt.fixitapp.databinding.FragmentUploadBinding
 import com.vickikbt.fixitapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterFragment : Fragment(), StateListener {
+class UploadFragment : Fragment(), StateListener {
 
-    private lateinit var binding: FragmentRegisterBinding
-    private val viewModel by viewModels<UserViewModel>()
+    private lateinit var binding: FragmentUploadBinding
+    private val viewModel: UploadViewModel by activityViewModels()
 
     private var selectedImage: Uri? = null
 
@@ -45,35 +41,30 @@ class RegisterFragment : Fragment(), StateListener {
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             selectedImage = uri
 
-            binding.imageViewProfile.setImageURI(uri)
+            binding.imageViewUpload.setImageURI(uri)
+
+            binding.textViewSelectUpload.visibility = View.GONE
         }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
-        binding.viewModel = viewModel
-        viewModel.stateListener = this
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_upload, container, false)
+        binding.viewModel=viewModel
+        viewModel.stateListener=this
+
+        setHasOptionsMenu(true)
 
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
 
         locationHelper = LocationHelper(requireActivity())
 
-        binding.buttonRegistration.setOnClickListener {
-            if (latitude != null && longitude != null) {
-                registerUser(latitude!!, longitude!!, address!!, region!!, country!!)
-            } else {
-                getMyLocation()
-            }
-        }
-
-        binding.imageViewProfile.setOnClickListener {
+        binding.imageViewUpload.setOnClickListener {
             pickerContent.launch("image/*")
         }
 
-        binding.linearlayoutRegister.setOnClickListener { findNavController().navigateUp() }
 
         requestPermission()
         getMyLocation()
@@ -81,8 +72,7 @@ class RegisterFragment : Fragment(), StateListener {
         return binding.root
     }
 
-    //Register user
-    private fun registerUser(
+    private fun uploadPost(
         latitude: Double,
         longitude: Double,
         address: String,
@@ -90,22 +80,19 @@ class RegisterFragment : Fragment(), StateListener {
         country: String
     ) {
         if (selectedImage == null) {
-            requireActivity().toast("Please select your profile picture")
+            requireActivity().applicationContext.toast("Please select image")
             return
         }
 
-        val category = binding.spinnerSpecialisation.selectedItem.toString()
-        if (binding.spinnerSpecialisation.selectedItemPosition == 0) {
-            requireActivity().toast("Please select your specialisation")
-            return
-        }
+        val category = binding.spinnerCategoryUpload.selectedItem.toString()
+        requireActivity().applicationContext.log(category)
 
         val body = ImageHelpers(requireActivity()).getImageBody(selectedImage!!)
 
-        viewModel.uploadProfilePic(body).observe(viewLifecycleOwner, Observer { imageUrl ->
-            viewModel.registerUser(
-                imageUrl!!,
+        viewModel.uploadPostPicture(body).observe(viewLifecycleOwner, { imageUrl ->
+            viewModel.uploadPost(
                 category,
+                imageUrl!!,
                 latitude,
                 longitude,
                 address,
@@ -113,6 +100,21 @@ class RegisterFragment : Fragment(), StateListener {
                 country
             )
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.upload_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_upload -> {
+                if (latitude != null && longitude != null) {
+                    uploadPost(latitude!!, longitude!!, address!!, region!!, country!!)
+                }
+            }
+        }
+        return false
     }
 
     //Allow user to grant location permissions.
@@ -127,7 +129,6 @@ class RegisterFragment : Fragment(), StateListener {
         )
     }
 
-    //Get last location
     private fun getMyLocation() {
         if (locationHelper!!.checkPermission()) {
             if (locationHelper!!.isLocationEnabled()) {
@@ -142,12 +143,12 @@ class RegisterFragment : Fragment(), StateListener {
 
                         getLocationNames()
 
-                        requireActivity().log("Latitude: ${latitude}, Longitude: $longitude")
+                        requireActivity().applicationContext.log("Latitude: ${latitude}, Longitude: $longitude")
                     }
 
                 }
             } else {
-                requireActivity().toast("Please enable location!")
+                requireActivity().applicationContext.toast("Please enable location!")
             }
 
         } else {
@@ -179,32 +180,31 @@ class RegisterFragment : Fragment(), StateListener {
 
             getLocationNames()
 
-            requireActivity().log("New Latitude: ${latitude}, New Longitude: $longitude")
+            requireActivity().applicationContext.log("New Latitude: ${latitude}, New Longitude: ${longitude}")
         }
     }
 
+    //Get the address, region and country name.
     private fun getLocationNames() {
-        if (isAdded){
-            address = UserLocation.getAddressName(requireActivity(), latitude!!, longitude!!)
-            region = UserLocation.getRegionName(requireActivity(), latitude!!, longitude!!)
-            country = UserLocation.getCountryName(requireActivity(), latitude!!, longitude!!)
-        }
+        address = UserLocation.getAddressName(requireActivity(), latitude!!, longitude!!)
+        region = UserLocation.getRegionName(requireActivity(), latitude!!, longitude!!)
+        country = UserLocation.getCountryName(requireActivity(), latitude!!, longitude!!)
     }
 
     override fun onLoading() {
-        binding.progressBarRegister.show()
+        binding.progressBarUpload.show()
     }
 
     override fun onSuccess(message: String) {
-        binding.progressBarRegister.hide()
+        binding.progressBarUpload.hide()
         requireActivity().toast(message)
-
-        findNavController().navigate(R.id.register_to_home)
+        //findNavController().navigateUp()
     }
 
     override fun onFailure(message: String) {
-        binding.progressBarRegister.hide()
+        binding.progressBarUpload.hide()
         requireActivity().toast(message)
+        requireActivity().log(message)
     }
 
 }

@@ -6,7 +6,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragments.PostDetailFragment">
+        tools:context=".ui.fragments.post_detail.PostDetailFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBar"

@@ -12,12 +12,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.ActivityMainBinding
-import com.vickikbt.fixitapp.ui.viewmodels.UserViewModel
+import com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.BlurTransformation
 

@@ -1,4 +1,4 @@
-package com.vickikbt.fixitapp.ui.fragments
+package com.vickikbt.fixitapp.ui.fragments.feeds
 
 import android.os.Bundle
 import android.view.LayoutInflater

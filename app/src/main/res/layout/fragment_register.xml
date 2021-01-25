@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.vickikbt.fixitapp.ui.viewmodels.UserViewModel" />
+            type="com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel" />
     </data>
 
     <RelativeLayout

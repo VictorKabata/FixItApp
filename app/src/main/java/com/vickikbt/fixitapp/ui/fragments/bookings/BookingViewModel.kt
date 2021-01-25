@@ -1,4 +1,4 @@
-package com.vickikbt.fixitapp.ui.viewmodels
+package com.vickikbt.fixitapp.ui.fragments.bookings
 
 import androidx.databinding.Observable
 import androidx.hilt.lifecycle.ViewModelInject

@@ -1,21 +1,27 @@
-package com.vickikbt.fixitapp.ui.fragments
+package com.vickikbt.fixitapp.ui.fragments.messages
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.vickikbt.fixitapp.R
+import com.vickikbt.fixitapp.databinding.FragmentMessagesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FeedsPostFragment : Fragment() {
+class MessagesFragment : Fragment() {
+
+    private lateinit var binding:FragmentMessagesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding=DataBindingUtil.inflate(inflater,R.layout.fragment_messages, container, false)
 
-        return inflater.inflate(R.layout.fragment_feeds_post, container, false)
+
+        return binding.root
     }
 }

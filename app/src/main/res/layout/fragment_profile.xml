@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.vickikbt.fixitapp.ui.viewmodels.UserViewModel" />
+            type="com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragments.ProfileFragment">
+        tools:context=".ui.fragments.profile.ProfileFragment">
 
         <ScrollView
             android:layout_width="match_parent"

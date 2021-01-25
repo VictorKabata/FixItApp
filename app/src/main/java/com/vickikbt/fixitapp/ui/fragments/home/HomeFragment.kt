@@ -1,4 +1,4 @@
-package com.vickikbt.fixitapp.ui.fragments
+package com.vickikbt.fixitapp.ui.fragments.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,13 +7,10 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentHomeBinding
 import com.vickikbt.fixitapp.ui.adapters.HomeRecyclerviewAdapter
-import com.vickikbt.fixitapp.ui.viewmodels.PostViewModel
-import com.vickikbt.fixitapp.ui.viewmodels.UserViewModel
+import com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel
 import com.vickikbt.fixitapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment(), StateListener {
 
     private lateinit var binding: FragmentHomeBinding
-    private val viewModel by viewModels<PostViewModel>()
+    private val viewModel by viewModels<HomeViewModel>()
     private val userViewModel by viewModels<UserViewModel>()
 
     override fun onCreateView(
@@ -30,7 +27,6 @@ class HomeFragment : Fragment(), StateListener {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         viewModel.stateListener = this
-        viewModel.getAllPosts()
 
         initUI()
 
@@ -47,11 +43,6 @@ class HomeFragment : Fragment(), StateListener {
                 })
             }
         })
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.getAllPosts()
     }
 
     override fun onLoading() {

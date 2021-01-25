@@ -1,12 +1,10 @@
-package com.vickikbt.fixitapp.ui.viewmodels
+package com.vickikbt.fixitapp.ui.fragments.auth
 
 import android.view.View
 import androidx.databinding.Bindable
 import androidx.databinding.Observable
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.vickikbt.fixitapp.models.entity.Post
-import com.vickikbt.fixitapp.models.entity.Review
 import com.vickikbt.fixitapp.repositories.UserRepository
 import com.vickikbt.fixitapp.utils.ApiException
 import com.vickikbt.fixitapp.utils.NoInternetException

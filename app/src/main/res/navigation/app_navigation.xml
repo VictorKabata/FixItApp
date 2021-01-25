@@ -6,7 +6,7 @@
     app:startDestination="@id/splash_fragment">
     <fragment
         android:id="@+id/splash_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.SplashFragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.auth.SplashFragment"
         android:label="Splash Screen"
         tools:layout="@layout/fragment_splash" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/login_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.LoginFragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.auth.LoginFragment"
         android:label="Login" >
         <action
             android:id="@+id/login_to_register"
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/register_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.RegisterFragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.auth.RegisterFragment"
         android:label="@string/register" >
         <action
             android:id="@+id/register_to_home"
@@ -46,7 +46,7 @@
     </fragment>
     <fragment
         android:id="@+id/home_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.HomeFragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -58,10 +58,13 @@
         <action
             android:id="@+id/home_to_work"
             app:destination="@id/work_fragment" />
+        <action
+            android:id="@+id/home_to_upload"
+            app:destination="@id/upload_fragment" />
     </fragment>
     <fragment
         android:id="@+id/profile_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.ProfileFragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.profile.ProfileFragment"
         android:label="@string/profile" >
         <action
             android:id="@+id/profile_to_login"
@@ -71,7 +74,7 @@
     </fragment>
     <fragment
         android:id="@+id/post_detail_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.PostDetailFragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.post_detail.PostDetailFragment"
         android:label="Post Detail"
         tools:layout="@layout/fragment_post_detail" >
         <argument
@@ -84,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/user_profile_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.UserProfileFragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.auth.UserProfileFragment"
         android:label="User Profile"
         tools:layout="@layout/fragment_user_profile" >
         <argument
@@ -94,7 +97,7 @@
     </fragment>
     <fragment
         android:id="@+id/post_booking_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.PostBookingsFragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.bookings.PostBookingsFragment"
         android:label="Post Booking"
         tools:layout="@layout/fragment_post_booking" >
         <argument android:name="PostId"
@@ -113,7 +116,7 @@
     </fragment>
     <fragment
         android:id="@+id/work_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.WorkFragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.work.WorkFragment"
         android:label="Work"
         tools:layout="@layout/fragment_work" >
         <argument
@@ -123,22 +126,27 @@
     </fragment>
     <fragment
         android:id="@+id/messages_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.MessagesFragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.messages.MessagesFragment"
         android:label="@string/messages"
         tools:layout="@layout/fragment_messages" />
     <fragment
         android:id="@+id/feeds_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.FeedsFragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.feeds.FeedsFragment"
         android:label="@string/feeds"
         tools:layout="@layout/fragment_feeds" />
     <fragment
         android:id="@+id/feeds_post_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.FeedsPostFragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.feeds.FeedsPostFragment"
         android:label="Feeds Posts"
         tools:layout="@layout/fragment_feeds_post" />
     <fragment
         android:id="@+id/feeds_work_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.FeedsWorkFragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.feeds.FeedsWorkFragment"
         android:label="Feeds Work"
         tools:layout="@layout/fragment_feeds_work" />
+    <fragment
+        android:id="@+id/upload_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.upload.UploadFragment"
+        android:label="fragment_upload"
+        tools:layout="@layout/fragment_upload" />
 </navigation>

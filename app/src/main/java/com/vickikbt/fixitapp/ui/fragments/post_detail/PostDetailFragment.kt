@@ -1,4 +1,4 @@
-package com.vickikbt.fixitapp.ui.fragments
+package com.vickikbt.fixitapp.ui.fragments.post_detail
 
 import android.app.Dialog
 import android.os.Bundle
@@ -18,8 +18,10 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentPostDetailBinding
-import com.vickikbt.fixitapp.ui.viewmodels.PostViewModel
-import com.vickikbt.fixitapp.ui.viewmodels.UserViewModel
+import com.vickikbt.fixitapp.ui.fragments.PostDetailFragmentArgs
+import com.vickikbt.fixitapp.ui.fragments.PostDetailFragmentDirections
+import com.vickikbt.fixitapp.ui.fragments.home.HomeViewModel
+import com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel
 import com.vickikbt.fixitapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,7 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class PostDetailFragment : Fragment(), StateListener {
 
     private lateinit var binding: FragmentPostDetailBinding
-    private val postViewModel by viewModels<PostViewModel>()
+    private val postViewModel by viewModels<HomeViewModel>()
     private val userViewModel by viewModels<UserViewModel>()
     private val args: PostDetailFragmentArgs by navArgs()
 

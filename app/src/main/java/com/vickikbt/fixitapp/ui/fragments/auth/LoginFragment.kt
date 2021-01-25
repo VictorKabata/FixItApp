@@ -1,4 +1,4 @@
-package com.vickikbt.fixitapp.ui.fragments
+package com.vickikbt.fixitapp.ui.fragments.auth
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentLoginBinding
-import com.vickikbt.fixitapp.ui.viewmodels.UserViewModel
 import com.vickikbt.fixitapp.utils.StateListener
-import com.vickikbt.fixitapp.utils.hide
-import com.vickikbt.fixitapp.utils.show
 import com.vickikbt.fixitapp.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
