@@ -126,4 +126,19 @@
         android:name="com.vickikbt.fixitapp.ui.fragments.MessagesFragment"
         android:label="@string/messages"
         tools:layout="@layout/fragment_messages" />
+    <fragment
+        android:id="@+id/feeds_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.FeedsFragment"
+        android:label="@string/feeds"
+        tools:layout="@layout/fragment_feeds" />
+    <fragment
+        android:id="@+id/feeds_post_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.FeedsPostFragment"
+        android:label="Feeds Posts"
+        tools:layout="@layout/fragment_feeds_post" />
+    <fragment
+        android:id="@+id/feeds_work_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.FeedsWorkFragment"
+        android:label="Feeds Work"
+        tools:layout="@layout/fragment_feeds_work" />
 </navigation>
