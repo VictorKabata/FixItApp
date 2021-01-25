@@ -9,48 +9,49 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentFeedsPostBinding
-import com.vickikbt.fixitapp.utils.StateListener
-import com.vickikbt.fixitapp.utils.log
-import com.vickikbt.fixitapp.utils.toast
+import com.vickikbt.fixitapp.ui.adapters.FeedPostRecyclerviewAdapter
+import com.vickikbt.fixitapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FeedsPostFragment : Fragment(),StateListener {
+class FeedsPostFragment : Fragment(), StateListener {
 
     private lateinit var binding: FragmentFeedsPostBinding
-    private val viewModel:FeedViewModel by activityViewModels()
+    private val viewModel: FeedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_feeds_post, container, false)
-        viewModel.stateListener=this
+        viewModel.stateListener = this
 
         initRecyclerview()
 
         return binding.root
     }
 
-    private fun initRecyclerview(){
-        viewModel.posts.observe(viewLifecycleOwner, {posts->
+    private fun initRecyclerview() {
+        viewModel.posts.observe(viewLifecycleOwner, { posts ->
             if (posts.isNullOrEmpty()) requireActivity().toast("No posts")
-
-            else{
-                //binding.recyclerviewFeedPosts.adapter
+            else {
+                binding.recyclerviewFeedPosts.adapter =
+                    FeedPostRecyclerviewAdapter(requireActivity(), posts)
             }
         })
     }
 
     override fun onLoading() {
-
+        binding.progressBarFeedPosts.show()
     }
 
     override fun onSuccess(message: String) {
+        binding.progressBarFeedPosts.hide()
         requireActivity().toast(message)
     }
 
     override fun onFailure(message: String) {
+        binding.progressBarFeedPosts.hide()
         requireActivity().toast(message)
         requireActivity().log(message)
     }

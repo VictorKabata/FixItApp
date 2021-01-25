@@ -9,9 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentFeedsWorkBinding
-import com.vickikbt.fixitapp.utils.StateListener
-import com.vickikbt.fixitapp.utils.log
-import com.vickikbt.fixitapp.utils.toast
+import com.vickikbt.fixitapp.ui.adapters.FeedWorksRecyclerviewAdapter
+import com.vickikbt.fixitapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,20 +35,23 @@ class FeedsWorkFragment : Fragment(), StateListener {
         viewModel.works.observe(viewLifecycleOwner, { works ->
             if (works.isNullOrEmpty()) requireActivity().toast("No Works")
             else {
-                //binding.recyclerviewFeedWork.adapter
+                binding.recyclerviewFeedWork.adapter =
+                    FeedWorksRecyclerviewAdapter(requireActivity(), works)
             }
         })
     }
 
     override fun onLoading() {
-
+        binding.progressBarFeedWorks.show()
     }
 
     override fun onSuccess(message: String) {
+        binding.progressBarFeedWorks.hide()
         requireActivity().toast(message)
     }
 
     override fun onFailure(message: String) {
+        binding.progressBarFeedWorks.hide()
         requireActivity().toast(message)
         requireActivity().log(message)
     }
