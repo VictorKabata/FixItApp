@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.ItemHomeBinding
 import com.vickikbt.fixitapp.models.entity.Post
-import com.vickikbt.fixitapp.ui.fragments.HomeFragmentDirections
+import com.vickikbt.fixitapp.ui.fragments.home.HomeFragmentDirections
 import com.vickikbt.fixitapp.utils.toast
 
 class HomeRecyclerviewAdapter constructor(

@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentLoginBinding
 import com.vickikbt.fixitapp.utils.StateListener
+import com.vickikbt.fixitapp.utils.hide
+import com.vickikbt.fixitapp.utils.show
 import com.vickikbt.fixitapp.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,7 +44,7 @@ class LoginFragment : Fragment(), StateListener {
 
     override fun onSuccess(message: String) {
         binding.progressBarLogin.hide()
-        if(isAdded) requireActivity().toast(message)
+        if (isAdded) requireActivity().toast(message)
         findNavController().navigate(R.id.login_to_home)
     }
 

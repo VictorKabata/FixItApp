@@ -11,7 +11,6 @@ import androidx.navigation.fragment.navArgs
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentPostBookingBinding
 import com.vickikbt.fixitapp.ui.adapters.PostBookingRecyclerviewAdapter
-import com.vickikbt.fixitapp.ui.fragments.PostBookingsFragmentArgs
 import com.vickikbt.fixitapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 

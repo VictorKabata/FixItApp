@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.ItemPostBookingBinding
 import com.vickikbt.fixitapp.models.entity.Booking
-import com.vickikbt.fixitapp.ui.fragments.PostBookingsFragmentDirections
+import com.vickikbt.fixitapp.ui.fragments.bookings.PostBookingsFragmentDirections
 
 class PostBookingRecyclerviewAdapter constructor(
     private val context: Context,
@@ -39,7 +39,7 @@ class PostBookingRecyclerviewAdapter constructor(
         holder.bind(booking, context, budget)
 
         holder.profilePic.setOnClickListener {
-            val action=PostBookingsFragmentDirections.postBookingToUserProfile(booking.userId)
+            val action= PostBookingsFragmentDirections.postBookingToUserProfile(booking.userId)
             it.findNavController().navigate(action)
         }
 
