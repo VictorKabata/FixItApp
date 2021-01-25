@@ -39,7 +39,7 @@ class PostDetailFragment : Fragment(), StateListener {
         postViewModel.stateListener = this
 
         binding.buttonContact.setOnClickListener {
-            //val action = PostDetailFragmentDirections.actionPostDetailFragmentToChatFragment(user.id)
+            //val action = PostDetailFragmentDirections.postDetailToUserProfile(user.id)
             //findNavController().navigate(action)
         }
 
@@ -100,6 +100,7 @@ class PostDetailFragment : Fragment(), StateListener {
         val budgetEt: EditText = dialog.findViewById(R.id.editText_budget_book_work)
         val commentEt: EditText = dialog.findViewById(R.id.editText_comment_book_work)
         val cancel: TextView = dialog.findViewById(R.id.textView_dialog_cancel_book_work)
+
         val bookWork: Button = dialog.findViewById(R.id.button_dialog_book_work)
 
         Glide.with(requireActivity()).load(user.imageUrl).into(profileImage)
@@ -108,10 +109,14 @@ class PostDetailFragment : Fragment(), StateListener {
         budgetEt.setText("0")
 
         bookWork.setOnClickListener {
-            val budget = budgetEt.text.toString().toInt()
+            val budget = budgetEt.text.toString()
             val comment = commentEt.text.toString()
 
-            //workViewModel.bookWork(postId, budget, comment)
+            when {
+                budget.isEmpty() -> requireActivity().toast("Enter bid amount")
+                comment.isEmpty() -> requireActivity().toast("Enter comment")
+                else -> postViewModel.bookWork(args.PostId, budget, comment)
+            }
         }
 
         cancel.setOnClickListener { dialog.dismiss() }

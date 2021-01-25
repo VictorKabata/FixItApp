@@ -8,7 +8,7 @@ import com.vickikbt.fixitapp.models.entity.Post
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface PostDao {
+interface PostsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveAllPosts(posts: List<Post>)
@@ -17,7 +17,7 @@ interface PostDao {
     fun getAllPosts(): Flow<MutableList<Post>>
 
     @Query("SELECT * FROM post_table WHERE id=:id")
-    fun getPost(id: Int): Flow<Post>
+    fun getPost(id: Int): Post//Flow<Post>
 
     @Query("SELECT COUNT(*) FROM post_table")
     suspend fun isPostCacheAvailable(): Int

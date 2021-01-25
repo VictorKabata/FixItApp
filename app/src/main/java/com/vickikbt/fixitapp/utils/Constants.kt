@@ -19,8 +19,8 @@ object Constants {
     const val TimeInterval = 6L
 
     const val ACCEPT_BOOKING = "Accepted"
-
     const val REJECT_BOOKING = "Rejected"
+    const val IN_PROGRESS = "In-Progress"
 
-    const val INPROGRESS = "In-Progress"
+    const val INTERNET="Ensure you have an internet connection"
 }

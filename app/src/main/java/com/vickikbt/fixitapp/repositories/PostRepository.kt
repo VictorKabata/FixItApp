@@ -72,8 +72,8 @@ class PostRepository @Inject constructor(
         country: String
     ): Post {
         val user = appDatabase.userDAO().getAuthenticatedUser()
-        var token = user.token
-        var userId = user.id
+        val token = user.token
+        val userId = user.id
 
         val uploadPostRequestBody = UploadPostRequest(
             userId,
@@ -89,6 +89,11 @@ class PostRepository @Inject constructor(
         )
 
         return safeApiRequest { apiService.uploadPost(token!!, uploadPostRequestBody) }
+    }
+
+    suspend fun getUserPosts(): List<Post> {
+        val userId = appDatabase.userDAO().getAuthenticatedUser().id
+        return safeApiRequest { apiService.getUserPosts(userId) }
     }
 
     //suspend fun getPostBookings(postId:Int)=safeApiRequest { apiService.getPostBookings(postId) }

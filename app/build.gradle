@@ -118,10 +118,10 @@ dependencies {
     //api 'com.ramotion.paperonboarding:paper-onboarding:1.1.3'
 
     //Location Dependency
-    implementation "com.google.android.gms:play-services-location:$location_version" //TODO: Update later
+    implementation "com.google.android.gms:play-services-location:$location_version"
 
-    //Timber
-    //implementation "com.jakewharton.timber:timber:$timber_version"
+    //NetworkX
+    implementation "com.github.rommansabbir:NetworkX:$networkx_version"
 
     //Multidex
     implementation "com.android.support:multidex:$multidex_version"

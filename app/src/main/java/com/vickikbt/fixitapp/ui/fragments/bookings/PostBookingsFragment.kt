@@ -36,11 +36,11 @@ class PostBookingsFragment : Fragment(), StateListener {
 
     private fun initUI() {
         val postId = args.PostId
-        val budget=args.Budget
+        val budget = args.Budget
 
         viewModel.getPostBooking(postId).observe(viewLifecycleOwner, { bookings ->
             binding.recyclerViewBookings.adapter =
-                PostBookingRecyclerviewAdapter(requireActivity(), bookings, budget)
+                PostBookingRecyclerviewAdapter(requireActivity(), bookings, budget, viewModel)
         })
     }
 

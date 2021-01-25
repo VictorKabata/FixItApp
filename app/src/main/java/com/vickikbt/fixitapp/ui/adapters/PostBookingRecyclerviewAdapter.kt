@@ -3,8 +3,11 @@ package com.vickikbt.fixitapp.ui.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -12,13 +15,18 @@ import com.bumptech.glide.Glide
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.ItemPostBookingBinding
 import com.vickikbt.fixitapp.models.entity.Booking
+import com.vickikbt.fixitapp.ui.fragments.bookings.BookingViewModel
 import com.vickikbt.fixitapp.ui.fragments.bookings.PostBookingsFragmentDirections
+import com.vickikbt.fixitapp.utils.Constants.REJECT_BOOKING
+import com.vickikbt.fixitapp.utils.StateListener
+import com.vickikbt.fixitapp.utils.toast
 
 class PostBookingRecyclerviewAdapter constructor(
     private val context: Context,
-    private val bookingList: MutableList<Booking>,
-    private val budget: Int
-) : RecyclerView.Adapter<PostBookingsRecyclerviewViewHolder>() {
+    private val bookingList: List<Booking>,
+    private val budget: Int,
+    private val bookingViewModel: BookingViewModel
+) : RecyclerView.Adapter<PostBookingsRecyclerviewViewHolder>(), StateListener {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -39,10 +47,42 @@ class PostBookingRecyclerviewAdapter constructor(
         holder.bind(booking, context, budget)
 
         holder.profilePic.setOnClickListener {
-            val action= PostBookingsFragmentDirections.postBookingToUserProfile(booking.userId)
+            val action = PostBookingsFragmentDirections.postBookingToUserProfile(booking.userId)
             it.findNavController().navigate(action)
         }
 
+        holder.acceptButton.setOnClickListener {
+            acceptBooking(booking.postId, booking.userId, it)
+        }
+
+        holder.rejectButton.setOnClickListener {
+            rejectBooking(booking.postId, booking.userId)
+            holder.linearLayoutContainer.visibility = View.GONE
+            holder.rejectConfirmedButton.visibility = View.VISIBLE
+        }
+
+    }
+
+    private fun acceptBooking(postId: Int, userId: Int, view: View) {
+        try {
+            bookingViewModel.acceptBooking(postId, userId)
+            val action = PostBookingsFragmentDirections.postBookingsToWork(postId)
+            view.findNavController().navigate(action)
+        } catch (e: Exception) {
+        }
+    }
+
+    private fun rejectBooking(postId: Int, userId: Int) =
+        bookingViewModel.rejectBooking(postId, userId)
+
+    override fun onLoading() {}
+
+    override fun onSuccess(message: String) {
+        context.toast(message)
+    }
+
+    override fun onFailure(message: String) {
+        context.toast(message)
     }
 
 
@@ -51,11 +91,16 @@ class PostBookingRecyclerviewAdapter constructor(
 class PostBookingsRecyclerviewViewHolder(private val binding: ItemPostBookingBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    val profilePic:ImageView =binding.imageViewPostBookingProfile
+    val profilePic: ImageView = binding.imageViewPostBookingProfile
+    val acceptButton: Button = binding.buttonAccept
+    val rejectButton: Button = binding.buttonReject
+
+    val linearLayoutContainer: LinearLayout = binding.linearLayoutContainer
+    val rejectConfirmedButton: Button = binding.buttonRejectionConfirmed
 
     @SuppressLint("SetTextI18n")
     fun bind(booking: Booking, context: Context, budget: Int) {
-        val bid = 499
+        val bid = booking.bid.toInt()
 
         Glide.with(context).load(booking.user.imageUrl).into(binding.imageViewPostBookingProfile)
         binding.textViewPostBookingUsername.text = booking.user.username
@@ -72,6 +117,11 @@ class PostBookingsRecyclerviewViewHolder(private val binding: ItemPostBookingBin
             binding.textViewPostBookingsBid.setTextColor(context.resources.getColor(R.color.green))
         }
         binding.textViewPostBookingsBid.text = "Ksh. $bid"//booking.bid
+
+        if (booking.status == REJECT_BOOKING) {
+            binding.linearLayoutContainer.visibility = View.GONE
+            binding.buttonRejectionConfirmed.visibility = View.VISIBLE
+        }
     }
 
 }

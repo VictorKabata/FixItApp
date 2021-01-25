@@ -37,7 +37,7 @@ interface ApiService {
     @POST("postpic")
     suspend fun uploadPostPicture(@Part upload: MultipartBody.Part): Response<PhotoUploadResponse>
 
-    //Endpoint to upload a post to the database
+    //Endpoint to upload a post to the api
     @POST("posts")
     suspend fun uploadPost(
         @Header("Authorization") token: String,
@@ -47,8 +47,8 @@ interface ApiService {
     //Endpoint to update a specific post.
     @PUT("post/{id}")
     suspend fun updatePost(
-        @Path("id") id: Int,
         @Header("Authorization") token: String,
+        @Path("id") id: Int,
         @Body uploadPost: UpdatePostRequest
     ): Response<Post>
 
@@ -56,16 +56,19 @@ interface ApiService {
     @GET("review/{id}")
     suspend fun getUserReviews(@Path("id") userId: Int): Response<List<Review>>
 
-    /*//Endpoint to book work.
+    @GET("posts/user/{id}")
+    suspend fun getUserPosts(@Path("id")userId: Int):Response<List<Post>>
+
+    //Endpoint to book work.
     @POST("booking")
     suspend fun bookWork(
         @Header("Authorization") token: String,
-        @Body bookWorkRequestBody: BookWorkRequestBody
-    ): Response<Post>*/
+        @Body bookWorkRequestBody: BookWorkRequest
+    ): Response<Post>
 
     //Endpoint to get booking made for a particular post
     @GET("posts/booking/{id}")
-    suspend fun getPostBooking(@Path("id") id: Int): Response<MutableList<Booking>>
+    suspend fun getPostBooking(@Path("id") id: Int): Response<List<Booking>>
 
     //Endpoint to reject or accept post booking
     @PUT("booking/{id}")
