@@ -17,6 +17,7 @@ import javax.inject.Inject
 class BookingRepository @Inject constructor(
     private val apiService: ApiService,
     private val appDatabase: AppDatabase
+    //private val workRepository: WorkRepository
 ) : SafeApiRequest() {
 
     private val bookingsMutableLiveData = MutableLiveData<List<Booking>>()
@@ -38,18 +39,19 @@ class BookingRepository @Inject constructor(
         safeApiRequest { apiService.bookWork(token, bookWorkRequestBody) }
     }
 
-    suspend fun acceptBooking(postId: Int, userId: Int): Booking {
+    suspend fun acceptBooking(bookingId: Int, userId: Int): Booking {
         val updateBookingRequest = UpdateBookingRequest(userId, ACCEPT_BOOKING)
-        val booking = safeApiRequest { apiService.updateBooking(postId, updateBookingRequest) }
+        val booking = safeApiRequest { apiService.updateBooking(bookingId, updateBookingRequest) }
+        //workRepository.createWork()
 
         updateBookedPost(booking)
 
         return booking
     }
 
-    suspend fun rejectBooking(postId: Int, userId: Int) {
+    suspend fun rejectBooking(bookingId: Int, userId: Int) {
         val updateBookingRequest = UpdateBookingRequest(userId, REJECT_BOOKING)
-        safeApiRequest { apiService.updateBooking(postId, updateBookingRequest) }
+        safeApiRequest { apiService.updateBooking(bookingId, updateBookingRequest) }
     }
 
     private suspend fun updateBookedPost(booking: Booking) {

@@ -19,6 +19,7 @@ import com.vickikbt.fixitapp.ui.fragments.bookings.BookingViewModel
 import com.vickikbt.fixitapp.ui.fragments.bookings.BookingsFragmentDirections
 import com.vickikbt.fixitapp.utils.Constants.REJECT_BOOKING
 import com.vickikbt.fixitapp.utils.StateListener
+import com.vickikbt.fixitapp.utils.log
 import com.vickikbt.fixitapp.utils.toast
 
 class PostBookingRecyclerviewAdapter constructor(
@@ -52,28 +53,29 @@ class PostBookingRecyclerviewAdapter constructor(
         }
 
         holder.acceptButton.setOnClickListener {
-            acceptBooking(booking.postId, booking.userId, it)
+            acceptBooking(booking.id, booking.postId, booking.userId, it)
         }
 
         holder.rejectButton.setOnClickListener {
-            rejectBooking(booking.postId, booking.userId)
+            rejectBooking(booking.id, booking.userId)
+
             holder.linearLayoutContainer.visibility = View.GONE
             holder.rejectConfirmedButton.visibility = View.VISIBLE
         }
 
     }
 
-    private fun acceptBooking(postId: Int, userId: Int, view: View) {
+    private fun acceptBooking(bookingId: Int, postId: Int, userId: Int, view: View) {
         try {
-            bookingViewModel.acceptBooking(postId, userId)
+            bookingViewModel.acceptBooking(bookingId, postId, userId)
             val action = BookingsFragmentDirections.postBookingsToWork(postId)
             view.findNavController().navigate(action)
         } catch (e: Exception) {
         }
     }
 
-    private fun rejectBooking(postId: Int, userId: Int) =
-        bookingViewModel.rejectBooking(postId, userId)
+    private fun rejectBooking(bookingId: Int, userId: Int) =
+        bookingViewModel.rejectBooking(bookingId, userId)
 
     override fun onLoading() {}
 
@@ -109,15 +111,24 @@ class PostBookingsRecyclerviewViewHolder(private val binding: ItemPostBookingBin
         binding.textViewPostBookingLocation.text = "${booking.user.region}, ${booking.user.address}"
         //binding.postBookingDate.text = DataFormatter.dateFormatter(booking.createdAt)
         binding.textViewPostBookingComment.text = booking.comment
+        context.log("${booking.status}")
 
 
         when {
-            bid < budget -> binding.textViewPostBookingsBid.setTextColor(context.resources.getColor(R.color.green))
-            bid>budget -> binding.textViewPostBookingsBid.setTextColor(context.resources.getColor(R.color.red))
-            else -> binding.textViewPostBookingsBid.setTextColor(context.resources.getColor(R.color.red))
+            bid < budget -> binding.textViewPostBookingsBid.setTextColor(
+                context.resources.getColor(
+                    R.color.green
+                )
+            )
+            bid > budget -> binding.textViewPostBookingsBid.setTextColor(
+                context.resources.getColor(
+                    R.color.red
+                )
+            )
+            else -> binding.textViewPostBookingsBid.setTextColor(context.resources.getColor(R.color.yellow))
         }
 
-        binding.textViewPostBookingsBid.text = "Ksh. $bid"//booking.bid
+        binding.textViewPostBookingsBid.text = "Ksh. $bid"
 
         if (booking.status == REJECT_BOOKING) {
             binding.linearLayoutContainer.visibility = View.GONE

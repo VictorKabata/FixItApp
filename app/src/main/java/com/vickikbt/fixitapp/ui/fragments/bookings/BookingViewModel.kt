@@ -1,5 +1,6 @@
 package com.vickikbt.fixitapp.ui.fragments.bookings
 
+import android.util.Log
 import androidx.databinding.Observable
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
@@ -41,34 +42,36 @@ class BookingViewModel @ViewModelInject constructor(
         }
     }
 
-    fun acceptBooking(postId: Int, userId: Int) = liveData {
-        stateListener?.onLoading()
-
-        try {
-            bookingRepository.acceptBooking(postId, userId)
-            val work = workRepository.createWork(postId, workerId = userId)
-            emit(work)
-
-            stateListener?.onSuccess("To start soon")
-            return@liveData
-        } catch (e: ApiException) {
-            stateListener?.onFailure("${e.message}")
-            return@liveData
-        } catch (e: UnknownHostException) {
-            stateListener?.onFailure(INTERNET)
-            return@liveData
-        } catch (e: Exception) {
-            stateListener?.onFailure("${e.message}")
-            return@liveData
-        }
-    }
-
-    fun rejectBooking(postId: Int, userId: Int) {
+    fun acceptBooking(bookingId: Int, postId: Int, userId: Int) {
         stateListener?.onLoading()
 
         viewModelScope.launch {
             try {
-                bookingRepository.rejectBooking(postId, userId)
+                bookingRepository.acceptBooking(bookingId, userId)
+                val work = workRepository.createWork(postId, workerId = userId)
+                Log.e("VickiKbt", "Booking ViewModel: Work created")
+                //emit(work)
+                stateListener?.onSuccess("To start soon")
+                return@launch
+            } catch (e: ApiException) {
+                stateListener?.onFailure("${e.message}")
+                return@launch
+            } catch (e: UnknownHostException) {
+                stateListener?.onFailure(INTERNET)
+                return@launch
+            } catch (e: Exception) {
+                stateListener?.onFailure("${e.message}")
+                return@launch
+            }
+        }
+    }
+
+    fun rejectBooking(bookingId: Int, userId: Int) {
+        stateListener?.onLoading()
+
+        viewModelScope.launch {
+            try {
+                bookingRepository.rejectBooking(bookingId, userId)
                 stateListener?.onSuccess("Rejected")
                 return@launch
             } catch (e: ApiException) {

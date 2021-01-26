@@ -73,7 +73,7 @@ interface ApiService {
     //Endpoint to reject or accept post booking
     @PUT("booking/{id}")
     suspend fun updateBooking(
-        @Path("id") postId: Int,
+        @Path("id") bookingId: Int,
         @Body updateBooking: UpdateBookingRequest
     ): Response<Booking>
 

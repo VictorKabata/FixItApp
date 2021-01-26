@@ -1,5 +1,6 @@
 package com.vickikbt.fixitapp.repositories
 
+import android.util.Log
 import com.vickikbt.fixitapp.data.cache.AppDatabase
 import com.vickikbt.fixitapp.data.network.ApiService
 import com.vickikbt.fixitapp.models.entity.Work
@@ -22,6 +23,8 @@ class WorkRepository @Inject constructor(
 
         val token = "Bearer: ${user.token}"
         val workRequest = WorkRequest(postId, user.id, workerId)
+
+        Log.e("VickiKbt", "Work Repo: Work created")
 
         return safeApiRequest { apiService.createWork(token, workRequest) }
     }
