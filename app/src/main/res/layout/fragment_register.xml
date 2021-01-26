@@ -42,7 +42,7 @@
                 android:layout_width="140dp"
                 android:layout_height="140dp"
                 android:layout_gravity="center"
-                android:elevation="1dp"
+                android:elevation="2dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_profile_pic"
                 tools:targetApi="lollipop" />
@@ -53,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-75dp"
                 android:layout_marginBottom="5dp"
+                app:cardElevation="0dp"
                 app:cardCornerRadius="15dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout

@@ -108,14 +108,15 @@ class PostBookingsRecyclerviewViewHolder(private val binding: ItemPostBookingBin
         //binding.postBookingUserPhone.text = booking.user.phoneNumber
         binding.textViewPostBookingLocation.text = "${booking.user.region}, ${booking.user.address}"
         //binding.postBookingDate.text = DataFormatter.dateFormatter(booking.createdAt)
-        binding.textViewPostBookingComment.text = "This is just a placeholder text"//booking.comment
+        binding.textViewPostBookingComment.text = booking.comment
 
 
-        if (bid < budget) {
-            binding.textViewPostBookingsBid.setTextColor(context.resources.getColor(R.color.red))
-        } else {
-            binding.textViewPostBookingsBid.setTextColor(context.resources.getColor(R.color.green))
+        when {
+            bid < budget -> binding.textViewPostBookingsBid.setTextColor(context.resources.getColor(R.color.green))
+            bid>budget -> binding.textViewPostBookingsBid.setTextColor(context.resources.getColor(R.color.red))
+            else -> binding.textViewPostBookingsBid.setTextColor(context.resources.getColor(R.color.red))
         }
+
         binding.textViewPostBookingsBid.text = "Ksh. $bid"//booking.bid
 
         if (booking.status == REJECT_BOOKING) {

@@ -80,7 +80,7 @@ class PostDetailFragment : Fragment(), StateListener {
                 binding.buttonContact.visibility = View.GONE
             }
 
-            binding.buttonContact.setOnClickListener {
+            binding.userImageView.setOnClickListener {
                 val action = PostDetailFragmentDirections.postDetailToUserProfile(user.id)
                 findNavController().navigate(action)
             }
@@ -94,7 +94,6 @@ class PostDetailFragment : Fragment(), StateListener {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.dialog_book_work)
 
-        val user = userViewModel.getCurrentUser.value!!
 
         val profileImage: ImageView = dialog.findViewById(R.id.imageView_book_work)
         val userName: TextView = dialog.findViewById(R.id.textView_userName_book_work)
@@ -105,9 +104,11 @@ class PostDetailFragment : Fragment(), StateListener {
 
         val bookWork: Button = dialog.findViewById(R.id.button_dialog_book_work)
 
-        Glide.with(requireActivity()).load(user.imageUrl).into(profileImage)
-        userName.text = user.username
-        phoneNumber.text = user.phoneNumber
+        userViewModel.getCurrentUser.observe(viewLifecycleOwner, { user ->
+            Glide.with(requireActivity()).load(user.imageUrl).into(profileImage)
+            userName.text = user.username
+            phoneNumber.text = user.phoneNumber
+        })
         budgetEt.setText("0")
 
         bookWork.setOnClickListener {
@@ -117,7 +118,10 @@ class PostDetailFragment : Fragment(), StateListener {
             when {
                 budget.isEmpty() -> requireActivity().toast("Enter bid amount")
                 comment.isEmpty() -> requireActivity().toast("Enter comment")
-                else -> postViewModel.bookWork(args.PostId, budget, comment)
+                else -> {
+                    postViewModel.bookWork(args.PostId, budget, comment)
+                    dialog.dismiss()
+                }
             }
         }
 
