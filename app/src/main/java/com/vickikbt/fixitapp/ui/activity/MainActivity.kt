@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         binding.navView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.splash_fragment || destination.id == R.id.login_fragment || destination.id == R.id.register_fragment) {
+            if (destination.id == R.id.splash_fragment || destination.id == R.id.login_fragment || destination.id == R.id.register_fragment || destination.id == R.id.post_detail_fragment) {
                 toolbar.visibility = View.GONE
             } else toolbar.visibility = View.VISIBLE
         }
@@ -70,8 +70,8 @@ class MainActivity : AppCompatActivity() {
         val headerImageViewBackground: ImageView =
             binding.navView.getHeaderView(0).findViewById(R.id.imageView_navHeaderBackground)
 
-        viewModel.getCurrentUser.observe(this, {user->
-            if (user!=null){
+        viewModel.getCurrentUser.observe(this, { user ->
+            if (user != null) {
                 headerUsername.text = user.username
                 headerEmail.text = user.email
                 Glide.with(this)

@@ -31,8 +31,8 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
-        binding.viewModel = viewModel //TODO: Check here for errors
-        binding.lifecycleOwner = this //TODO: Check if removing brings in errors
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         binding.buttonLogout.setOnClickListener {
             logoutUser()

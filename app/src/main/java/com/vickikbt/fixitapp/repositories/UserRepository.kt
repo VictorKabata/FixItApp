@@ -10,10 +10,8 @@ import com.vickikbt.fixitapp.models.network.AuthResponse
 import com.vickikbt.fixitapp.models.network.LoginRequest
 import com.vickikbt.fixitapp.models.network.PhotoUploadResponse
 import com.vickikbt.fixitapp.models.network.RegistrationRequest
-import com.vickikbt.fixitapp.utils.Constants
 import com.vickikbt.fixitapp.utils.Coroutines
 import com.vickikbt.fixitapp.utils.SafeApiRequest
-import com.vickikbt.fixitapp.utils.TimeKeeper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
@@ -51,22 +49,23 @@ class UserRepository @Inject constructor(
         Coroutines.io { appDatabase.reviewDao().saveAllReviews(reviews) }
 
     suspend fun getCurrentUserReviews(): Flow<MutableList<Review>> {
-        val isReviewCacheAvailable=appDatabase.reviewDao().isReviewCacheAvailable()>0
+        val isReviewCacheAvailable = appDatabase.reviewDao().isReviewCacheAvailable() > 0
 
         if (isReviewCacheAvailable) return appDatabase.reviewDao().getAllReviews()
 
         //TODO: Add check internet connectivity
-        val currentUserId=appDatabase.userDAO().getAuthenticatedUser().id
-        val userReviewsResponse=safeApiRequest { apiService.getUserReviews(currentUserId) }
-        reviewMutableLiveData.value=userReviewsResponse
+        val currentUserId = appDatabase.userDAO().getAuthenticatedUser().id
+        val userReviewsResponse = safeApiRequest { apiService.getUserReviews(currentUserId) }
+        reviewMutableLiveData.value = userReviewsResponse
         timePreference.saveReviewSyncTime(System.currentTimeMillis())
 
         return appDatabase.reviewDao().getAllReviews()
     }
 
-    suspend fun fetchCurrentUserReviews(userId:Int){
-        val reviewsRequest=safeApiRequest { apiService.getUserReviews(userId) }
-        reviewMutableLiveData.value=reviewsRequest
+    suspend fun fetchCurrentUserReviews() {
+        val userId = appDatabase.userDAO().getAuthenticatedUser().id
+        val reviewsRequest = safeApiRequest { apiService.getUserReviews(userId) }
+        reviewMutableLiveData.value = reviewsRequest
         timePreference.saveReviewSyncTime(System.currentTimeMillis())
     }
 
@@ -106,6 +105,6 @@ class UserRepository @Inject constructor(
 
     suspend fun fetchUser(id: Int) = safeApiRequest { apiService.getUser(id) }
 
-    suspend fun fetchUserReviews(userId: Int)=safeApiRequest { apiService.getUserReviews(userId) }
+    suspend fun fetchUserReviews(userId: Int) = safeApiRequest { apiService.getUserReviews(userId) }
 
 }

@@ -55,7 +55,7 @@ class UserViewModel @ViewModelInject constructor(private val userRepository: Use
                 authResponse.user.let {
                     stateListener?.onSuccess("Welcome, ${it.username}")
                     userRepository.saveAuthenticatedUser(it)
-                    userRepository.fetchCurrentUserReviews(it.id) //Fetch user reviews and save to sqlite
+                    userRepository.fetchCurrentUserReviews() //Fetch user reviews and save to sqlite
                     return@launch
                 }
             } catch (e: ApiException) {
@@ -169,8 +169,7 @@ class UserViewModel @ViewModelInject constructor(private val userRepository: Use
         }
     }
 
-    fun fetchCurrentUserReviews(userId: Int) =
-        viewModelScope.launch { userRepository.fetchCurrentUserReviews(userId) }
+    fun fetchCurrentUserReviews() = viewModelScope.launch { userRepository.fetchCurrentUserReviews() }
 
     fun fetchUser(id: Int) = liveData {
         stateListener?.onLoading()

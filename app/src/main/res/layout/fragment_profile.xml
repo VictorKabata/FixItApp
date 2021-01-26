@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel" />
@@ -61,8 +60,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:numStars="5"
                                 android:isIndicator="true"
+                                android:numStars="5"
                                 android:theme="@style/RatingBar" />
 
                             <TextView
@@ -87,8 +86,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="end"
-                                android:text="@{viewModel.getCurrentUser.username}"
                                 android:maxLines="1"
+                                android:text="@{viewModel.getCurrentUser.username}"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />

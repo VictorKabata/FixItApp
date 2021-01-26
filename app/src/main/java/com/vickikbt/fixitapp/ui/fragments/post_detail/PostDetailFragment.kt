@@ -38,10 +38,7 @@ class PostDetailFragment : Fragment(), StateListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_detail, container, false)
         postViewModel.stateListener = this
 
-        binding.buttonContact.setOnClickListener {
-            //val action = PostDetailFragmentDirections.postDetailToUserProfile(user.id)
-            //findNavController().navigate(action)
-        }
+
 
         binding.postDetailToolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         binding.postDetailToolbar.setNavigationOnClickListener {
@@ -81,6 +78,11 @@ class PostDetailFragment : Fragment(), StateListener {
             } else {
                 binding.buttonBook.visibility = View.GONE
                 binding.buttonContact.visibility = View.GONE
+            }
+
+            binding.buttonContact.setOnClickListener {
+                val action = PostDetailFragmentDirections.postDetailToUserProfile(user.id)
+                findNavController().navigate(action)
             }
 
         })
