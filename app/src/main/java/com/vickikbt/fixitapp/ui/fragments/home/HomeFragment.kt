@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentHomeBinding
 import com.vickikbt.fixitapp.ui.adapters.HomeRecyclerviewAdapter
@@ -28,6 +29,14 @@ class HomeFragment : Fragment(), StateListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         viewModel.stateListener = this
 
+        binding.fabHome.setOnClickListener {
+            findNavController().navigate(R.id.home_to_upload)
+        }
+
+        binding.swipeRefreshLayoutHome.setOnRefreshListener {
+            viewModel.fetchAllPosts()
+        }
+
         initUI()
 
         return binding.root
@@ -35,11 +44,12 @@ class HomeFragment : Fragment(), StateListener {
 
     private fun initUI() {
         viewModel.posts.observe(viewLifecycleOwner, { posts ->
-            if (posts.isNullOrEmpty()) requireActivity().toast("No posts") //TODO: Replace with no post textview
+            if (posts.isNullOrEmpty()) requireActivity().toast("No posts") //TODO: Replace with no post imageview
 
             else {
-                userViewModel.getCurrentUser.observe(viewLifecycleOwner, { user->
-                    binding.recyclerViewHome.adapter = HomeRecyclerviewAdapter(requireActivity(), posts, user.id)
+                userViewModel.getCurrentUser.observe(viewLifecycleOwner, { user ->
+                    binding.recyclerViewHome.adapter =
+                        HomeRecyclerviewAdapter(requireActivity(), posts, user.id)
                 })
             }
         })
@@ -51,11 +61,14 @@ class HomeFragment : Fragment(), StateListener {
 
     override fun onSuccess(message: String) {
         binding.progressBarHome.hide()
+        binding.swipeRefreshLayoutHome.isRefreshing = false
         if (isAdded) requireActivity().log(message)
     }
 
     override fun onFailure(message: String) {
         binding.progressBarHome.hide()
+
+        binding.swipeRefreshLayoutHome.isRefreshing = false
         if (isAdded) {
             requireActivity().toast("Error fetching posts")
             requireActivity().log("Error: $message")

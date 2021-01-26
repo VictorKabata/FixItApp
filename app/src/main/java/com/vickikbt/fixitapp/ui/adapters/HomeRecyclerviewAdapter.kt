@@ -13,6 +13,7 @@ import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.ItemHomeBinding
 import com.vickikbt.fixitapp.models.entity.Post
 import com.vickikbt.fixitapp.ui.fragments.home.HomeFragmentDirections
+import com.vickikbt.fixitapp.utils.DataFormatter.Companion.dateFormatter
 import com.vickikbt.fixitapp.utils.toast
 
 class HomeRecyclerviewAdapter constructor(
@@ -44,7 +45,7 @@ class HomeRecyclerviewAdapter constructor(
             val action = HomeFragmentDirections.homeToPostDetail(post.id)
             view.findNavController().navigate(action)
         } else if (post.status.isEmpty() && post.user.id == currentUserId) {
-            val action = HomeFragmentDirections.homeToPostBookings(post.id,post.budget.toInt())
+            val action = HomeFragmentDirections.homeToPostBookings(post.id, post.budget.toInt())
             view.findNavController().navigate(action)
         } else if (post.status == "In-Progress" && post.workerId == currentUserId) {
             val action = HomeFragmentDirections.homeToWork(post.id)
@@ -69,10 +70,9 @@ class HomeRecyclerviewViewHolder(private val binding: ItemHomeBinding) :
     fun bind(post: Post, context: Context) {
         Glide.with(context).load(post.user.imageUrl).into(binding.postUserImageView)
         binding.postUserUsername.text = post.user.username
-        binding.postDate.text = post.createdAt //TODO: Add date formatter later
+        binding.postDate.text = dateFormatter(post.createdAt)
         Glide.with(context).load(post.imageUrl).into(binding.postImageView)
-        binding.postLocationTextView.text =
-            "${post.region}, ${post.country}"//"${post.address}, ${post.country}."
+        binding.postLocationTextView.text = "${post.region}, ${post.country}"
         binding.postCategoryTextView.text = post.category
         binding.postDescriptionTextView.text = post.description
     }

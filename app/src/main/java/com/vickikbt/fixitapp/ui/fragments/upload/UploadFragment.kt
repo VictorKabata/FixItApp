@@ -51,8 +51,8 @@ class UploadFragment : Fragment(), StateListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_upload, container, false)
-        binding.viewModel=viewModel
-        viewModel.stateListener=this
+        binding.viewModel = viewModel
+        viewModel.stateListener = this
 
         setHasOptionsMenu(true)
 
@@ -198,7 +198,7 @@ class UploadFragment : Fragment(), StateListener {
     override fun onSuccess(message: String) {
         binding.progressBarUpload.hide()
         requireActivity().toast(message)
-        //findNavController().navigateUp()
+        findNavController().navigateUp()
     }
 
     override fun onFailure(message: String) {

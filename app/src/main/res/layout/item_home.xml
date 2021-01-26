@@ -48,7 +48,8 @@
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/post_user_imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/post_user_imageView"
+            tool:src="@drawable/ic_launcher_background" />
 
         <TextView
             android:id="@+id/post_location_textView"

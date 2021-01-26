@@ -183,7 +183,7 @@ class RegisterFragment : Fragment(), StateListener {
     }
 
     private fun getLocationNames() {
-        if (isAdded){
+        if (isAdded) {
             address = UserLocation.getAddressName(requireActivity(), latitude!!, longitude!!)
             region = UserLocation.getRegionName(requireActivity(), latitude!!, longitude!!)
             country = UserLocation.getCountryName(requireActivity(), latitude!!, longitude!!)
@@ -196,14 +196,14 @@ class RegisterFragment : Fragment(), StateListener {
 
     override fun onSuccess(message: String) {
         binding.progressBarRegister.hide()
-        requireActivity().toast(message)
+        if (isAdded) requireActivity().toast(message)
 
         findNavController().navigate(R.id.register_to_home)
     }
 
     override fun onFailure(message: String) {
         binding.progressBarRegister.hide()
-        requireActivity().toast(message)
+        if (isAdded) requireActivity().toast(message)
     }
 
 }

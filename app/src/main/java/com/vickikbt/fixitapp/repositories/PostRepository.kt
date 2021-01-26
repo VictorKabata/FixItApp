@@ -72,7 +72,7 @@ class PostRepository @Inject constructor(
         country: String
     ): Post {
         val user = appDatabase.userDAO().getAuthenticatedUser()
-        val token = user.token
+        val token = "Bearer: ${user.token}"
         val userId = user.id
 
         val uploadPostRequestBody = UploadPostRequest(
@@ -88,7 +88,7 @@ class PostRepository @Inject constructor(
             country
         )
 
-        return safeApiRequest { apiService.uploadPost(token!!, uploadPostRequestBody) }
+        return safeApiRequest { apiService.uploadPost(token, uploadPostRequestBody) }
     }
 
     suspend fun getUserPosts(): List<Post> {

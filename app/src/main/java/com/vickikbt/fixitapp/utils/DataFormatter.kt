@@ -5,13 +5,12 @@ import java.text.SimpleDateFormat
 class DataFormatter {
     companion object {
 
+        //2021-01-26T15:33:30+03:00
         fun dateFormatter(date: String): String {
-            val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(date)
-            val formatter = SimpleDateFormat("EEE MMM dd HH:mm:ss zzzz yyyy")
+            val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").parse(date)
+            val targetFormat = SimpleDateFormat("dd-MM-yyyy HH:mm a")
 
-            val date = formatter.parse(simpleDateFormat.toString())
-
-            return SimpleDateFormat("dd/MM/yyyy, hh:mma").format(date)
+            return targetFormat.format(originalFormat)
         }
 
     }

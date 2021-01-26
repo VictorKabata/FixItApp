@@ -32,7 +32,7 @@ class UploadViewModel @ViewModelInject constructor(private val postRepository: P
         try {
             val photoUploadResponseBody = postRepository.uploadPostPicture(body)
             photoUploadResponseBody.imageURL.let {
-                stateListener?.onSuccess("Image Uploaded")
+                //stateListener?.onSuccess("Image Uploaded")
                 emit(it)
                 return@liveData
             }
