@@ -4,7 +4,7 @@ object Constants {
 
     //const val BASE_URL: String = "https://fix-it-server.herokuapp.com/"
     //const val BASE_URL: String = "http://10.0.2.2:8081/"
-    const val BASE_URL: String = "http://172.16.120.222:8081/"
+    const val BASE_URL: String = "http://192.168.43.125:8081/"
 
     const val PERMISSION_ID = 69
 
@@ -22,5 +22,5 @@ object Constants {
     const val REJECT_BOOKING = "Rejected"
     const val IN_PROGRESS = "In-Progress"
 
-    const val INTERNET="Ensure you have an internet connection"
+    const val INTERNET_MESSAGE="Ensure you have an internet connection"
 }

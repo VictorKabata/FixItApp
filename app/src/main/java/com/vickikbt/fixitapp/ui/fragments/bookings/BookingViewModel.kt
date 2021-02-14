@@ -9,7 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.vickikbt.fixitapp.repositories.BookingRepository
 import com.vickikbt.fixitapp.repositories.WorkRepository
 import com.vickikbt.fixitapp.utils.ApiException
-import com.vickikbt.fixitapp.utils.Constants.INTERNET
+import com.vickikbt.fixitapp.utils.Constants.INTERNET_MESSAGE
 import com.vickikbt.fixitapp.utils.StateListener
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
@@ -33,7 +33,7 @@ class BookingViewModel @ViewModelInject constructor(
             stateListener?.onFailure("${e.message}")
             return@liveData
         } catch (e: UnknownHostException) {
-            stateListener?.onFailure("Ensure you have internet connection")
+            stateListener?.onFailure(INTERNET_MESSAGE)
             return@liveData
         } catch (e: Exception) {
             //stateListener?.onFailure("Error fetching post bookings")
@@ -48,16 +48,15 @@ class BookingViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             try {
                 bookingRepository.acceptBooking(bookingId, userId)
-                val work = workRepository.createWork(postId, workerId = userId)
+                workRepository.createWork(postId, workerId = userId)
                 Log.e("VickiKbt", "Booking ViewModel: Work created")
-                //emit(work)
                 stateListener?.onSuccess("To start soon")
                 return@launch
             } catch (e: ApiException) {
                 stateListener?.onFailure("${e.message}")
                 return@launch
             } catch (e: UnknownHostException) {
-                stateListener?.onFailure(INTERNET)
+                stateListener?.onFailure(INTERNET_MESSAGE)
                 return@launch
             } catch (e: Exception) {
                 stateListener?.onFailure("${e.message}")
@@ -78,7 +77,7 @@ class BookingViewModel @ViewModelInject constructor(
                 stateListener?.onFailure("${e.message}")
                 return@launch
             } catch (e: UnknownHostException) {
-                stateListener?.onFailure(INTERNET)
+                stateListener?.onFailure(INTERNET_MESSAGE)
                 return@launch
             } catch (e: Exception) {
                 stateListener?.onFailure("${e.message}")

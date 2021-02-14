@@ -10,7 +10,7 @@ import com.vickikbt.fixitapp.models.entity.Post
 import com.vickikbt.fixitapp.models.entity.Work
 import com.vickikbt.fixitapp.repositories.PostRepository
 import com.vickikbt.fixitapp.repositories.WorkRepository
-import com.vickikbt.fixitapp.utils.Constants.INTERNET
+import com.vickikbt.fixitapp.utils.Constants.INTERNET_MESSAGE
 import com.vickikbt.fixitapp.utils.StateListener
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
@@ -48,7 +48,7 @@ class FeedViewModel @ViewModelInject constructor(
                 stateListener?.onFailure("${e.message}")
                 return@launch
             } catch (e: UnknownHostException) {
-                stateListener?.onFailure(INTERNET)
+                stateListener?.onFailure(INTERNET_MESSAGE)
                 return@launch
             } catch (e: Exception) {
                 stateListener?.onFailure("${e.message}")
@@ -70,7 +70,7 @@ class FeedViewModel @ViewModelInject constructor(
                 stateListener?.onFailure("${e.message}")
                 return@launch
             } catch (e: UnknownHostException) {
-                stateListener?.onFailure(INTERNET)
+                stateListener?.onFailure(INTERNET_MESSAGE)
                 return@launch
             } catch (e: Exception) {
                 stateListener?.onFailure("${e.message}")
