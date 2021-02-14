@@ -1,5 +1,6 @@
 package com.vickikbt.fixitapp.repositories
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.vickikbt.fixitapp.data.cache.AppDatabase
 import com.vickikbt.fixitapp.data.network.ApiService
@@ -16,8 +17,8 @@ import javax.inject.Inject
 
 class BookingRepository @Inject constructor(
     private val apiService: ApiService,
-    private val appDatabase: AppDatabase
-    //private val workRepository: WorkRepository
+    private val appDatabase: AppDatabase,
+    private val workRepository: WorkRepository
 ) : SafeApiRequest() {
 
     private val bookingsMutableLiveData = MutableLiveData<List<Booking>>()
@@ -39,10 +40,10 @@ class BookingRepository @Inject constructor(
         safeApiRequest { apiService.bookWork(token, bookWorkRequestBody) }
     }
 
-    suspend fun acceptBooking(bookingId: Int, userId: Int): Booking {
+    suspend fun acceptBooking(bookingId: Int,postId: Int, userId: Int): Booking {
         val updateBookingRequest = UpdateBookingRequest(userId, ACCEPT_BOOKING)
         val booking = safeApiRequest { apiService.updateBooking(bookingId, updateBookingRequest) }
-        //workRepository.createWork()
+        workRepository.createWork(postId,userId)
 
         updateBookedPost(booking)
 
@@ -75,6 +76,7 @@ class BookingRepository @Inject constructor(
         )
 
         safeApiRequest { apiService.updatePost(token, booking.postId, updatePostRequestBody) }
+        Log.e("VickiKbt", "Updating booked post")
     }
 
     private fun saveBookings(booking: List<Booking>) {

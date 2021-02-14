@@ -47,7 +47,7 @@ class BookingViewModel @ViewModelInject constructor(
 
         viewModelScope.launch {
             try {
-                bookingRepository.acceptBooking(bookingId, userId)
+                bookingRepository.acceptBooking(bookingId, postId, userId)
                 workRepository.createWork(postId, workerId = userId)
                 Log.e("VickiKbt", "Booking ViewModel: Work created")
                 stateListener?.onSuccess("To start soon")
