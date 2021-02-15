@@ -12,4 +12,6 @@
     <color name="yellow">#AFB42B</color>
 
     <color name="golden">#FFCA28</color>
+
+    <color name="button_disabled">#7483ff</color>
 </resources>

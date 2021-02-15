@@ -33,7 +33,7 @@ class WorkFragment : Fragment(), StateListener {
     private val args: WorkFragmentArgs by navArgs()
 
     private var workId: Int? = null
-    private var currentUser: User? = null
+    //private var currentUser: User? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,21 +63,21 @@ class WorkFragment : Fragment(), StateListener {
                     binding.workUsername.text = work.worker.username
                     binding.workEmailAddress.text = work.worker.email
                     binding.workPhoneNumber.text = work.worker.phoneNumber
-                    Glide.with(requireActivity()).load(work.worker.imageUrl)
-                        .into(binding.workImageView)
+                    Glide.with(requireActivity()).load(work.worker.imageUrl).into(binding.workImageView)
                 } else {
                     //Show the user/employer detail
                     binding.workUsername.text = work.user.username
                     binding.workEmailAddress.text = work.user.email
                     binding.workPhoneNumber.text = work.user.phoneNumber
-                    Glide.with(requireActivity()).load(work.user.imageUrl)
-                        .into(binding.workImageView)
+                    Glide.with(requireActivity()).load(work.user.imageUrl).into(binding.workImageView)
                 }
 
                 binding.workStarted.text = DataFormatter.dateFormatter(work.createdAt)
 
                 if (work.status == COMPLETED) {
                     binding.workFinished.text = DataFormatter.dateFormatter(work.updatedAt)
+                    binding.buttonComplete.text=requireActivity().resources.getString(R.string.completed)
+                    binding.buttonComplete.setBackgroundColor(resources.getColor(R.color.button_disabled))
                     binding.buttonComplete.isEnabled=false
                 }
             })
@@ -97,15 +97,13 @@ class WorkFragment : Fragment(), StateListener {
 
         buttonNo.setOnClickListener { dialog.dismiss() }
 
-        /*workViewModel.updateWork(workId!!).observe(viewLifecycleOwner, { work ->
+        workViewModel.updateWork(workId!!).observe(viewLifecycleOwner, { work ->
 
             buttonYes.setOnClickListener {
                 workViewModel.updateWork(work.id)
                 dialog.dismiss()
             }
-        })*/
-
-        dialog.show()
+        })
     }
 
     override fun onLoading() {
