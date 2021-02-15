@@ -27,7 +27,7 @@ interface ApiService {
 
     //Endpoint to get all post from the server.
     @GET("posts")
-    suspend fun fetchAllPosts(): Response<List<Post>>
+    suspend fun fetchAllPosts(): Response<MutableList<Post>>
 
     //Endpoint to upload post picture to AWS and return the post image URL.
     @Multipart
@@ -87,4 +87,8 @@ interface ApiService {
      //Get work
      @GET("work/{id}")
      suspend fun getWork(@Path("id") id: Int): Response<Work>
+
+    //Update work progress
+    @PUT("work/{id}")
+    suspend fun updateWork(@Path("id")id:Int, @Body workUpdateRequestBody:WorkUpdate):Response<Work>
 }

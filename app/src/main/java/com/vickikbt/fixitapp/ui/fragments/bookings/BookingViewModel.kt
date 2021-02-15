@@ -1,6 +1,5 @@
 package com.vickikbt.fixitapp.ui.fragments.bookings
 
-import android.util.Log
 import androidx.databinding.Observable
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
@@ -49,7 +48,6 @@ class BookingViewModel @ViewModelInject constructor(
             try {
                 bookingRepository.acceptBooking(bookingId, postId, userId)
                 workRepository.createWork(postId, workerId = userId)
-                Log.e("VickiKbt", "Booking ViewModel: Work created")
                 stateListener?.onSuccess("To start soon")
                 return@launch
             } catch (e: ApiException) {

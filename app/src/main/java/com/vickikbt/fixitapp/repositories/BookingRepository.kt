@@ -8,10 +8,9 @@ import com.vickikbt.fixitapp.models.entity.Booking
 import com.vickikbt.fixitapp.models.network.BookWorkRequest
 import com.vickikbt.fixitapp.models.network.UpdateBookingRequest
 import com.vickikbt.fixitapp.models.network.UpdatePostRequest
-import com.vickikbt.fixitapp.utils.Constants.ACCEPT_BOOKING
+import com.vickikbt.fixitapp.utils.Constants.ACCEPT
 import com.vickikbt.fixitapp.utils.Constants.IN_PROGRESS
-import com.vickikbt.fixitapp.utils.Constants.REJECT_BOOKING
-import com.vickikbt.fixitapp.utils.Coroutines
+import com.vickikbt.fixitapp.utils.Constants.REJECT
 import com.vickikbt.fixitapp.utils.SafeApiRequest
 import javax.inject.Inject
 
@@ -41,28 +40,28 @@ class BookingRepository @Inject constructor(
     }
 
     suspend fun acceptBooking(bookingId: Int,postId: Int, userId: Int): Booking {
-        val updateBookingRequest = UpdateBookingRequest(userId, ACCEPT_BOOKING)
+        val updateBookingRequest = UpdateBookingRequest(userId, ACCEPT)
         val booking = safeApiRequest { apiService.updateBooking(bookingId, updateBookingRequest) }
         workRepository.createWork(postId,userId)
 
-        updateBookedPost(booking)
+        updateBookedPost(userId, postId)
 
         return booking
     }
 
     suspend fun rejectBooking(bookingId: Int, userId: Int) {
-        val updateBookingRequest = UpdateBookingRequest(userId, REJECT_BOOKING)
+        val updateBookingRequest = UpdateBookingRequest(userId, REJECT)
         safeApiRequest { apiService.updateBooking(bookingId, updateBookingRequest) }
     }
 
-    private suspend fun updateBookedPost(booking: Booking) {
+    suspend fun updateBookedPost(userId:Int,postId: Int) {
         val user = appDatabase.userDAO().getAuthenticatedUser()
-        val post = appDatabase.postDao().getPost(booking.postId)
+        val post = appDatabase.postDao().getPost(postId)
 
         val token = "Bearer: ${user.token}"
         val updatePostRequestBody = UpdatePostRequest(
             user.id,
-            booking.userId,
+            userId,
             post.category,
             post.description,
             post.imageUrl,
@@ -75,14 +74,14 @@ class BookingRepository @Inject constructor(
             post.country
         )
 
-        safeApiRequest { apiService.updatePost(token, booking.postId, updatePostRequestBody) }
-        Log.e("VickiKbt", "Updating booked post")
+        Log.e("VickiKbt", "Updating Booking Post")
+        safeApiRequest { apiService.updatePost(token, postId, updatePostRequestBody) }
     }
 
-    private fun saveBookings(booking: List<Booking>) {
+    /*private fun saveBookings(booking: List<Booking>) {
         Coroutines.io {
             appDatabase.bookingDao().saveBookings(booking)
         }
-    }
+    }*/
 
 }

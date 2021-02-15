@@ -17,7 +17,7 @@ import com.vickikbt.fixitapp.databinding.ItemPostBookingBinding
 import com.vickikbt.fixitapp.models.entity.Booking
 import com.vickikbt.fixitapp.ui.fragments.bookings.BookingViewModel
 import com.vickikbt.fixitapp.ui.fragments.bookings.BookingsFragmentDirections
-import com.vickikbt.fixitapp.utils.Constants.REJECT_BOOKING
+import com.vickikbt.fixitapp.utils.Constants.REJECT
 import com.vickikbt.fixitapp.utils.StateListener
 import com.vickikbt.fixitapp.utils.log
 import com.vickikbt.fixitapp.utils.toast
@@ -130,7 +130,7 @@ class PostBookingsRecyclerviewViewHolder(private val binding: ItemPostBookingBin
 
         binding.textViewPostBookingsBid.text = "Ksh. $bid"
 
-        if (booking.status == REJECT_BOOKING) {
+        if (booking.status == REJECT) {
             binding.linearLayoutContainer.visibility = View.GONE
             binding.buttonRejectionConfirmed.visibility = View.VISIBLE
         }

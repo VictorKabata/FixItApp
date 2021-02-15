@@ -40,7 +40,7 @@ data class Work(
     val status: String,
 
     @ColumnInfo(name = "CreatedAt")
-    @SerializedName("created_aat")
+    @SerializedName("created_at")
     val createdAt: String,
 
     @ColumnInfo(name = "UpdatedAt")

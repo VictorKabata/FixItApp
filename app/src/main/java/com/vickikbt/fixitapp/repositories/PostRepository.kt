@@ -11,6 +11,7 @@ import com.vickikbt.fixitapp.utils.Coroutines
 import com.vickikbt.fixitapp.utils.SafeApiRequest
 import com.vickikbt.fixitapp.utils.TimeKeeper
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import okhttp3.MultipartBody
 import javax.inject.Inject
 
@@ -40,13 +41,14 @@ class PostRepository @Inject constructor(
             lastSyncTime
         )
 
-        if (isPostCacheAvailable && !isTimeSurpassed) return appDatabase.postDao().getAllPosts()
+        //if (isPostCacheAvailable && !isTimeSurpassed) return appDatabase.postDao().getAllPosts()
 
         val postResponse = safeApiRequest { apiService.fetchAllPosts() }
         postMutableLiveData.value = postResponse
         timePreference.savePostSyncTime(System.currentTimeMillis())
 
-        return appDatabase.postDao().getAllPosts()
+        //return appDatabase.postDao().getAllPosts() TODO: Find a way to cache status and workerId properly
+        return flow { emit(postResponse) }
     }
 
     fun getPost(id: Int) = appDatabase.postDao().getPost(id)

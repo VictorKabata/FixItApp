@@ -5,12 +5,14 @@ import com.vickikbt.fixitapp.data.cache.AppDatabase
 import com.vickikbt.fixitapp.data.network.ApiService
 import com.vickikbt.fixitapp.models.entity.Work
 import com.vickikbt.fixitapp.models.network.WorkRequest
+import com.vickikbt.fixitapp.models.network.WorkUpdate
+import com.vickikbt.fixitapp.utils.Constants.COMPLETED
 import com.vickikbt.fixitapp.utils.SafeApiRequest
 import javax.inject.Inject
 
 class WorkRepository @Inject constructor(
     private val apiService: ApiService,
-    private val appDatabase: AppDatabase
+    private val appDatabase: AppDatabase,
 ) : SafeApiRequest() {
 
     suspend fun getUserWorks(): List<Work> {
@@ -29,6 +31,12 @@ class WorkRepository @Inject constructor(
         return safeApiRequest { apiService.createWork(token, workRequest) }
     }
 
-    suspend fun getWork(id: Int) = safeApiRequest { apiService.getWork(id) }
+    suspend fun getWork(postId: Int) = safeApiRequest { apiService.getWork(postId) }
+
+    suspend fun updateWork(workId: Int): Work {
+        val workUpdateRequestBody = WorkUpdate(COMPLETED)
+        //bookingRepository.updateBookedPost()
+        return safeApiRequest { apiService.updateWork(workId, workUpdateRequestBody) }
+    }
 
 }

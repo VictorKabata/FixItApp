@@ -141,7 +141,7 @@
     <fragment
         android:id="@+id/upload_fragment"
         android:name="com.vickikbt.fixitapp.ui.fragments.upload.UploadFragment"
-        android:label="fragment_upload"
+        android:label="@string/upload"
         tools:layout="@layout/fragment_upload" />
     <fragment
         android:id="@+id/profile_fragment"
