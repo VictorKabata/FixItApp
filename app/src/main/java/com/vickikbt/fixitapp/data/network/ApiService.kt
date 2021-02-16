@@ -53,6 +53,12 @@ interface ApiService {
     @GET("review/{id}")
     suspend fun getUserReviews(@Path("id") userId: Int): Response<List<Review>>
 
+    @POST("review")
+    suspend fun reviewUser(
+        @Header("Authorization") token: String,
+        @Body reviewUserRequest: ReviewUserRequest
+    ):Response<Any>
+
     @GET("posts/user/{id}")
     suspend fun getUserPosts(@Path("id") userId: Int): Response<List<Post>>
 
@@ -78,17 +84,20 @@ interface ApiService {
     ): Response<Booking>
 
     //Create work
-     @POST("work")
-     suspend fun createWork(
-         @Header("Authorization") token: String,
-         @Body workRequestBody: WorkRequest
-     ): Response<Work>
+    @POST("work")
+    suspend fun createWork(
+        @Header("Authorization") token: String,
+        @Body workRequestBody: WorkRequest
+    ): Response<Work>
 
-     //Get work
-     @GET("work/{id}")
-     suspend fun getWork(@Path("id") id: Int): Response<Work>
+    //Get work
+    @GET("work/{id}")
+    suspend fun getWork(@Path("id") id: Int): Response<Work>
 
     //Update work progress
     @PUT("work/{id}")
-    suspend fun updateWork(@Path("id")id:Int, @Body workUpdateRequestBody:WorkUpdate):Response<Work>
+    suspend fun updateWork(
+        @Path("id") id: Int,
+        @Body workUpdateRequestRequestBody: WorkUpdateRequest
+    ): Response<Work>
 }

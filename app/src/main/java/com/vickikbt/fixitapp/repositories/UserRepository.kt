@@ -6,10 +6,8 @@ import com.vickikbt.fixitapp.data.network.ApiService
 import com.vickikbt.fixitapp.data.preferences.TimePreference
 import com.vickikbt.fixitapp.models.entity.Review
 import com.vickikbt.fixitapp.models.entity.User
-import com.vickikbt.fixitapp.models.network.AuthResponse
-import com.vickikbt.fixitapp.models.network.LoginRequest
-import com.vickikbt.fixitapp.models.network.PhotoUploadResponse
-import com.vickikbt.fixitapp.models.network.RegistrationRequest
+import com.vickikbt.fixitapp.models.entity.Work
+import com.vickikbt.fixitapp.models.network.*
 import com.vickikbt.fixitapp.utils.Coroutines
 import com.vickikbt.fixitapp.utils.SafeApiRequest
 import kotlinx.coroutines.flow.Flow
@@ -106,5 +104,11 @@ class UserRepository @Inject constructor(
     suspend fun fetchUser(id: Int) = safeApiRequest { apiService.getUser(id) }
 
     suspend fun fetchUserReviews(userId: Int) = safeApiRequest { apiService.getUserReviews(userId) }
+
+    suspend fun reviewUser(work:Work,rating:Int,comment:String){
+        val reviewUserRequest=ReviewUserRequest(work.userId,work.workerId,comment, rating)
+        val token="Bearer: ${appDatabase.userDAO().getAuthenticatedUser().token}"
+        safeApiRequest { apiService.reviewUser(token, reviewUserRequest) }
+    }
 
 }

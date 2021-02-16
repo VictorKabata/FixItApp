@@ -1,5 +1,6 @@
 package com.vickikbt.fixitapp.ui.fragments.work
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
+import android.widget.EditText
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentWorkBinding
+import com.vickikbt.fixitapp.models.entity.User
 import com.vickikbt.fixitapp.models.entity.Work
 import com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel
 import com.vickikbt.fixitapp.utils.Constants.COMPLETED
@@ -33,7 +38,7 @@ class WorkFragment : Fragment(), StateListener {
     private val args: WorkFragmentArgs by navArgs()
 
     private var workX: Work? = null
-    //private var currentUser: User? = null
+    private var currentUserX: User? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,6 +60,8 @@ class WorkFragment : Fragment(), StateListener {
         val postId = args.PostId
 
         userViewModel.getCurrentUser.observe(viewLifecycleOwner, { currentUser ->
+            currentUserX=currentUser
+
             workViewModel.getWork(postId).observe(viewLifecycleOwner, { work ->
                 workX = work
 
@@ -95,7 +102,7 @@ class WorkFragment : Fragment(), StateListener {
         val buttonYes: Button = dialog.findViewById(R.id.button_dialog_yes)
         val buttonNo: TextView = dialog.findViewById(R.id.textView_dialog_no)
 
-        dialogMessage.text = requireActivity().resources.getString(R.string.complete_work_message)
+        dialogMessage.text = resources.getString(R.string.complete_work_message)
 
         buttonNo.setOnClickListener { dialog.dismiss() }
 
@@ -103,14 +110,48 @@ class WorkFragment : Fragment(), StateListener {
             workViewModel.updateWork(workX!!).observe(viewLifecycleOwner, { work ->
                 workViewModel.updateWork(work)
                 //binding.workFinished.text = DataFormatter.updateDateFormatter(work.updatedAt) TODO: Fix this
-                requireActivity().log("Updated At: ${work.updatedAt}")
-                requireActivity().log("Formatted Updated At: ${DataFormatter.dateFormatter(work.updatedAt)}")
+                //requireActivity().log("Updated At: ${work.updatedAt}")
+                //requireActivity().log("Formatted Updated At: ${DataFormatter.dateFormatter(work.updatedAt)}")
+                //rateWorker(work)
+
+                if (currentUserX!!.id==work.userId){
+                    val action=WorkFragmentDirections.workToPayment(work.worker.phoneNumber)
+                    findNavController().navigate(action)
+                    dialog.dismiss()
+                }else
+
                 dialog.dismiss()
             })
         }
 
         dialog.show()
     }
+
+    /*@SuppressLint("SetTextI18n")
+    private fun rateWorker(work: Work) {
+        val dialog = Dialog(requireActivity())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_rating)
+
+        val dialogMessage: TextView = dialog.findViewById(R.id.textView_review_title)
+        val ratingBar:RatingBar=dialog.findViewById(R.id.rating_bar_review)
+        val editTextReview:EditText=dialog.findViewById(R.id.editText_review)
+        val buttonYes: Button = dialog.findViewById(R.id.button_dialog_yes)
+        val buttonNo: TextView = dialog.findViewById(R.id.textView_dialog_no)
+
+        dialogMessage.text = "${resources.getString(R.string.rating_dialog_title)} ${work.worker.username}?"
+
+        buttonNo.setOnClickListener { dialog.dismiss() }
+
+        buttonYes.setOnClickListener {
+            val rating=ratingBar.rating.toInt()
+            val comment=editTextReview.text.toString()
+            workViewModel.reviewUser(work,rating, comment)
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }*/
 
     override fun onLoading() {
         //requireActivity().log(message) TODO: Show progressbar

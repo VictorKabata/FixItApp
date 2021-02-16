@@ -5,7 +5,7 @@ import com.vickikbt.fixitapp.data.cache.AppDatabase
 import com.vickikbt.fixitapp.data.network.ApiService
 import com.vickikbt.fixitapp.models.entity.Work
 import com.vickikbt.fixitapp.models.network.WorkRequest
-import com.vickikbt.fixitapp.models.network.WorkUpdate
+import com.vickikbt.fixitapp.models.network.WorkUpdateRequest
 import com.vickikbt.fixitapp.utils.Constants.COMPLETED
 import com.vickikbt.fixitapp.utils.SafeApiRequest
 import javax.inject.Inject
@@ -34,7 +34,7 @@ class WorkRepository @Inject constructor(
     suspend fun getWork(postId: Int) = safeApiRequest { apiService.getWork(postId) }
 
     suspend fun updateWork(work: Work): Work {
-        val workUpdateRequestBody = WorkUpdate(work.postId, work.userId, work.workerId, COMPLETED)
+        val workUpdateRequestBody = WorkUpdateRequest(work.postId, work.userId, work.workerId, COMPLETED)
         //bookingRepository.updateBookedPost()
         return safeApiRequest { apiService.updateWork(work.id, workUpdateRequestBody) }
     }

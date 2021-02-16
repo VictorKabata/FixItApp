@@ -3,13 +3,16 @@ package com.vickikbt.fixitapp.ui.fragments.work
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.vickikbt.fixitapp.models.entity.Work
+import com.vickikbt.fixitapp.repositories.UserRepository
 import com.vickikbt.fixitapp.repositories.WorkRepository
 import com.vickikbt.fixitapp.utils.ApiException
 import com.vickikbt.fixitapp.utils.StateListener
+import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 
-class WorkViewModel @ViewModelInject constructor(private val workRepository: WorkRepository) :
+class WorkViewModel @ViewModelInject constructor(private val workRepository: WorkRepository,private val userRepository: UserRepository) :
     ViewModel() {
 
     var stateListener: StateListener? = null
@@ -56,6 +59,27 @@ class WorkViewModel @ViewModelInject constructor(private val workRepository: Wor
         }catch (e:Exception){
             stateListener?.onFailure("${e.message}")
             return@liveData
+        }
+    }
+
+    fun reviewUser(work: Work,rating:Int,comment:String){
+        stateListener?.onLoading()
+
+        viewModelScope.launch {
+            try {
+                userRepository.reviewUser(work, rating, comment)
+                stateListener?.onSuccess("Rated ${work.worker.username} with $rating because: $comment")
+                return@launch
+            }catch (e:ApiException){
+                stateListener?.onFailure("${e.message}")
+                return@launch
+            }catch (e:UnknownHostException){
+                stateListener?.onFailure("${e.message}")
+                return@launch
+            }catch (e:Exception){
+                stateListener?.onFailure("${e.message}")
+                return@launch
+            }
         }
     }
 }

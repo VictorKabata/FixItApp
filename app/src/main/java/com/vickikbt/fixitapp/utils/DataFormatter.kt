@@ -24,6 +24,21 @@ class DataFormatter {
             return targetFormat.format(originalFormat)
         }
 
+        //0714091304-Input
+        //+254714091304-Input
+        //714091304-Output
+        fun phoneNumberFormatter(phoneNumber:String): String {
+            return when {
+                phoneNumber.startsWith("0") -> {
+                    phoneNumber.removePrefix("0")
+                }
+                phoneNumber.startsWith("+254") -> {
+                    phoneNumber.removePrefix("+254")
+                }
+                else -> phoneNumber
+            }
+        }
+
     }
 
 }

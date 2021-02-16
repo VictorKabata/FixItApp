@@ -47,6 +47,10 @@
     <string name="upload">Upload</string>
     <string name="logout_message">Are you sure you want to logout?</string>
     <string name="complete_work_message">Mark this work as complete?</string>
+    <string name="rating_dialog_title">How would you rate </string>
+    <string name="review">Review</string>
+    <string name="amount">Amount</string>
+    <string name="make_payment">Make Payment</string>
 
     <string-array name="specialisations">
         <item>Select Specialisation</item>

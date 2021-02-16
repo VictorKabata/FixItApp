@@ -114,6 +114,9 @@ dependencies {
     //Circular ImageView
     implementation "de.hdodenhof:circleimageview:$hdodenhof_version"
 
+    //Country code picker
+    implementation "com.github.joielechong:countrycodepicker:$ccp_version"
+
     //Paper OnBoarding
     //api 'com.ramotion.paperonboarding:paper-onboarding:1.1.3'
 
