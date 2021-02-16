@@ -3,6 +3,7 @@ package com.vickikbt.fixitapp.ui.fragments.work
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.vickikbt.fixitapp.models.entity.Work
 import com.vickikbt.fixitapp.repositories.WorkRepository
 import com.vickikbt.fixitapp.utils.ApiException
 import com.vickikbt.fixitapp.utils.StateListener
@@ -36,11 +37,11 @@ class WorkViewModel @ViewModelInject constructor(private val workRepository: Wor
         }
     }
 
-    fun updateWork(workId:Int)= liveData {
+    fun updateWork(work:Work)= liveData {
         stateListener?.onLoading()
 
         try {
-            val workUpdateResponse=workRepository.updateWork(workId)
+            val workUpdateResponse=workRepository.updateWork(work)
             workUpdateResponse.let {work->
                 emit(work)
                 stateListener?.onSuccess("Updated work to complete")

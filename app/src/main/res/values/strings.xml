@@ -46,6 +46,7 @@
     <string name="select_photo">Select Photo</string>
     <string name="upload">Upload</string>
     <string name="logout_message">Are you sure you want to logout?</string>
+    <string name="complete_work_message">Mark this work as complete?</string>
 
     <string-array name="specialisations">
         <item>Select Specialisation</item>

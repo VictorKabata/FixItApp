@@ -15,7 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentWorkBinding
-import com.vickikbt.fixitapp.models.entity.User
+import com.vickikbt.fixitapp.models.entity.Work
 import com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel
 import com.vickikbt.fixitapp.utils.Constants.COMPLETED
 import com.vickikbt.fixitapp.utils.DataFormatter
@@ -32,7 +32,7 @@ class WorkFragment : Fragment(), StateListener {
     private val userViewModel by viewModels<UserViewModel>()
     private val args: WorkFragmentArgs by navArgs()
 
-    private var workId: Int? = null
+    private var workX: Work? = null
     //private var currentUser: User? = null
 
     override fun onCreateView(
@@ -56,29 +56,31 @@ class WorkFragment : Fragment(), StateListener {
 
         userViewModel.getCurrentUser.observe(viewLifecycleOwner, { currentUser ->
             workViewModel.getWork(postId).observe(viewLifecycleOwner, { work ->
-                workId = work.id
+                workX = work
 
                 if (currentUser.id == work.user.id) {
                     //Show the worker detail
                     binding.workUsername.text = work.worker.username
                     binding.workEmailAddress.text = work.worker.email
                     binding.workPhoneNumber.text = work.worker.phoneNumber
-                    Glide.with(requireActivity()).load(work.worker.imageUrl).into(binding.workImageView)
+                    Glide.with(requireActivity()).load(work.worker.imageUrl)
+                        .into(binding.workImageView)
                 } else {
                     //Show the user/employer detail
                     binding.workUsername.text = work.user.username
                     binding.workEmailAddress.text = work.user.email
                     binding.workPhoneNumber.text = work.user.phoneNumber
-                    Glide.with(requireActivity()).load(work.user.imageUrl).into(binding.workImageView)
+                    Glide.with(requireActivity()).load(work.user.imageUrl)
+                        .into(binding.workImageView)
                 }
 
                 binding.workStarted.text = DataFormatter.dateFormatter(work.createdAt)
 
                 if (work.status == COMPLETED) {
                     binding.workFinished.text = DataFormatter.dateFormatter(work.updatedAt)
-                    binding.buttonComplete.text=requireActivity().resources.getString(R.string.completed)
+                    binding.buttonComplete.text = requireActivity().resources.getString(R.string.completed)
                     binding.buttonComplete.setBackgroundColor(resources.getColor(R.color.button_disabled))
-                    binding.buttonComplete.isEnabled=false
+                    binding.buttonComplete.isEnabled = false
                 }
             })
         })
@@ -93,17 +95,21 @@ class WorkFragment : Fragment(), StateListener {
         val buttonYes: Button = dialog.findViewById(R.id.button_dialog_yes)
         val buttonNo: TextView = dialog.findViewById(R.id.textView_dialog_no)
 
-        dialogMessage.text=requireActivity().resources.getString(R.string.logout_message)
+        dialogMessage.text = requireActivity().resources.getString(R.string.complete_work_message)
 
         buttonNo.setOnClickListener { dialog.dismiss() }
 
-        workViewModel.updateWork(workId!!).observe(viewLifecycleOwner, { work ->
-
-            buttonYes.setOnClickListener {
-                workViewModel.updateWork(work.id)
+        buttonYes.setOnClickListener {
+            workViewModel.updateWork(workX!!).observe(viewLifecycleOwner, { work ->
+                workViewModel.updateWork(work)
+                //binding.workFinished.text = DataFormatter.updateDateFormatter(work.updatedAt) TODO: Fix this
+                requireActivity().log("Updated At: ${work.updatedAt}")
+                requireActivity().log("Formatted Updated At: ${DataFormatter.dateFormatter(work.updatedAt)}")
                 dialog.dismiss()
-            }
-        })
+            })
+        }
+
+        dialog.show()
     }
 
     override fun onLoading() {
@@ -116,7 +122,7 @@ class WorkFragment : Fragment(), StateListener {
 
     override fun onFailure(message: String) {
         requireActivity().toast(message)
-        requireActivity().log(message)
+        requireActivity().log("Network Error: $message")
     }
 
 }
