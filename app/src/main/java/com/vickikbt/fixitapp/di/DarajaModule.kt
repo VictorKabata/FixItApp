@@ -1,13 +1,12 @@
 package com.vickikbt.fixitapp.di
 
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
+//@InstallIn(ActivityRetainedComponent::class)
 
-@InstallIn(ActivityRetainedComponent::class)
-
-@Module
+//@Module
 object DarajaModule {
 
-    
+    fun providesDaraja() {
+        //return Daraja.
+    }
+
 }

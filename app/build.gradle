@@ -123,7 +123,7 @@ dependencies {
     //Daraja(MPesa) API
     implementation "com.androidstudy:daraja:$daraja_version"
 
-    //Location Dependency TODO: Update to latese version
+    //Location Dependency TODO: Update to latest version
     implementation "com.google.android.gms:play-services-location:$location_version"
 
     //NetworkX
