@@ -50,7 +50,8 @@
     <string name="rating_dialog_title">How would you rate </string>
     <string name="review">Review</string>
     <string name="amount">Amount</string>
-    <string name="make_payment">Make Payment</string>
+    <string name="pay_with_cash">Pay with Cash</string>
+    <string name="pay_with_mpesa">Pay with Mpesa</string>
 
     <string-array name="specialisations">
         <item>Select Specialisation</item>

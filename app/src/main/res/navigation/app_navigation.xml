@@ -113,9 +113,6 @@
             android:name="PostId"
             app:argType="integer"
             android:defaultValue="0" />
-        <action
-            android:id="@+id/work_to_payment"
-            app:destination="@id/payment_fragment" />
     </fragment>
     <fragment
         android:id="@+id/messages_fragment"
@@ -156,15 +153,5 @@
             app:destination="@id/login_fragment"
             app:popUpTo="@id/login_fragment"
             app:popUpToInclusive="true" />
-    </fragment>
-    <fragment
-        android:id="@+id/payment_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.payment.PaymentFragment"
-        android:label="Payment"
-        tools:layout="@layout/fragment_payment" >
-        <argument
-            android:name="PhoneNumber"
-            app:argType="string"
-            android:defaultValue="null" />
     </fragment>
 </navigation>

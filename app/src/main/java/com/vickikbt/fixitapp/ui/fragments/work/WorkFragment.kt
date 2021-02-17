@@ -1,6 +1,5 @@
 package com.vickikbt.fixitapp.ui.fragments.work
 
-import android.annotation.SuppressLint
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,13 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
-import android.widget.EditText
-import android.widget.RatingBar
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.vickikbt.fixitapp.R
@@ -44,7 +40,7 @@ class WorkFragment : Fragment(), StateListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_work, container, false)
         workViewModel.stateListener = this
 
@@ -61,7 +57,7 @@ class WorkFragment : Fragment(), StateListener {
         val postId = args.PostId
 
         userViewModel.getCurrentUser.observe(viewLifecycleOwner, { currentUser ->
-            currentUserX=currentUser
+            currentUserX = currentUser
 
             workViewModel.getWork(postId).observe(viewLifecycleOwner, { work ->
                 workX = work
@@ -86,7 +82,8 @@ class WorkFragment : Fragment(), StateListener {
 
                 if (work.status == COMPLETED) {
                     binding.workFinished.text = DataFormatter.dateFormatter(work.updatedAt)
-                    binding.buttonComplete.text = requireActivity().resources.getString(R.string.completed)
+                    binding.buttonComplete.text =
+                        requireActivity().resources.getString(R.string.completed)
                     binding.buttonComplete.setBackgroundColor(resources.getColor(R.color.button_disabled))
                     binding.buttonComplete.isEnabled = false
                 }
@@ -115,15 +112,16 @@ class WorkFragment : Fragment(), StateListener {
                 //requireActivity().log("Formatted Updated At: ${DataFormatter.dateFormatter(work.updatedAt)}")
                 //rateWorker(work)
 
-                if (currentUserX!!.id==work.userId){
+                if (currentUserX!!.id == work.userId) {
                     //val action=WorkFragmentDirections.workToPayment(work.worker.phoneNumber)
                     //findNavController().navigate(action)
-                    val paymentBottomSheet=PaymentBottomSheet()
-                    paymentBottomSheet.show(childFragmentManager,"Payment BottomSheet")
+                    val paymentBottomSheet = PaymentBottomSheet()
+                    //paymentBottomSheet.
+                    paymentBottomSheet.show(childFragmentManager, "Payment BottomSheet")
                     dialog.dismiss()
-                }else
+                } else
 
-                dialog.dismiss()
+                    dialog.dismiss()
             })
         }
 

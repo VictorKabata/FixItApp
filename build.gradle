@@ -20,6 +20,7 @@ buildscript {
         location_version="17.0.0"
         hdodenhof_version = "3.1.0"
         ccp_version="2.4.2"
+        daraja_version="1.0.2"
         networkx_version = "1.0"
     }
 
