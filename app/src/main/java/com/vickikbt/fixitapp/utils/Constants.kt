@@ -5,6 +5,7 @@ object Constants {
     //const val BASE_URL: String = "https://fix-it-server.herokuapp.com/"
     //const val BASE_URL: String = "http://10.0.2.2:8081/"
     const val BASE_URL: String = "http://192.168.43.125:8081/"
+    const val SAF_BASE_URL = "https://sandbox.safaricom.co.ke/"
 
     const val PERMISSION_ID = 69
 
@@ -28,4 +29,11 @@ object Constants {
     //TODO: Move to config file or add constants to gitignore
     const val CONSUMER_KEY="bZwcaGor0sSwGqLPBAiRtLoXaPwIk8Gy"
     const val CONSUMER_SECRET="N3w5oMiHXu0ZLT8H"
+
+    const val BUSINESS_SHORT_CODE = "174379"
+    const val PASSKEY = "add_password"
+    const val TRANSACTION_TYPE = "CustomerPayBillOnline"
+    const val PARTYB = "add_business_shortcode"
+
+    const val CALLBACKURL = "add_your_callback_url"
 }
