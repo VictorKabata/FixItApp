@@ -4,7 +4,7 @@ object Constants {
 
     //const val BASE_URL: String = "https://fix-it-server.herokuapp.com/"
     //const val BASE_URL: String = "http://10.0.2.2:8081/"
-    const val BASE_URL: String = "http://10.42.0.69:8081/"
+    const val BASE_URL: String = "http://192.168.43.125:8081/"
 
     const val PERMISSION_ID = 69
 
@@ -24,4 +24,8 @@ object Constants {
     const val COMPLETED="Completed"
 
     const val INTERNET_MESSAGE="Ensure you have an internet connection"
+
+    //TODO: Move to config file or add constants to gitignore
+    const val CONSUMER_KEY="bZwcaGor0sSwGqLPBAiRtLoXaPwIk8Gy"
+    const val CONSUMER_SECRET="N3w5oMiHXu0ZLT8H"
 }
