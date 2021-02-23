@@ -1,10 +1,6 @@
 package com.vickikbt.fixitapp.ui
 
-import android.view.View
-import androidx.databinding.Bindable
-import androidx.databinding.Observable
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,15 +11,15 @@ import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 
 class MpesaViewModel @ViewModelInject constructor(private val mpesaRepository: MpesaRepository) :
-    ViewModel(), Observable {
+    ViewModel() {
 
     private val accessTokenMutableLiveData = MutableLiveData<String>()
 
-    @Bindable
-    val phoneNumber: LiveData<String>? = null
+    //@Bindable
+    //val phoneNumber: LiveData<String>? = null
 
-    @Bindable
-    val amount: LiveData<String>? = null
+    //@Bindable
+    //val amount: LiveData<String>? = null
 
     var stateListener: StateListener? = null
 
@@ -51,16 +47,14 @@ class MpesaViewModel @ViewModelInject constructor(private val mpesaRepository: M
         }
     }
 
-    fun makePayment(view:View) {
+    fun makePayment(phoneNumber: String, amount: String) {
         stateListener?.onLoading()
 
         viewModelScope.launch {
             try {
-                if (phoneNumber?.value.isNullOrEmpty()) stateListener?.onFailure("Enter phone number")
-                else if (amount?.value.isNullOrEmpty()) stateListener?.onFailure("Enter amount")
-
-                mpesaRepository.makePayment(phoneNumber!!.value!!,amount!!.value!!)
-                stateListener?.onSuccess("Payed: ${amount.value} to ${phoneNumber.value}")
+                val token = accessTokenMutableLiveData.value!!
+                mpesaRepository.makePayment(token, phoneNumber, amount)
+                stateListener?.onSuccess("Payed: $amount to $phoneNumber")
                 return@launch
             } catch (e: UnknownHostException) {
                 stateListener?.onFailure(INTERNET_MESSAGE)
@@ -72,8 +66,5 @@ class MpesaViewModel @ViewModelInject constructor(private val mpesaRepository: M
         }
     }
 
-    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {}
-
-    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback?) {}
 
 }

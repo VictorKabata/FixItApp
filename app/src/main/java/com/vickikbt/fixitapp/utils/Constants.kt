@@ -33,7 +33,7 @@ object Constants {
     const val BUSINESS_SHORT_CODE = "174379"
     const val PASSKEY = "add_password"
     const val TRANSACTION_TYPE = "CustomerPayBillOnline"
-    const val PARTYB = "add_business_shortcode"
+    const val PARTYB = "174379"
 
-    const val CALLBACKURL = "add_your_callback_url"
+    const val CALLBACKURL = "http://mpesa-requestbin.herokuapp.com/"
 }

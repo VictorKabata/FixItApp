@@ -67,9 +67,10 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun providesDarajaApi(okHttpClient: OkHttpClient): DarajaService? {
+    fun providesDarajaApi(okHttpClient: OkHttpClient,gsonConverterFactory: Converter.Factory): DarajaService {
         return Retrofit.Builder()
             .baseUrl(Constants.SAF_BASE_URL)
+            .addConverterFactory(gsonConverterFactory)
             .client(okHttpClient)
             .build()
             .create(DarajaService::class.java)

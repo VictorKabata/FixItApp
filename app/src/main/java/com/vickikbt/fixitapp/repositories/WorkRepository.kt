@@ -35,8 +35,9 @@ class WorkRepository @Inject constructor(
 
     suspend fun updateWork(work: Work): Work {
         val workUpdateRequestBody = WorkUpdateRequest(work.postId, work.userId, work.workerId, COMPLETED)
-        //bookingRepository.updateBookedPost()
+        //bookingRepository.updateBookedPost() TODO: Update booked post
         return safeApiRequest { apiService.updateWork(work.id, workUpdateRequestBody) }
     }
+
 
 }

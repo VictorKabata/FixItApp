@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.vickikbt.fixitapp.R
@@ -18,7 +19,6 @@ import com.vickikbt.fixitapp.databinding.FragmentWorkBinding
 import com.vickikbt.fixitapp.models.entity.User
 import com.vickikbt.fixitapp.models.entity.Work
 import com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel
-import com.vickikbt.fixitapp.ui.views.PaymentBottomSheet
 import com.vickikbt.fixitapp.utils.Constants.COMPLETED
 import com.vickikbt.fixitapp.utils.DataFormatter
 import com.vickikbt.fixitapp.utils.StateListener
@@ -113,11 +113,9 @@ class WorkFragment : Fragment(), StateListener {
                 //rateWorker(work)
 
                 if (currentUserX!!.id == work.userId) {
-                    //val action=WorkFragmentDirections.workToPayment(work.worker.phoneNumber)
-                    //findNavController().navigate(action)
-                    val paymentBottomSheet = PaymentBottomSheet()
-                    //paymentBottomSheet.
-                    paymentBottomSheet.show(childFragmentManager, "Payment BottomSheet")
+                    val action=WorkFragmentDirections.workToPayment(work.worker.phoneNumber, work.post.budget)
+                    findNavController().navigate(action)
+
                     dialog.dismiss()
                 } else
 
