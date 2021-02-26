@@ -90,12 +90,12 @@ class PaymentFragment : Fragment(), StateListener {
         daraja.requestMPESAExpress(lnmExpress,
             object : DarajaListener<LNMResult> {
                 override fun onResult(lnmResult: LNMResult) {
-                    requireActivity().toast("STKPush Successful")
+                    //requireActivity().toast("STKPush Successful")
                 }
 
                 override fun onError(error: String) {
                     requireActivity().log("STKPush error: $error")
-                    requireActivity().toast("STKPush Failed")
+                    //requireActivity().toast("STKPush Failed")
                 }
             }
         )
