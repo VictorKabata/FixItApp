@@ -31,10 +31,9 @@ class PaymentFragment : Fragment(), StateListener {
 
     private val args: PaymentFragmentArgs by navArgs()
     private lateinit var daraja: Daraja
-    private lateinit var accessTokenString: String
 
-    @Inject
-    lateinit var appDatabase: AppDatabase
+    //@Inject
+    //lateinit var appDatabase: AppDatabase
 
     init {
         getAccessToken()
@@ -74,15 +73,13 @@ class PaymentFragment : Fragment(), StateListener {
         val phoneNumber = countryCode + phoneEt
         val amount = binding.editTextPaymentAmount.text.toString()
 
-        val partyA = appDatabase.userDAO().getAuthenticatedUser().phoneNumber
-        val timeStamp = getTimeStamp()
-        //val password = getPassword(timeStamp, Constants.BUSINESS_SHORT_CODE, Constants.PASSKEY)
+        validate()
 
         val lnmExpress = LNMExpress(
             Constants.BUSINESS_SHORT_CODE,
             Constants.PASSKEY,
             amount,
-            partyA,
+            "0714091304",
             Constants.PARTYB,
             phoneNumber,
             Constants.CALLBACKURL,
@@ -104,10 +101,24 @@ class PaymentFragment : Fragment(), StateListener {
         )
     }
 
+    private fun validate(){
+        when {
+            binding.editTextPaymentPhone.text.isNullOrEmpty() -> {
+                requireActivity().toast("Enter phone number.")
+            }
+            binding.editTextPaymentAmount.text.isNullOrEmpty() -> {
+                requireActivity().toast("Enter amount.")
+            }
+            binding.editTextPaymentAmount.text.toString().toInt()<1 -> {
+                requireActivity().toast("Cannot send money less than 1 Ksh.")
+            }
+        }
+    }
+
     private fun initUI() {
         //binding.editTextPaymentPhone.setText(phoneNumberFormatter(args.phoneNumber))
         binding.editTextPaymentPhone.setText("722387452")
-        binding.editTextPaymentAmount.setText("1")
+        binding.editTextPaymentAmount.setText("0")
         //binding.editTextPaymentAmount.setText(args.budget) TODO: Update
 
     }
