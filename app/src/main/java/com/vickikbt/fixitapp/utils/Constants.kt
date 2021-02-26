@@ -31,9 +31,9 @@ object Constants {
     const val CONSUMER_SECRET="N3w5oMiHXu0ZLT8H"
 
     const val BUSINESS_SHORT_CODE = "174379"
-    const val PASSKEY = "add_password"
+    const val PASSKEY = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919"
     const val TRANSACTION_TYPE = "CustomerPayBillOnline"
+    const val ACCOUNT_REFERENCE="001ABC"
     const val PARTYB = "174379"
-
     const val CALLBACKURL = "http://mpesa-requestbin.herokuapp.com/"
 }

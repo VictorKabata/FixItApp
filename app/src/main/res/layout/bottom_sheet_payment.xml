@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.vickikbt.fixitapp.ui.MpesaViewModel" />
+            type="com.vickikbt.fixitapp.ui.fragments.payment.MpesaViewModel" />
     </data>-->
 
     <androidx.constraintlayout.widget.ConstraintLayout

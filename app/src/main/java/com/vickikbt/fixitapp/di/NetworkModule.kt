@@ -1,7 +1,6 @@
 package com.vickikbt.fixitapp.di
 
 import com.vickikbt.fixitapp.data.network.ApiService
-import com.vickikbt.fixitapp.data.network.DarajaService
 import com.vickikbt.fixitapp.utils.Constants
 import com.vickikbt.fixitapp.utils.Constants.BASE_URL
 import dagger.Module
@@ -65,16 +64,7 @@ object NetworkModule {
         return retrofit.create(ApiService::class.java)
     }
 
-    @Provides
-    @Singleton
-    fun providesDarajaApi(okHttpClient: OkHttpClient,gsonConverterFactory: Converter.Factory): DarajaService {
-        return Retrofit.Builder()
-            .baseUrl(Constants.SAF_BASE_URL)
-            .addConverterFactory(gsonConverterFactory)
-            .client(okHttpClient)
-            .build()
-            .create(DarajaService::class.java)
-    }
+
 
 
 }

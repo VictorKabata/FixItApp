@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/splash_fragment">
+    app:startDestination="@id/payment_fragment">
     <fragment
         android:id="@+id/splash_fragment"
         android:name="com.vickikbt.fixitapp.ui.fragments.auth.SplashFragment"
