@@ -13,6 +13,7 @@ import com.twigafoods.daraja.model.AccessToken
 import com.twigafoods.daraja.model.LNMExpress
 import com.twigafoods.daraja.model.LNMResult
 import com.vickikbt.fixitapp.R
+import com.vickikbt.fixitapp.data.cache.AppDatabase
 import com.vickikbt.fixitapp.databinding.FragmentPaymentBinding
 import com.vickikbt.fixitapp.utils.*
 import com.vickikbt.fixitapp.utils.Constants.CONSUMER_KEY
@@ -20,6 +21,7 @@ import com.vickikbt.fixitapp.utils.Constants.CONSUMER_SECRET
 import com.vickikbt.fixitapp.utils.DataFormatter.Companion.getPassword
 import com.vickikbt.fixitapp.utils.DataFormatter.Companion.getTimeStamp
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -31,8 +33,8 @@ class PaymentFragment : Fragment(), StateListener {
     private lateinit var daraja: Daraja
     private lateinit var accessTokenString: String
 
-    //@Inject
-    //lateinit var appDatabase: AppDatabase
+    @Inject
+    lateinit var appDatabase: AppDatabase
 
     init {
         getAccessToken()
@@ -72,15 +74,15 @@ class PaymentFragment : Fragment(), StateListener {
         val phoneNumber = countryCode + phoneEt
         val amount = binding.editTextPaymentAmount.text.toString()
 
-        //val partyA = appDatabase.userDAO().getAuthenticatedUser().phoneNumber
+        val partyA = appDatabase.userDAO().getAuthenticatedUser().phoneNumber
         val timeStamp = getTimeStamp()
-        val password = getPassword(timeStamp, Constants.BUSINESS_SHORT_CODE, Constants.PASSKEY)
+        //val password = getPassword(timeStamp, Constants.BUSINESS_SHORT_CODE, Constants.PASSKEY)
 
         val lnmExpress = LNMExpress(
             Constants.BUSINESS_SHORT_CODE,
             Constants.PASSKEY,
             amount,
-            "254714091304",
+            partyA,
             Constants.PARTYB,
             phoneNumber,
             Constants.CALLBACKURL,
@@ -106,7 +108,7 @@ class PaymentFragment : Fragment(), StateListener {
         //binding.editTextPaymentPhone.setText(phoneNumberFormatter(args.phoneNumber))
         binding.editTextPaymentPhone.setText("722387452")
         binding.editTextPaymentAmount.setText("1")
-        //binding.editTextPaymentAmount.setText(args.budget)
+        //binding.editTextPaymentAmount.setText(args.budget) TODO: Update
 
     }
 
