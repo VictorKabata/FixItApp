@@ -58,6 +58,8 @@
     <string name="transactions">Transactions</string>
     <string name="amount">Amount</string>
     <string name="review">Review</string>
+    <string name="from">From:</string>
+    <string name="no_transactions">No Transactions</string>
 
     <string-array name="specialisations">
         <item>Select Specialisation</item>

@@ -21,7 +21,7 @@
 
                 <item
                     android:id="@+id/transactions_fragment"
-                    android:icon="@drawable/ic_transactions"
+                    android:icon="@drawable/ic_money"
                     android:title="@string/transactions" />
             </menu>
         </item>

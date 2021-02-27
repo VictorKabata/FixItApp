@@ -3,8 +3,8 @@ package com.vickikbt.fixitapp.utils
 object Constants {
 
     //const val BASE_URL: String = "https://fix-it-server.herokuapp.com/"
-    //const val BASE_URL: String = "http://10.0.2.2:8081/"
-    const val BASE_URL: String = "http://192.168.43.125:8081/"
+    const val BASE_URL: String = "http://10.0.2.2:8081/"
+    //const val BASE_URL: String = "http://192.168.43.125:8081/"
     const val SAF_BASE_URL = "https://sandbox.safaricom.co.ke/"
 
     const val PERMISSION_ID = 69

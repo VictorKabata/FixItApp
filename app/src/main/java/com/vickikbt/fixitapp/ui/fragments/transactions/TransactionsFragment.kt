@@ -10,9 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentTransactionsBinding
-import com.vickikbt.fixitapp.utils.StateListener
-import com.vickikbt.fixitapp.utils.log
-import com.vickikbt.fixitapp.utils.toast
+import com.vickikbt.fixitapp.ui.adapters.TransactionsRecyclerviewAdapter
+import com.vickikbt.fixitapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,27 +35,24 @@ class TransactionsFragment : Fragment(), StateListener {
 
     private fun initUI() {
         viewModel.getUserTransactions().observe(viewLifecycleOwner, { transactions ->
-            if (transactions.isNullOrEmpty()){
-                binding.textViewTransactions.text="No Transactions"
-                //binding.textViewTransactions.visibility=VISIBLE
-            }
+            if (transactions.isNullOrEmpty()) binding.textViewTransactions.visibility = VISIBLE
 
-            binding.textViewTransactions.text = transactions.toString()
+            binding.recyclerviewTransactions.adapter = TransactionsRecyclerviewAdapter(transactions)
         })
 
     }
 
     override fun onLoading() {
-        requireActivity().toast("Loading")
+        binding.progressBarTransaction.show()
     }
 
     override fun onSuccess(message: String) {
-        requireActivity().toast("Loading")
+        binding.progressBarTransaction.hide()
         requireActivity().log(message)
     }
 
     override fun onFailure(message: String) {
-        requireActivity().toast(message)
+        binding.progressBarTransaction.hide()
         requireActivity().log(message)
     }
 }
