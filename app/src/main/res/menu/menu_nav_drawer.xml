@@ -7,7 +7,7 @@
 
         <item
 
-            android:title="Home and Feeds">
+            android:title="@string/home_and_feeds">
             <menu>
                 <item
                     android:id="@+id/home_fragment"
@@ -18,10 +18,15 @@
                     android:id="@+id/feeds_fragment"
                     android:icon="@drawable/ic_feeds"
                     android:title="@string/feeds" />
+
+                <item
+                    android:id="@+id/transactions_fragment"
+                    android:icon="@drawable/ic_transactions"
+                    android:title="@string/transactions" />
             </menu>
         </item>
 
-        <item android:title="Profile">
+        <item android:title="@string/profile">
             <menu>
                 <item
                     android:id="@+id/profile_fragment"
@@ -30,7 +35,7 @@
             </menu>
         </item>
 
-        <item android:title="Communication">
+        <item android:title="@string/communication">
             <menu>
                 <item
                     android:id="@+id/messages_fragment"
@@ -39,7 +44,7 @@
             </menu>
         </item>
 
-        <item android:title="Others">
+        <item android:title="@string/others">
             <menu>
                 <item
                     android:id="@+id/settings_fragment"

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/payment_fragment">
+    app:startDestination="@id/splash_fragment">
     <fragment
         android:id="@+id/splash_fragment"
         android:name="com.vickikbt.fixitapp.ui.fragments.auth.SplashFragment"
@@ -170,4 +170,9 @@
             app:argType="string"
             android:defaultValue="null" />
     </fragment>
+    <fragment
+        android:id="@+id/transactions_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.transactions.TransactionsFragment"
+        android:label="@string/transactions"
+        tools:layout="@layout/fragment_transactions" />
 </navigation>

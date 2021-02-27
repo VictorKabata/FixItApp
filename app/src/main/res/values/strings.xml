@@ -48,10 +48,16 @@
     <string name="logout_message">Are you sure you want to logout?</string>
     <string name="complete_work_message">Mark this work as complete?</string>
     <string name="rating_dialog_title">How would you rate </string>
-    <string name="review">Review</string>
-    <string name="amount">Amount</string>
+
     <string name="pay_with_cash">Pay with Cash</string>
     <string name="pay_with_mpesa">Pay with Mpesa</string>
+    <string name="home_and_feeds">Home and Feeds</string>
+
+    <string name="communication">Communication</string>
+    <string name="others">Others</string>
+    <string name="transactions">Transactions</string>
+    <string name="amount">Amount</string>
+    <string name="review">Review</string>
 
     <string-array name="specialisations">
         <item>Select Specialisation</item>

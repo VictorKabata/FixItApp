@@ -57,7 +57,7 @@ interface ApiService {
     suspend fun reviewUser(
         @Header("Authorization") token: String,
         @Body reviewUserRequest: ReviewUserRequest
-    ):Response<Any>
+    ): Response<Any>
 
     @GET("posts/user/{id}")
     suspend fun getUserPosts(@Path("id") userId: Int): Response<List<Post>>
@@ -100,4 +100,18 @@ interface ApiService {
         @Path("id") id: Int,
         @Body workUpdateRequestRequestBody: WorkUpdateRequest
     ): Response<Work>
+
+    //Get user transactions
+    @GET("/transaction/user/{id}")
+    suspend fun getUserTransactions(
+        @Header("Authorization") token: String,
+        @Path("id") userId: Int
+    ): Response<List<TransactionResponse>>
+
+    //Create a new transaction
+    @POST("transactions")
+    suspend fun createTransaction(
+        @Header("Authorization") token: String,
+        @Body transactionRequestBody: TransactionRequest
+    ): Response<TransactionResponse>
 }
