@@ -167,22 +167,6 @@ class PostDetailFragment : Fragment(), StateListener, OnMapReadyCallback {
         startActivity(intent)
     }
 
-    override fun onLoading() {
-        binding.progressBarPostDetail.show()
-    }
-
-    override fun onSuccess(message: String) {
-        binding.progressBarPostDetail.hide()
-        //requireActivity().toast(message)
-        requireActivity().log(message)
-    }
-
-    override fun onFailure(message: String) {
-        binding.progressBarPostDetail.hide()
-        //requireActivity().toast(message)
-        requireActivity().log(message)
-    }
-
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap?) {
         googleMap?.isMyLocationEnabled = false //Error due to permission check
@@ -204,6 +188,22 @@ class PostDetailFragment : Fragment(), StateListener, OnMapReadyCallback {
 
             googleMap?.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
         })
+    }
+
+    override fun onLoading() {
+        binding.progressBarPostDetail.show()
+    }
+
+    override fun onSuccess(message: String) {
+        binding.progressBarPostDetail.hide()
+        requireActivity().toast(message)
+        requireActivity().log(message)
+    }
+
+    override fun onFailure(message: String) {
+        binding.progressBarPostDetail.hide()
+        //requireActivity().toast(message)
+        requireActivity().log(message)
     }
 
 }

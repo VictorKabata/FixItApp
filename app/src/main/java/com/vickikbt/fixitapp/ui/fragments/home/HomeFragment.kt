@@ -34,7 +34,7 @@ class HomeFragment : Fragment(), StateListener {
         }
 
         binding.swipeRefreshLayoutHome.setOnRefreshListener {
-            viewModel.fetchAllPosts()
+            initUI()
         }
 
         initUI()
@@ -48,11 +48,12 @@ class HomeFragment : Fragment(), StateListener {
 
             else {
                 userViewModel.getCurrentUser.observe(viewLifecycleOwner, { user ->
-                    binding.recyclerViewHome.adapter =
-                        HomeRecyclerviewAdapter(requireActivity(), posts, user.id)
+                    binding.recyclerViewHome.adapter = HomeRecyclerviewAdapter(requireActivity(), posts, user.id)
                 })
             }
         })
+
+        binding.swipeRefreshLayoutHome.isRefreshing = false
     }
 
     override fun onLoading() {
@@ -61,7 +62,7 @@ class HomeFragment : Fragment(), StateListener {
 
     override fun onSuccess(message: String) {
         binding.progressBarHome.hide()
-        binding.swipeRefreshLayoutHome.isRefreshing = false
+        //binding.swipeRefreshLayoutHome.
         if (isAdded) requireActivity().log(message)
     }
 

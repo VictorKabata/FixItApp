@@ -61,6 +61,9 @@
         <action
             android:id="@+id/home_to_upload"
             app:destination="@id/upload_fragment" />
+        <action
+            android:id="@+id/home_to_user_profile"
+            app:destination="@id/user_profile_fragment" />
     </fragment>
     <fragment
         android:id="@+id/post_detail_fragment"
@@ -76,16 +79,6 @@
             app:destination="@id/user_profile_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/user_profile_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.auth.UserProfileFragment"
-        android:label="User Profile"
-        tools:layout="@layout/fragment_user_profile" >
-        <argument
-            android:name="UserId"
-            app:argType="integer"
-            android:defaultValue="0" />
-    </fragment>
-    <fragment
         android:id="@+id/post_booking_fragment"
         android:name="com.vickikbt.fixitapp.ui.fragments.bookings.BookingsFragment"
         android:label="Post Booking"
@@ -94,15 +87,15 @@
             app:argType="integer"
             android:defaultValue="0" />
         <action
-            android:id="@+id/post_booking_to_user_profile"
-            app:destination="@id/user_profile_fragment" />
-        <action
             android:id="@+id/post_bookings_to_work"
             app:destination="@id/work_fragment" />
         <argument
             android:name="Budget"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/post_bookings_to_user_profile"
+            app:destination="@id/user_profile_fragment" />
     </fragment>
     <fragment
         android:id="@+id/work_fragment"
@@ -116,6 +109,9 @@
         <action
             android:id="@+id/work_to_payment"
             app:destination="@id/payment_fragment" />
+        <action
+            android:id="@+id/work_fragment_to_user_profile"
+            app:destination="@id/user_profile_fragment" />
     </fragment>
     <fragment
         android:id="@+id/messages_fragment"
@@ -190,5 +186,18 @@
         <action
             android:id="@+id/transactions_to_home"
             app:destination="@id/home_fragment" />
+        <action
+            android:id="@+id/transaction_to_user_profile"
+            app:destination="@id/user_profile_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/user_profile_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.user_profile.UserProfileFragment"
+        android:label="User Profile"
+        tools:layout="@layout/fragment_user_profile" >
+        <argument
+            android:name="userId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

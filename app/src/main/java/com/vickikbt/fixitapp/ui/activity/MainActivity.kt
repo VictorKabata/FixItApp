@@ -1,11 +1,13 @@
 package com.vickikbt.fixitapp.ui.activity
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -13,9 +15,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.preference.PreferenceManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.vickikbt.fixitapp.R
+import com.vickikbt.fixitapp.data.preferences.ThemePreference
 import com.vickikbt.fixitapp.databinding.ActivityMainBinding
 import com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +29,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var themePreferenceRepo: ThemePreference
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     private val viewModel by viewModels<UserViewModel>()
@@ -58,13 +63,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         initUI()
+
+        initTheme()
     }
 
     private fun initUI() {
-        val headerUsername: TextView = binding.navView.getHeaderView(0).findViewById(R.id.userName_navHeader)
-        val headerEmail: TextView = binding.navView.getHeaderView(0).findViewById(R.id.emailAddress_navHeader)
-        val headerImageView: ImageView = binding.navView.getHeaderView(0).findViewById(R.id.imageView_navHeader)
-        val headerImageViewBackground: ImageView = binding.navView.getHeaderView(0).findViewById(R.id.imageView_navHeaderBackground)
+        val headerUsername: TextView =
+            binding.navView.getHeaderView(0).findViewById(R.id.userName_navHeader)
+        val headerEmail: TextView =
+            binding.navView.getHeaderView(0).findViewById(R.id.emailAddress_navHeader)
+        val headerImageView: ImageView =
+            binding.navView.getHeaderView(0).findViewById(R.id.imageView_navHeader)
+        val headerImageViewBackground: ImageView =
+            binding.navView.getHeaderView(0).findViewById(R.id.imageView_navHeaderBackground)
 
         viewModel.getCurrentUser.observe(this, { user ->
             if (user != null) {
@@ -78,6 +89,23 @@ class MainActivity : AppCompatActivity() {
                 Glide.with(this).load(user.imageUrl)
                     .apply(RequestOptions.bitmapTransform(BlurTransformation(25, 3)))
                     .into(headerImageViewBackground)
+            }
+        })
+    }
+
+    private fun initTheme() {
+        val pref = PreferenceManager.getDefaultSharedPreferences(this)
+        themePreferenceRepo = ThemePreference(pref)
+
+        themePreferenceRepo.nightModeLive.observe(this, {
+            when (it) {
+                "Light" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                "Dark" -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                "System" ->
+                    if (Build.VERSION.SDK_INT >= 29)
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                    else
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY)
             }
         })
     }

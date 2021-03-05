@@ -1,0 +1,35 @@
+<resources>
+    <string-array name="theme_options_above_q">
+        <item>Light Theme</item>
+        <item>Dark Theme</item>
+        <item>System Default</item>
+    </string-array>
+
+    <string-array name="theme_options_below_q">
+        <item>Light Theme</item>
+        <item>Dark Theme</item>
+        <item>Set By Battery Saver</item>
+    </string-array>
+
+    <string-array name="theme_values">
+        <item>Light</item>
+        <item>Dark</item>
+        <item>System</item>
+    </string-array>
+
+    <string-array name="language_values">
+        <item>English</item>
+        <item>Swahili</item>
+    </string-array>
+
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
+</resources>

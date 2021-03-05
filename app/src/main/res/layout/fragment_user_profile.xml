@@ -6,7 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragments.auth.UserProfileFragment">
+        tools:context=".ui.fragments.profile.UserProfileFragment">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -50,12 +50,11 @@
                             android:padding="15dp">
 
                             <androidx.appcompat.widget.AppCompatRatingBar
-                                android:id="@+id/user_profile_rating"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:numStars="5"
-                                android:isIndicator="true"
+                                android:rating="4.0"
                                 android:theme="@style/RatingBar" />
 
                             <TextView
@@ -83,7 +82,8 @@
                                 android:maxLines="1"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="Victor Kabata" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -101,7 +101,8 @@
                                 android:maxLines="1"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="victorbro14@gmail.com" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -119,7 +120,8 @@
                                 android:maxLines="1"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="+254714091304" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -137,7 +139,8 @@
                                 android:maxLines="1"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textStyle="bold"
+                                tools:text="Computer Repair" />
 
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -183,7 +186,8 @@
                             android:maxLines="1"
                             android:textColor="@color/primaryColor"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:text="Trap House" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -201,7 +205,8 @@
                             android:maxLines="1"
                             android:textColor="@color/primaryColor"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:text="Nyeri County" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -219,7 +224,8 @@
                             android:maxLines="1"
                             android:textColor="@color/primaryColor"
                             android:textSize="18sp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:text="Kenya" />
 
                     </LinearLayout>
 

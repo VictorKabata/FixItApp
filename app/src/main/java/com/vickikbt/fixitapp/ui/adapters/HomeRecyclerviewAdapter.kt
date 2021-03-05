@@ -37,10 +37,17 @@ class HomeRecyclerviewAdapter constructor(
 
         holder.bind(post, context)
 
+        holder.profilePic.setOnClickListener {
+            val action=HomeFragmentDirections.homeToUserProfile(post.userId)
+            it.findNavController().navigate(action)
+        }
+
+        holder.userName.setOnClickListener {
+            val action=HomeFragmentDirections.homeToUserProfile(post.userId)
+            it.findNavController().navigate(action)
+        }
+
         holder.itemView.setOnClickListener { postDetail(it, post, currentUserId) }
-        /*holder.itemView.setOnClickListener {
-            context.toast(post.status)
-        }*/
     }
 
     private fun postDetail(view: View, post: Post, currentUserId: Int) {
@@ -59,13 +66,16 @@ class HomeRecyclerviewAdapter constructor(
         } else if (post.status == "In-Progress" && post.workerId != currentUserId || post.user.id != currentUserId) {
             //context.toast("No more application for this work")
             context.toast("Work applications closed")
-        }
+        } //TODO: Add check for if is paid field==true
     }
 
 }
 
 class HomeRecyclerviewViewHolder(private val binding: ItemHomeBinding) :
     RecyclerView.ViewHolder(binding.root) {
+
+    val profilePic=binding.postUserImageView
+    val userName=binding.postUserUsername
 
     @SuppressLint("SetTextI18n")
     fun bind(post: Post, context: Context) {

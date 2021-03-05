@@ -1,0 +1,41 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/theme">
+        <ListPreference
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:icon="@drawable/ic_theme"
+            app:entryValues="@array/theme_values"
+            app:key="theme"
+            app:title="@string/select_theme"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/language">
+        <ListPreference
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:icon="@drawable/ic_language"
+            app:entryValues="@array/language_values"
+            app:key="language"
+            app:title="@string/select_language"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/sync_header">
+
+        <SwitchPreferenceCompat
+            app:key="sync"
+            app:title="@string/sync_title" />
+
+        <SwitchPreferenceCompat
+            app:dependency="sync"
+            app:key="attachment"
+            app:summaryOff="@string/attachment_summary_off"
+            app:summaryOn="@string/attachment_summary_on"
+            app:title="@string/attachment_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -5,7 +5,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="4dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/post_user_imageView"
@@ -101,6 +102,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/post_category_textView"
             tool:text="Description" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="6dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/primaryColor"
+            app:layout_constraintTop_toBottomOf="@id/post_description_textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
