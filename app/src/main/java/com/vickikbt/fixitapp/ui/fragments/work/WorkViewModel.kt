@@ -68,7 +68,8 @@ class WorkViewModel @ViewModelInject constructor(private val workRepository: Wor
         viewModelScope.launch {
             try {
                 userRepository.reviewUser(work, rating, comment)
-                stateListener?.onSuccess("Rated ${work.worker.username} with $rating because: $comment")
+                //stateListener?.onSuccess("Rated ${work.worker.username} with $rating because: $comment")
+                stateListener?.onSuccess("Rated")
                 return@launch
             }catch (e:ApiException){
                 stateListener?.onFailure("${e.message}")

@@ -153,6 +153,31 @@
                     android:textSize="20sp"
                     android:textStyle="italic" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/location"
+                    android:textColor="@color/secondaryColor"
+                    android:textSize="16sp" />
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="230dp"
+                    app:cardCornerRadius="8dp"
+                    android:elevation="8dp">
+
+                    <!--TODO: Remove public api key-->
+                    <fragment
+                        android:id="@+id/mapView"
+                        android:layout_width="match_parent"
+                        android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_height="match_parent"
+                        android:apiKey="@string/google_maps_key"/>
+
+                </com.google.android.material.card.MaterialCardView>
+
                 <Button
                     android:id="@+id/button_book"
                     android:layout_width="match_parent"

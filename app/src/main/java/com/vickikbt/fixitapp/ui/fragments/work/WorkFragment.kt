@@ -113,7 +113,13 @@ class WorkFragment : Fragment(), StateListener {
                 //rateWorker(work)
 
                 if (currentUserX!!.id == work.userId) {
-                    val action=WorkFragmentDirections.workToPayment(work.worker.phoneNumber, work.post.budget)
+                    val action = WorkFragmentDirections.workToPayment(
+                        work.worker.phoneNumber,
+                        work.post.budget,
+                        work.postId,
+                        work.id,
+                        work.workerId
+                    )
                     findNavController().navigate(action)
 
                     dialog.dismiss()
@@ -126,31 +132,6 @@ class WorkFragment : Fragment(), StateListener {
         dialog.show()
     }
 
-    /*@SuppressLint("SetTextI18n")
-    private fun rateWorker(work: Work) {
-        val dialog = Dialog(requireActivity())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.dialog_rating)
-
-        val dialogMessage: TextView = dialog.findViewById(R.id.textView_review_title)
-        val ratingBar:RatingBar=dialog.findViewById(R.id.rating_bar_review)
-        val editTextReview:EditText=dialog.findViewById(R.id.editText_review)
-        val buttonYes: Button = dialog.findViewById(R.id.button_dialog_yes)
-        val buttonNo: TextView = dialog.findViewById(R.id.textView_dialog_no)
-
-        dialogMessage.text = "${resources.getString(R.string.rating_dialog_title)} ${work.worker.username}?"
-
-        buttonNo.setOnClickListener { dialog.dismiss() }
-
-        buttonYes.setOnClickListener {
-            val rating=ratingBar.rating.toInt()
-            val comment=editTextReview.text.toString()
-            workViewModel.reviewUser(work,rating, comment)
-            dialog.dismiss()
-        }
-
-        dialog.show()
-    }*/
 
     override fun onLoading() {
         //requireActivity().log(message) TODO: Show progressbar

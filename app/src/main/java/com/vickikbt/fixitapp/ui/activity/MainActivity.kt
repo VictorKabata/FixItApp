@@ -61,14 +61,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initUI() {
-        val headerUsername: TextView =
-            binding.navView.getHeaderView(0).findViewById(R.id.userName_navHeader)
-        val headerEmail: TextView =
-            binding.navView.getHeaderView(0).findViewById(R.id.emailAddress_navHeader)
-        val headerImageView: ImageView =
-            binding.navView.getHeaderView(0).findViewById(R.id.imageView_navHeader)
-        val headerImageViewBackground: ImageView =
-            binding.navView.getHeaderView(0).findViewById(R.id.imageView_navHeaderBackground)
+        val headerUsername: TextView = binding.navView.getHeaderView(0).findViewById(R.id.userName_navHeader)
+        val headerEmail: TextView = binding.navView.getHeaderView(0).findViewById(R.id.emailAddress_navHeader)
+        val headerImageView: ImageView = binding.navView.getHeaderView(0).findViewById(R.id.imageView_navHeader)
+        val headerImageViewBackground: ImageView = binding.navView.getHeaderView(0).findViewById(R.id.imageView_navHeaderBackground)
 
         viewModel.getCurrentUser.observe(this, { user ->
             if (user != null) {

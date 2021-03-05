@@ -1,6 +1,9 @@
 package com.vickikbt.fixitapp.ui.fragments.post_detail
 
+import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,37 +19,53 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentPostDetailBinding
 import com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel
 import com.vickikbt.fixitapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
-class PostDetailFragment : Fragment(), StateListener {
+class PostDetailFragment : Fragment(), StateListener, OnMapReadyCallback {
 
     private lateinit var binding: FragmentPostDetailBinding
     private val postViewModel by viewModels<PostDetailViewModel>()
     private val userViewModel by viewModels<UserViewModel>()
     private val args: PostDetailFragmentArgs by navArgs()
 
+    private lateinit var currentUserName: String
+    private lateinit var postUserName: String
+    private lateinit var postUserPhoneNumber: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_detail, container, false)
         postViewModel.stateListener = this
-
-
 
         binding.postDetailToolbar.setNavigationIcon(R.drawable.ic_arrow_back)
         binding.postDetailToolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
 
+        val mapFragment = childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment?
+        mapFragment?.getMapAsync(this)
+
         binding.buttonBook.setOnClickListener {
             bookWork() //TODO: apply work api
+        }
+
+        binding.buttonContact.setOnClickListener {
+            sendSms()
         }
 
         initUI()
@@ -59,6 +78,9 @@ class PostDetailFragment : Fragment(), StateListener {
 
         postViewModel.getPost(postId).observe(viewLifecycleOwner, { post ->
             val user = post.user
+
+            postUserName = user.username
+            postUserPhoneNumber = user.phoneNumber
 
             Glide.with(requireActivity()).load(post.imageUrl).into(binding.imageViewPostDetail)
             Glide.with(requireActivity()).load(user.imageUrl).into(binding.userImageView)
@@ -85,9 +107,17 @@ class PostDetailFragment : Fragment(), StateListener {
                 findNavController().navigate(action)
             }
 
+
+            //setUpMap(post)
+
+        })
+
+        userViewModel.getCurrentUser.observe(viewLifecycleOwner, { user ->
+            currentUserName = user.username
         })
 
     }
+
 
     private fun bookWork() {
         val dialog = Dialog(requireActivity())
@@ -130,18 +160,50 @@ class PostDetailFragment : Fragment(), StateListener {
         dialog.show()
     }
 
+    private fun sendSms() {
+        val uri = Uri.parse("smsto:$postUserPhoneNumber")
+        val intent = Intent(Intent.ACTION_SENDTO, uri)
+        intent.putExtra("sms_body", "Hello $postUserName, i'm $currentUserName. ")
+        startActivity(intent)
+    }
+
     override fun onLoading() {
         binding.progressBarPostDetail.show()
     }
 
     override fun onSuccess(message: String) {
         binding.progressBarPostDetail.hide()
+        //requireActivity().toast(message)
         requireActivity().log(message)
     }
 
     override fun onFailure(message: String) {
         binding.progressBarPostDetail.hide()
-        requireActivity().toast(message)
+        //requireActivity().toast(message)
         requireActivity().log(message)
     }
+
+    @SuppressLint("MissingPermission")
+    override fun onMapReady(googleMap: GoogleMap?) {
+        googleMap?.isMyLocationEnabled = false //Error due to permission check
+        //googleMap?.uiSettings?.isScrollGesturesEnabled = false
+
+        postViewModel.getPost(args.PostId).observe(viewLifecycleOwner, { post ->
+            val location = LatLng(post.latitude, post.longitude)
+            requireActivity().log("Location is: $location")
+
+            googleMap?.addMarker(
+                MarkerOptions().position(location).title(post.address)
+                    .snippet("${post.region}, ${post.country}")
+            )
+
+            val cameraPosition = CameraPosition.Builder()
+                .target(location)
+                .zoom(16f)
+                .build()
+
+            googleMap?.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+        })
+    }
+
 }

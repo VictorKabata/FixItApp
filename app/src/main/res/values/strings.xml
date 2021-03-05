@@ -80,5 +80,7 @@
         <item>Electrical Repair</item>
         <item>Phone Repair</item>
     </string-array>
+
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDbEEHz3vTzgRd9aGWypOCqDWHeMmHF1uc</string>
 </resources>
 

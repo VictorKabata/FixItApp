@@ -24,7 +24,7 @@ class PostDetailViewModel @ViewModelInject constructor(
         try {
             val postResponse = postRepository.getPost(postId)
             postResponse.let { post ->
-                stateListener?.onSuccess("Fetched post")
+                stateListener?.onSuccess(null.toString())
                 emit(post)
             }
             return@liveData

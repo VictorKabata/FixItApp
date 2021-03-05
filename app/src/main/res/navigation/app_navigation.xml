@@ -169,10 +169,26 @@
             android:name="budget"
             app:argType="string"
             android:defaultValue="null" />
+        <argument
+            android:name="postId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="workId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="workerId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/transactions_fragment"
         android:name="com.vickikbt.fixitapp.ui.fragments.transactions.TransactionsFragment"
         android:label="@string/transactions"
-        tools:layout="@layout/fragment_transactions" />
+        tools:layout="@layout/fragment_transactions" >
+        <action
+            android:id="@+id/transactions_to_home"
+            app:destination="@id/home_fragment" />
+    </fragment>
 </navigation>
