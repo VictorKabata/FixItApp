@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    xmlns:tool="http://schemas.android.com/tools"
     android:background="@color/colorPrimary"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
@@ -11,13 +11,13 @@
         android:id="@+id/imageView_navHeaderBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView_navHeader"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
         android:src="@drawable/ic_profile_pic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,15 +27,15 @@
         android:id="@+id/userName_navHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:layout_marginTop="16dp"
-        tool:text="Victor Kabata"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_navHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_navHeader"
+        tool:text="Victor Kabata" />
 
     <TextView
         android:id="@+id/emailAddress_navHeader"
@@ -43,11 +43,11 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        tool:text="victorbro14@gmail.com"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userName_navHeader" />
+        app:layout_constraintTop_toBottomOf="@+id/userName_navHeader"
+        tool:text="victorbro14@gmail.com" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

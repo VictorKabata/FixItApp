@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -37,13 +38,18 @@ class HomeRecyclerviewAdapter constructor(
 
         holder.bind(post, context)
 
+        holder.itemView.animation = AnimationUtils.loadAnimation(
+            holder.itemView.context,
+            R.anim.recyclerview_load_animation
+        )
+
         holder.profilePic.setOnClickListener {
-            val action=HomeFragmentDirections.homeToUserProfile(post.userId)
+            val action = HomeFragmentDirections.homeToUserProfile(post.userId)
             it.findNavController().navigate(action)
         }
 
         holder.userName.setOnClickListener {
-            val action=HomeFragmentDirections.homeToUserProfile(post.userId)
+            val action = HomeFragmentDirections.homeToUserProfile(post.userId)
             it.findNavController().navigate(action)
         }
 
@@ -74,8 +80,8 @@ class HomeRecyclerviewAdapter constructor(
 class HomeRecyclerviewViewHolder(private val binding: ItemHomeBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-    val profilePic=binding.postUserImageView
-    val userName=binding.postUserUsername
+    val profilePic = binding.postUserImageView
+    val userName = binding.postUserUsername
 
     @SuppressLint("SetTextI18n")
     fun bind(post: Post, context: Context) {
