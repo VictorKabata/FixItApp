@@ -176,7 +176,7 @@ class UserViewModel @ViewModelInject constructor(private val userRepository: Use
 
         try {
             val userResponse = userRepository.fetchUser(id)
-            fetchUserReviews(userResponse.id) //Fetch user reviews
+            //fetchUserReviews(userResponse.id) //Fetch user reviews
             emit(userResponse)
             stateListener?.onSuccess("Fetched user details")
             return@liveData

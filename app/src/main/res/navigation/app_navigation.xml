@@ -192,12 +192,15 @@
     </fragment>
     <fragment
         android:id="@+id/user_profile_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.user_profile.UserProfileFragment"
-        android:label="User Profile"
-        tools:layout="@layout/fragment_user_profile" >
+        android:name="com.vickikbt.fixitapp.ui.fragments.profile.UserProfileFragment"
+        android:label="User Profile">
         <argument
             android:name="userId"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/settings_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.settings.SettingsFragment"
+        android:label="@string/settings" />
 </navigation>

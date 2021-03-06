@@ -34,7 +34,7 @@ class HomeFragment : Fragment(), StateListener {
         }
 
         binding.swipeRefreshLayoutHome.setOnRefreshListener {
-            initUI()
+            refreshUI()
         }
 
         initUI()
@@ -54,6 +54,11 @@ class HomeFragment : Fragment(), StateListener {
         })
 
         binding.swipeRefreshLayoutHome.isRefreshing = false
+    }
+
+    private fun refreshUI(){
+        viewModel.fetchAllPosts()
+        binding.swipeRefreshLayoutHome.isRefreshing=false
     }
 
     override fun onLoading() {

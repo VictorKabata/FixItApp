@@ -53,10 +53,11 @@ class PostRepository @Inject constructor(
 
     fun getPost(id: Int) = appDatabase.postDao().getPost(id)
 
-    suspend fun fetchAllPosts() {
+    suspend fun fetchAllPosts(): MutableList<Post> {
         val postResponse = safeApiRequest { apiService.fetchAllPosts() }
         postMutableLiveData.value = postResponse
         timePreference.savePostSyncTime(System.currentTimeMillis())
+        return postResponse
     }
 
     suspend fun uploadPostPicture(body: MultipartBody.Part) =

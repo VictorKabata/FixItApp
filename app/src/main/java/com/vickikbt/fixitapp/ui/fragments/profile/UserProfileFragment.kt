@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentUserProfileBinding
 import com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel
-import com.vickikbt.fixitapp.ui.fragments.user_profile.UserProfileFragmentArgs
+import com.vickikbt.fixitapp.utils.log
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,6 +33,8 @@ class UserProfileFragment : Fragment() {
     }
 
     private fun initUI() {
+        var ratings =0
+
         viewModel.fetchUser(args.userId).observe(viewLifecycleOwner, { user ->
             Glide.with(requireActivity()).load(user.imageUrl).into(binding.userProfileImageView)
             binding.userProfileUsername.text = user.username
@@ -42,7 +44,17 @@ class UserProfileFragment : Fragment() {
             binding.userProfileAddress.text = user.address
             binding.userProfileRegion.text = user.region
             binding.userProfileCountry.text = user.country
+
+            requireActivity().log("Fetched user: $user")
+        })
+
+        viewModel.fetchUserReviews(args.userId).observe(viewLifecycleOwner,{reviews->
+            reviews.forEach { review->
+                ratings+=review.rating/reviews.size
+            }
+            binding.ratingBarProfile.rating=ratings.toFloat()
         })
     }
+
 
 }

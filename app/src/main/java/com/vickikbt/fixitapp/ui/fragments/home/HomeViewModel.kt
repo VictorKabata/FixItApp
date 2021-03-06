@@ -1,18 +1,15 @@
 package com.vickikbt.fixitapp.ui.fragments.home
 
 import android.util.Log
-import androidx.databinding.Bindable
-import androidx.databinding.Observable
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.vickikbt.fixitapp.models.entity.Post
 import com.vickikbt.fixitapp.repositories.PostRepository
 import com.vickikbt.fixitapp.utils.ApiException
-import com.vickikbt.fixitapp.utils.NoInternetException
+import com.vickikbt.fixitapp.utils.Constants
 import com.vickikbt.fixitapp.utils.StateListener
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import okhttp3.MultipartBody
 import java.net.UnknownHostException
 
 class HomeViewModel @ViewModelInject constructor(private val postRepository: PostRepository) :
@@ -52,5 +49,25 @@ class HomeViewModel @ViewModelInject constructor(private val postRepository: Pos
         }
     }
 
-    fun fetchAllPosts() = liveData { emit(postRepository.fetchAllPosts()) }
+    fun fetchAllPosts() {
+        stateListener?.onLoading()
+
+        viewModelScope.launch {
+            try {
+                val posts=postRepository.fetchAllPosts()
+                _postMutableLiveData.value=posts
+                stateListener?.onSuccess("Fetched posts")
+                return@launch
+            } catch (e: ApiException) {
+                stateListener?.onFailure("${e.message}")
+                return@launch
+            } catch (e: UnknownHostException) {
+                stateListener?.onFailure("${Constants.INTERNET_MESSAGE}")
+                return@launch
+            } catch (e: Exception) {
+                stateListener?.onFailure("Error loading posts")
+                return@launch
+            }
+        }
+    }
 }

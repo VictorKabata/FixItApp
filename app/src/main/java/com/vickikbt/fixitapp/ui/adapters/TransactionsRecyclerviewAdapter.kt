@@ -3,10 +3,12 @@ package com.vickikbt.fixitapp.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.ItemTransactionBinding
 import com.vickikbt.fixitapp.models.network.TransactionResponse
+import com.vickikbt.fixitapp.ui.fragments.transactions.TransactionsFragmentDirections
 import com.vickikbt.fixitapp.utils.DataFormatter.Companion.dateFormatter
 
 class TransactionsRecyclerviewAdapter constructor(private val transactionList: List<TransactionResponse>) :
@@ -24,6 +26,11 @@ class TransactionsRecyclerviewAdapter constructor(private val transactionList: L
         val transaction = transactionList[position]
 
         holder.bind(transaction)
+
+        holder.userName.setOnClickListener {
+            val action = TransactionsFragmentDirections.transactionToUserProfile(transaction.worker.id)
+            it.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount() = transactionList.size
@@ -31,6 +38,8 @@ class TransactionsRecyclerviewAdapter constructor(private val transactionList: L
 
 class TransactionsViewHolder(private val binding: ItemTransactionBinding) :
     RecyclerView.ViewHolder(binding.root) {
+
+    val userName = binding.textViewName
 
     fun bind(transaction: TransactionResponse) {
         binding.textViewName.text = transaction.worker.username
