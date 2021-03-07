@@ -51,7 +51,11 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/home_to_post_detail"
-            app:destination="@id/post_detail_fragment" />
+            app:destination="@id/post_detail_fragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_out"
+            app:popExitAnim="@anim/fade_in" />
         <action
             android:id="@+id/home_to_post_bookings"
             app:destination="@id/post_booking_fragment" />

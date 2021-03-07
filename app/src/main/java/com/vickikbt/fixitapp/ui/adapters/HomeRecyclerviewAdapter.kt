@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -38,10 +39,10 @@ class HomeRecyclerviewAdapter constructor(
         holder.bind(post, context)
 
         //TODO: Load animation
-        /*holder.itemView.animation = AnimationUtils.loadAnimation(
+        holder.itemView.animation = AnimationUtils.loadAnimation(
             holder.itemView.context,
             R.anim.recyclerview_load_animation
-        )*/
+        )
 
         holder.profilePic.setOnClickListener {
             val action = HomeFragmentDirections.homeToUserProfile(post.userId)
