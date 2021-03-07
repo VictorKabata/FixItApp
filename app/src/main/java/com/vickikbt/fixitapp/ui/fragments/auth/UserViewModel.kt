@@ -30,12 +30,12 @@ class UserViewModel @ViewModelInject constructor(private val userRepository: Use
     @Bindable
     val password = MutableLiveData<String>()
 
-    //private val _reviewsMutableLiveData = MutableLiveData<List<Review>>()
-    //val userReviews: LiveData<List<Review>> = _reviewsMutableLiveData
+    //private val _userMutableLiveData = MutableLiveData<User>()
+    //val user: LiveData<User> = _userMutableLiveData
 
     val getCurrentUser = userRepository.getAuthenticatedUser().asLiveData()
 
-    suspend fun getCurrentUserReviews() =userRepository.getCurrentUserReviews().asLiveData()
+    suspend fun getCurrentUserReviews() = userRepository.getCurrentUserReviews().asLiveData()
 
     fun loginUser(view: View) {
         stateListener?.onLoading()
@@ -169,14 +169,14 @@ class UserViewModel @ViewModelInject constructor(private val userRepository: Use
         }
     }
 
-    fun fetchCurrentUserReviews() = viewModelScope.launch { userRepository.fetchCurrentUserReviews() }
+    fun fetchCurrentUserReviews() =
+        viewModelScope.launch { userRepository.fetchCurrentUserReviews() }
 
     fun fetchUser(id: Int) = liveData {
         stateListener?.onLoading()
 
         try {
             val userResponse = userRepository.fetchUser(id)
-            //fetchUserReviews(userResponse.id) //Fetch user reviews
             emit(userResponse)
             stateListener?.onSuccess("Fetched user details")
             return@liveData
@@ -192,24 +192,24 @@ class UserViewModel @ViewModelInject constructor(private val userRepository: Use
         }
     }
 
-    fun fetchUserReviews(userId: Int)= liveData {
+    fun fetchUserReviews(userId: Int) = liveData {
         stateListener?.onLoading()
 
         try {
-            val userReviewsResponse=userRepository.fetchUserReviews(userId)
-            userReviewsResponse.let {reviews->
+            val userReviewsResponse = userRepository.fetchUserReviews(userId)
+            userReviewsResponse.let { reviews ->
                 //_reviewsMutableLiveData.value=reviews
                 emit(reviews)
                 stateListener?.onSuccess("Fetched user's reviews")
                 return@liveData
             }
-        }catch (e:ApiException){
+        } catch (e: ApiException) {
             stateListener?.onFailure("${e.message}")
             return@liveData
-        }catch (e:UnknownHostException){
+        } catch (e: UnknownHostException) {
             stateListener?.onFailure("Ensure you have an internet connection")
             return@liveData
-        }catch (e:Exception){
+        } catch (e: Exception) {
             stateListener?.onFailure("Error loading users reviews")
             return@liveData
         }

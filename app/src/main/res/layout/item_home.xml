@@ -9,7 +9,7 @@
         android:layout_marginHorizontal="2dp"
         android:layout_marginVertical="4dp"
         android:clickable="true"
-        android:elevation="0dp"
+        app:cardElevation="8dp"
         android:focusable="true"
         app:cardCornerRadius="0dp">
 

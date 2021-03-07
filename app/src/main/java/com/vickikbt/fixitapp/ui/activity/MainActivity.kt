@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
         initUI()
 
-        initTheme()
+        //initTheme()
     }
 
     private fun initUI() {

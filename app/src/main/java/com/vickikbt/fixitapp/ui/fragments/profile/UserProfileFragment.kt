@@ -27,7 +27,7 @@ class UserProfileFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_user_profile, container, false)
 
-        initUI()
+        //initUI()
 
         return root
     }

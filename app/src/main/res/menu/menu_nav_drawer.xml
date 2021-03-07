@@ -35,14 +35,14 @@
             </menu>
         </item>
 
-        <item android:title="@string/communication">
+        <!--<item android:title="@string/communication">
             <menu>
                 <item
                     android:id="@+id/messages_fragment"
                     android:icon="@drawable/ic_messages"
                     android:title="@string/messages" />
             </menu>
-        </item>
+        </item>-->
 
         <item android:title="@string/others">
             <menu>
