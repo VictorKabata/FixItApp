@@ -139,15 +139,17 @@ class WorkFragment : Fragment(), StateListener {
     }
 
     override fun onSuccess(message: String) {
+        binding.shimmerWorkFragment.hideShimmer()
         binding.shimmerWorkFragment.stopShimmer()
         binding.shimmerWorkFragment.visibility=View.GONE
         requireActivity().log(message)
     }
 
     override fun onFailure(message: String) {
+        binding.shimmerWorkFragment.hideShimmer()
         binding.shimmerWorkFragment.stopShimmer()
         binding.shimmerWorkFragment.visibility=View.GONE
-        
+
         requireActivity().toast(message)
         requireActivity().log("Network Error: $message")
     }

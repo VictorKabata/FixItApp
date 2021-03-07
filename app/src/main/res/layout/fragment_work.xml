@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.fragments.work.WorkFragment">
-
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmer_work_fragment"
-            android:layout_width="match_parent"
-            android:visibility="visible"
-            android:layout_height="match_parent">
-
-            <include layout="@layout/fragment_work_shimmer"/>
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -62,8 +52,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/username"
                                 android:layout_gravity="center_horizontal"
+                                android:text="@string/username"
                                 android:textColor="@color/secondaryColor"
                                 android:textSize="12sp" />
 
@@ -81,9 +71,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="18dp"
                                 android:text="@string/email"
-                                android:layout_gravity="center_horizontal"
                                 android:textColor="@color/secondaryColor"
                                 android:textSize="12sp" />
 
@@ -91,8 +81,8 @@
                                 android:id="@+id/work_emailAddress"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:ellipsize="end"
                                 android:layout_gravity="center_horizontal"
+                                android:ellipsize="end"
                                 android:maxLines="1"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="18sp"
@@ -101,9 +91,9 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="18dp"
                                 android:text="@string/phone_number"
-                                android:layout_gravity="center_horizontal"
                                 android:textColor="@color/secondaryColor"
                                 android:textSize="12sp" />
 
@@ -111,9 +101,9 @@
                                 android:id="@+id/work_phoneNumber"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
                                 android:ellipsize="end"
                                 android:maxLines="1"
-                                android:layout_gravity="center_horizontal"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="18sp"
                                 android:textStyle="bold" />
@@ -145,8 +135,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:ellipsize="end"
-                        android:text="-"
                         android:maxLines="1"
+                        android:text="-"
                         android:textColor="@color/primaryColor"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -173,7 +163,7 @@
                         android:textStyle="bold" />
 
                 </LinearLayout>
-                
+
                 <Button
                     android:id="@+id/button_complete"
                     android:layout_width="match_parent"
@@ -193,6 +183,16 @@
 
 
         </ScrollView>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_work_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <include layout="@layout/fragment_work_shimmer" />
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <ProgressBar
             android:id="@+id/progressBar_Profile"

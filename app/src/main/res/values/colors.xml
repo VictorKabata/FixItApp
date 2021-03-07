@@ -14,4 +14,5 @@
     <color name="golden">#FFCA28</color>
 
     <color name="button_disabled">#7483ff</color>
+    <color name="shimmer_color">#E7E7E7</color>
 </resources>

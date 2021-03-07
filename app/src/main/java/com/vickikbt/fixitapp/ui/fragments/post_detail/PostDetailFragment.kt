@@ -179,27 +179,25 @@ class PostDetailFragment : Fragment(), StateListener, OnMapReadyCallback {
 
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap?) {
-        Coroutines.io {
-            googleMap?.isMyLocationEnabled = false //Error due to permission check
-            //googleMap?.uiSettings?.isScrollGesturesEnabled = false
+        googleMap?.isMyLocationEnabled = false //Error due to permission check
+        //googleMap?.uiSettings?.isScrollGesturesEnabled = false
 
-            postViewModel.getPost(args.PostId).observe(viewLifecycleOwner, { post ->
-                val location = LatLng(post.latitude, post.longitude)
-                requireActivity().log("Location is: $location")
+        postViewModel.getPost(args.PostId).observe(viewLifecycleOwner, { post ->
+            val location = LatLng(post.latitude, post.longitude)
+            requireActivity().log("Location is: $location")
 
-                googleMap?.addMarker(
-                    MarkerOptions().position(location).title(post.address)
-                        .snippet("${post.region}, ${post.country}")
-                )
+            googleMap?.addMarker(
+                MarkerOptions().position(location).title(post.address)
+                    .snippet("${post.region}, ${post.country}")
+            )
 
-                val cameraPosition = CameraPosition.Builder()
-                    .target(location)
-                    .zoom(16f)
-                    .build()
+            val cameraPosition = CameraPosition.Builder()
+                .target(location)
+                .zoom(16f)
+                .build()
 
-                googleMap?.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-            })
-        }
+            googleMap?.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+        })
     }
 
     override fun onLoading() {
