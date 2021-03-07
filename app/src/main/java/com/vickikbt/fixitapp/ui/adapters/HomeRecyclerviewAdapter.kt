@@ -5,7 +5,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -38,10 +37,11 @@ class HomeRecyclerviewAdapter constructor(
 
         holder.bind(post, context)
 
-        holder.itemView.animation = AnimationUtils.loadAnimation(
+        //TODO: Load animation
+        /*holder.itemView.animation = AnimationUtils.loadAnimation(
             holder.itemView.context,
             R.anim.recyclerview_load_animation
-        )
+        )*/
 
         holder.profilePic.setOnClickListener {
             val action = HomeFragmentDirections.homeToUserProfile(post.userId)
@@ -71,7 +71,7 @@ class HomeRecyclerviewAdapter constructor(
             view.findNavController().navigate(action)
         } else if (post.status == "In-Progress" && post.workerId != currentUserId || post.user.id != currentUserId) {
             //context.toast("No more application for this work")
-            context.toast("Work applications closed")
+            context.toast(context.getString(R.string.no_work))
         } //TODO: Add check for if is paid field==true
     }
 
@@ -85,10 +85,19 @@ class HomeRecyclerviewViewHolder(private val binding: ItemHomeBinding) :
 
     @SuppressLint("SetTextI18n")
     fun bind(post: Post, context: Context) {
-        Glide.with(context).load(post.user.imageUrl).into(binding.postUserImageView)
+        Glide.with(context).load(post.user.imageUrl)
+            .placeholder(R.drawable.imageview_placeholder)
+            .error(R.drawable.imageview_placeholder)
+            .into(binding.postUserImageView)
+
         binding.postUserUsername.text = post.user.username
         binding.postDate.text = dateFormatter(post.createdAt)
-        Glide.with(context).load(post.imageUrl).into(binding.postImageView)
+
+        Glide.with(context).load(post.imageUrl)
+            .placeholder(R.drawable.imageview_placeholder)
+            .error(R.drawable.imageview_placeholder)
+            .into(binding.postImageView)
+
         binding.postLocationTextView.text = "${post.region}, ${post.country}"
         binding.postCategoryTextView.text = post.category
         binding.postDescriptionTextView.text = post.description

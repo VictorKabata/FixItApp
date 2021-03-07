@@ -56,25 +56,6 @@ class DataFormatter {
             } else phoneNumber
         }
 
-        fun getTimeStamp(): String {
-            val timeStamp = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(Date())
-            Log.e("VickiKbt", "timeStamp: $timeStamp")
-            return timeStamp
-        }
-
-        //Generates password for Daraja API
-        fun getPassword(timeStamp:String, businessShortCode:String, passKey:String): String? {
-            //val timestamp = getTimeStamp()
-            //val businessShortCode = Constants.BUSINESS_SHORT_CODE
-            //val passkey = Constants.PASSKEY
-
-            val str = businessShortCode + passKey + timeStamp
-            val encodedStr = Base64.encodeToString(str.toByteArray(), Base64.NO_WRAP)
-            Log.e("VickiKbt", "password text: $str")
-            Log.e("VickiKbt", "password encoded: $encodedStr")
-
-            return encodedStr
-        }
 
     }
 

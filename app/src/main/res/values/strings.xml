@@ -48,6 +48,7 @@
     <string name="logout_message">Are you sure you want to logout?</string>
     <string name="complete_work_message">Mark this work as complete?</string>
     <string name="rating_dialog_title">How would you rate </string>
+    <string name="no_work">Work applications closed</string>
 
     <string name="pay_with_cash">Pay with Cash</string>
     <string name="pay_with_mpesa">Pay with Mpesa</string>

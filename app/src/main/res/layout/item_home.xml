@@ -24,7 +24,8 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tool:src="@drawable/imageview_placeholder" />
 
             <TextView
                 android:id="@+id/post_user_username"
@@ -55,11 +56,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:scaleType="fitCenter"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_max="350dp"
+                app:layout_constraintHeight_min="250dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/post_user_imageView"
-                tool:src="@drawable/ic_launcher_background" />
+                tool:src="@drawable/imageview_placeholder" />
 
             <TextView
                 android:id="@+id/post_location_textView"
@@ -68,11 +71,11 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
-                android:drawableStart="@drawable/ic_location"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="@color/secondaryColor"
                 android:textSize="14sp"
+                app:drawableStartCompat="@drawable/ic_location"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/post_imageView"
