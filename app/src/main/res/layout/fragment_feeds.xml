@@ -12,15 +12,14 @@
             android:id="@+id/tabs_feeds"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:minHeight="?attr/actionBarSize"
             app:layout_constraintTop_toTopOf="parent"
+            app:tabBackground="@color/colorPrimary"
             app:tabGravity="fill"
-            app:tabIndicatorGravity="stretch"
+            app:tabIndicatorColor="@color/white"
+            app:tabIndicatorHeight="4dp"
             app:tabMode="fixed"
-            app:tabSelectedTextColor="@android:color/white"
-            app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-            app:tabTextColor="@android:color/black" />
+            app:tabTextColor="@color/white" />
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPager_feeds"

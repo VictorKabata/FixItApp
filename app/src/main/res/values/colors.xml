@@ -15,4 +15,5 @@
 
     <color name="button_disabled">#7483ff</color>
     <color name="shimmer_color">#E7E7E7</color>
+    <color name="white">#FFFFFF</color>
 </resources>

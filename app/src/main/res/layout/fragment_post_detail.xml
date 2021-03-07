@@ -29,7 +29,7 @@
                     android:id="@+id/imageView_post_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitCenter"
                     app:layout_collapseMode="pin" />
 
                 <androidx.appcompat.widget.Toolbar
@@ -174,6 +174,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="230dp"
                     android:elevation="8dp"
+                    android:layout_marginTop="3dp"
                     app:cardCornerRadius="8dp">
 
                     <!--TODO: Remove public api key-->

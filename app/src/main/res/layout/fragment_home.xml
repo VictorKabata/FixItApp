@@ -17,7 +17,6 @@
                 android:id="@+id/recyclerView_home"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_home" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -29,12 +28,12 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:src="@drawable/ic_add"
-            android:tint="@android:color/white"
-            app:backgroundTint="@android:color/white"
             app:borderWidth="0dp"
+            app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:rippleColor="@color/colorAccent" />
+            app:rippleColor="@color/colorAccent"
+            app:tint="@color/white" />
 
         <ProgressBar
             android:id="@+id/progressBar_home"

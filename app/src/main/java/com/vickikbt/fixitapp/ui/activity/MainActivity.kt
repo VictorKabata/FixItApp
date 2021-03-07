@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.home_fragment,
                 R.id.feeds_fragment,
                 R.id.profile_fragment,
-                R.id.messages_fragment,
+                R.id.transactions_fragment,
                 R.id.settings_fragment
             ), binding.drawerLayout
         )
@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
         initUI()
 
-        //initTheme()
+        initTheme()
     }
 
     private fun initUI() {
