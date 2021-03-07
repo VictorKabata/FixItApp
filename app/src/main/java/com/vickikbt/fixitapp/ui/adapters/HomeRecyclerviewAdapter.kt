@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.vickikbt.fixitapp.R
@@ -61,6 +62,7 @@ class HomeRecyclerviewAdapter constructor(
         if (post.status.isEmpty() && post.user.id != currentUserId) {
             val action = HomeFragmentDirections.homeToPostDetail(post.id)
             view.findNavController().navigate(action)
+            //performTransition(holder, view, post)
         } else if (post.status.isEmpty() && post.user.id == currentUserId) {
             val action = HomeFragmentDirections.homeToPostBookings(post.id, post.budget.toInt())
             view.findNavController().navigate(action)
@@ -76,6 +78,19 @@ class HomeRecyclerviewAdapter constructor(
         } //TODO: Add check for if is paid field==true
     }
 
+    private fun performTransition(holder: HomeRecyclerviewViewHolder, view: View, post: Post) {
+        val extras = FragmentNavigatorExtras(
+            holder.postImage to "post_image",
+            holder.category to "post_category",
+            holder.description to "post_description",
+            holder.profilePic to "post_profile",
+            holder.userName to "post_username"
+        )
+
+        val action = HomeFragmentDirections.homeToPostDetail(post.id)
+        view.findNavController().navigate(action, extras)
+    }
+
 }
 
 class HomeRecyclerviewViewHolder(private val binding: ItemHomeBinding) :
@@ -83,6 +98,9 @@ class HomeRecyclerviewViewHolder(private val binding: ItemHomeBinding) :
 
     val profilePic = binding.postUserImageView
     val userName = binding.postUserUsername
+    val postImage = binding.postImageView
+    val category = binding.postCategoryTextView
+    val description = binding.postDescriptionTextView
 
     @SuppressLint("SetTextI18n")
     fun bind(post: Post, context: Context) {

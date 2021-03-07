@@ -5,6 +5,7 @@ import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,6 +68,8 @@ class PostDetailFragment : Fragment(), StateListener, OnMapReadyCallback {
         binding.buttonContact.setOnClickListener {
             sendSms()
         }
+
+        //initAnimations()
 
         initUI()
 
@@ -167,27 +170,36 @@ class PostDetailFragment : Fragment(), StateListener, OnMapReadyCallback {
         startActivity(intent)
     }
 
+    private fun initAnimations() {
+        val animation =
+            TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+        sharedElementEnterTransition = animation
+        sharedElementReturnTransition = animation
+    }
+
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap?) {
-        googleMap?.isMyLocationEnabled = false //Error due to permission check
-        //googleMap?.uiSettings?.isScrollGesturesEnabled = false
+        Coroutines.io {
+            googleMap?.isMyLocationEnabled = false //Error due to permission check
+            //googleMap?.uiSettings?.isScrollGesturesEnabled = false
 
-        postViewModel.getPost(args.PostId).observe(viewLifecycleOwner, { post ->
-            val location = LatLng(post.latitude, post.longitude)
-            requireActivity().log("Location is: $location")
+            postViewModel.getPost(args.PostId).observe(viewLifecycleOwner, { post ->
+                val location = LatLng(post.latitude, post.longitude)
+                requireActivity().log("Location is: $location")
 
-            googleMap?.addMarker(
-                MarkerOptions().position(location).title(post.address)
-                    .snippet("${post.region}, ${post.country}")
-            )
+                googleMap?.addMarker(
+                    MarkerOptions().position(location).title(post.address)
+                        .snippet("${post.region}, ${post.country}")
+                )
 
-            val cameraPosition = CameraPosition.Builder()
-                .target(location)
-                .zoom(16f)
-                .build()
+                val cameraPosition = CameraPosition.Builder()
+                    .target(location)
+                    .zoom(16f)
+                    .build()
 
-            googleMap?.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
-        })
+                googleMap?.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+            })
+        }
     }
 
     override fun onLoading() {
@@ -196,7 +208,7 @@ class PostDetailFragment : Fragment(), StateListener, OnMapReadyCallback {
 
     override fun onSuccess(message: String) {
         binding.progressBarPostDetail.hide()
-        requireActivity().toast(message)
+        //requireActivity().toast(message)
         requireActivity().log(message)
     }
 

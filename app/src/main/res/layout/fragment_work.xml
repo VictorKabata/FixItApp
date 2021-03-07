@@ -8,6 +8,16 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragments.work.WorkFragment">
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_work_fragment"
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:layout_height="match_parent">
+
+            <include layout="@layout/fragment_work_shimmer"/>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"

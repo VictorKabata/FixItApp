@@ -133,4 +133,7 @@ dependencies {
 
     //Multidex
     implementation "com.android.support:multidex:$multidex_version"
+
+    //Shimmer android
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 }
