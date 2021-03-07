@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel" />
@@ -53,8 +54,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-75dp"
                 android:layout_marginBottom="5dp"
-                app:cardElevation="0dp"
-                app:cardCornerRadius="15dp">
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -183,12 +184,12 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="8dp"
+                        android:fontFamily="@font/roboto_bold"
                         android:padding="10dp"
-                        android:textColor="@android:color/white"
                         android:text="@string/register"
                         android:textAllCaps="false"
+                        android:textColor="@android:color/white"
                         android:textSize="20sp"
-                        android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />

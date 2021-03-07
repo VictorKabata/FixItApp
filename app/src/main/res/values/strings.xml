@@ -103,5 +103,6 @@
     <string name="def">Default</string>
     <string name="post_description_placeholder">This is just a test post that to test post detail fragment and will be deleted in final production database refresh feature</string>
     <string name="logout">Logout</string>
+    <string name="category_placeholder">Electrical Repair</string>
 </resources>
 

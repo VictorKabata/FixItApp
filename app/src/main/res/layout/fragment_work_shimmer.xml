@@ -52,6 +52,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
+                            android:fontFamily="@font/roboto_medium"
                             android:text="@string/username"
                             android:textColor="@color/secondaryColor"
                             android:textSize="12sp" />
@@ -68,6 +69,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="18dp"
+                            android:fontFamily="@font/roboto_medium"
                             android:text="@string/email"
                             android:textColor="@color/secondaryColor"
                             android:textSize="12sp" />
@@ -84,6 +86,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="18dp"
+                            android:fontFamily="@font/roboto_medium"
                             android:text="@string/phone_number"
                             android:textColor="@color/secondaryColor"
                             android:textSize="12sp" />
@@ -112,6 +115,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="@string/started"
                     android:textColor="@color/secondaryColor"
                     android:textSize="12sp" />
@@ -128,6 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="18dp"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="@string/finished"
                     android:textColor="@color/secondaryColor"
                     android:textSize="12sp" />
@@ -148,6 +153,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="25dp"
                 android:layout_marginVertical="24dp"
+                android:fontFamily="@font/roboto_bold"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="@string/complete"

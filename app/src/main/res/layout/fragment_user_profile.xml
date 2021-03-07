@@ -62,15 +62,16 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginVertical="10dp"
+                                android:fontFamily="@font/roboto_black"
                                 android:gravity="center"
                                 android:text="@string/personal_information"
                                 android:textColor="@color/primaryColor"
-                                android:textSize="20sp"
-                                android:textStyle="bold" />
+                                android:textSize="20sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/roboto_medium"
                                 android:text="@string/username"
                                 android:textColor="@color/secondaryColor"
                                 android:textSize="12sp" />
@@ -80,16 +81,17 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="end"
+                                android:fontFamily="@font/roboto_bold"
                                 android:maxLines="1"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="18sp"
-                                android:textStyle="bold"
                                 tools:text="Victor Kabata" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="18dp"
+                                android:fontFamily="@font/roboto_medium"
                                 android:text="@string/email"
                                 android:textColor="@color/secondaryColor"
                                 android:textSize="12sp" />
@@ -99,16 +101,17 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="end"
+                                android:fontFamily="@font/roboto_bold"
                                 android:maxLines="1"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="18sp"
-                                android:textStyle="bold"
                                 tools:text="victorbro14@gmail.com" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="18dp"
+                                android:fontFamily="@font/roboto_medium"
                                 android:text="@string/phone_number"
                                 android:textColor="@color/secondaryColor"
                                 android:textSize="12sp" />
@@ -118,16 +121,17 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="end"
+                                android:fontFamily="@font/roboto_bold"
                                 android:maxLines="1"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="18sp"
-                                android:textStyle="bold"
                                 tools:text="+254714091304" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="18dp"
+                                android:fontFamily="@font/roboto_medium"
                                 android:text="@string/specialisation"
                                 android:textColor="@color/secondaryColor"
                                 android:textSize="12sp" />
@@ -137,10 +141,10 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="end"
+                                android:fontFamily="@font/roboto_bold"
                                 android:maxLines="1"
                                 android:textColor="@color/primaryColor"
                                 android:textSize="18sp"
-                                android:textStyle="bold"
                                 tools:text="Computer Repair" />
 
                         </LinearLayout>
@@ -166,15 +170,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginVertical="10dp"
+                            android:fontFamily="@font/roboto_black"
                             android:gravity="center"
                             android:text="@string/address_information"
                             android:textColor="@color/primaryColor"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:textSize="20sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_medium"
                             android:text="@string/address"
                             android:textColor="@color/secondaryColor"
                             android:textSize="12sp" />
@@ -184,16 +189,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
+                            android:fontFamily="@font/roboto_bold"
                             android:maxLines="1"
                             android:textColor="@color/primaryColor"
                             android:textSize="18sp"
-                            android:textStyle="bold"
                             tools:text="Trap House" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="18dp"
+                            android:fontFamily="@font/roboto_medium"
                             android:text="@string/region"
                             android:textColor="@color/secondaryColor"
                             android:textSize="12sp" />
@@ -203,16 +209,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
+                            android:fontFamily="@font/roboto_bold"
                             android:maxLines="1"
                             android:textColor="@color/primaryColor"
                             android:textSize="18sp"
-                            android:textStyle="bold"
                             tools:text="Nyeri County" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="18dp"
+                            android:fontFamily="@font/roboto_medium"
                             android:text="@string/country"
                             android:textColor="@color/secondaryColor"
                             android:textSize="12sp" />
@@ -222,10 +229,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
+                            android:fontFamily="@font/roboto_bold"
                             android:maxLines="1"
                             android:textColor="@color/primaryColor"
                             android:textSize="18sp"
-                            android:textStyle="bold"
                             tools:text="Kenya" />
 
                     </LinearLayout>

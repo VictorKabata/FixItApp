@@ -53,6 +53,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/roboto_medium"
                                 android:text="@string/username"
                                 android:textColor="@color/secondaryColor"
                                 android:textSize="12sp" />
@@ -63,16 +64,17 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:ellipsize="end"
+                                android:fontFamily="@font/roboto_bold"
                                 android:maxLines="1"
                                 android:textColor="@color/primaryColor"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textSize="18sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="18dp"
+                                android:fontFamily="@font/roboto_medium"
                                 android:text="@string/email"
                                 android:textColor="@color/secondaryColor"
                                 android:textSize="12sp" />
@@ -83,16 +85,17 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:ellipsize="end"
+                                android:fontFamily="@font/roboto_bold"
                                 android:maxLines="1"
                                 android:textColor="@color/primaryColor"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textSize="18sp" />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="18dp"
+                                android:fontFamily="@font/roboto_medium"
                                 android:text="@string/phone_number"
                                 android:textColor="@color/secondaryColor"
                                 android:textSize="12sp" />
@@ -103,10 +106,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:ellipsize="end"
+                                android:fontFamily="@font/roboto_bold"
                                 android:maxLines="1"
                                 android:textColor="@color/primaryColor"
-                                android:textSize="18sp"
-                                android:textStyle="bold" />
+                                android:textSize="18sp" />
 
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -125,6 +128,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/roboto_medium"
                         android:text="@string/started"
                         android:textColor="@color/secondaryColor"
                         android:textSize="12sp" />
@@ -135,6 +139,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:ellipsize="end"
+                        android:fontFamily="@font/roboto_bold"
                         android:maxLines="1"
                         android:text="-"
                         android:textColor="@color/primaryColor"
@@ -146,6 +151,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="18dp"
+                        android:fontFamily="@font/roboto_medium"
                         android:text="@string/finished"
                         android:textColor="@color/secondaryColor"
                         android:textSize="12sp" />
@@ -156,6 +162,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:ellipsize="end"
+                        android:fontFamily="@font/roboto_bold"
                         android:maxLines="1"
                         android:text="-"
                         android:textColor="@color/primaryColor"
@@ -171,6 +178,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginHorizontal="25dp"
                     android:layout_marginVertical="24dp"
+                    android:fontFamily="@font/roboto_bold"
                     android:gravity="center"
                     android:padding="10dp"
                     android:text="@string/complete"
