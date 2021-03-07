@@ -89,7 +89,7 @@
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/roboto_bold"
             app:layout_constraintEnd_toEndOf="@id/textInputLayout2"
             app:layout_constraintStart_toStartOf="@id/textInputLayout2"
             app:layout_constraintTop_toBottomOf="@id/textInputLayout2" />
@@ -106,7 +106,7 @@
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/roboto_bold"
             app:layout_constraintEnd_toEndOf="@id/button_payment_mpesa"
             app:layout_constraintStart_toStartOf="@id/button_payment_mpesa"
             app:layout_constraintTop_toBottomOf="@id/button_payment_mpesa" />

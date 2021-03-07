@@ -30,6 +30,7 @@
             android:layout_marginBottom="8dp"
             android:src="@drawable/ic_add"
             android:tint="@android:color/white"
+            app:backgroundTint="@android:color/white"
             app:borderWidth="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

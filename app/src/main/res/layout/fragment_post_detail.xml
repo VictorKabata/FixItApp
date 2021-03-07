@@ -29,7 +29,7 @@
                     android:id="@+id/imageView_post_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scaleType="fitCenter"
+                    android:scaleType="centerCrop"
                     app:layout_collapseMode="pin" />
 
                 <androidx.appcompat.widget.Toolbar
@@ -105,6 +105,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="@string/category"
                     android:textColor="@color/secondaryColor"
                     android:textSize="16sp" />
@@ -114,15 +115,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
+                    android:fontFamily="@font/roboto_bold"
                     android:maxLines="1"
                     android:textColor="@color/primaryColor"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    tools:text="Electrical Repair" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="@string/description"
                     android:textColor="@color/secondaryColor"
                     android:textSize="16sp" />
@@ -132,13 +135,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
+                    android:fontFamily="@font/roboto_regular"
                     android:textColor="@color/primaryColor"
-                    android:textSize="20sp" />
+                    android:textSize="16sp"
+                    tools:text="@string/post_description_placeholder" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="@string/budget"
                     android:textColor="@color/secondaryColor"
                     android:textSize="16sp" />
@@ -148,15 +154,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
+                    android:fontFamily="@font/roboto_regular"
                     android:maxLines="1"
                     android:textColor="@color/primaryColor"
                     android:textSize="20sp"
-                    android:textStyle="italic" />
+                    tools:text="420" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="@string/location"
                     android:textColor="@color/secondaryColor"
                     android:textSize="16sp" />
@@ -165,16 +173,16 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="230dp"
-                    app:cardCornerRadius="8dp"
-                    android:elevation="8dp">
+                    android:elevation="8dp"
+                    app:cardCornerRadius="8dp">
 
                     <!--TODO: Remove public api key-->
                     <fragment
                         android:id="@+id/mapView"
-                        android:layout_width="match_parent"
                         android:name="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:apiKey="@string/google_maps_key"/>
+                        android:apiKey="@string/google_maps_key" />
 
                 </com.google.android.material.card.MaterialCardView>
 
@@ -184,6 +192,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="24dp"
+                    android:fontFamily="@font/roboto_bold"
                     android:padding="10dp"
                     android:text="@string/book_work"
                     android:textAllCaps="false"
@@ -195,6 +204,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/roboto_bold"
                     android:padding="10dp"
                     android:text="@string/contact"
                     android:textAllCaps="false"

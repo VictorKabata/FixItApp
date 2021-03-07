@@ -40,9 +40,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="40dp"
+                android:fontFamily="@font/roboto_black"
                 android:textColor="@android:color/black"
                 android:textSize="15sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -54,10 +54,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_bold"
                 android:paddingHorizontal="10dp"
                 android:textColor="@android:color/black"
                 android:textSize="15sp"
-                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView_userName_book_work"
                 app:layout_constraintStart_toStartOf="@+id/textView_userName_book_work"
                 app:layout_constraintTop_toBottomOf="@+id/textView_userName_book_work"
@@ -125,10 +125,10 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="24dp"
                     android:layout_toStartOf="@+id/button_dialog_book_work"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="@string/cancel"
                     android:textColor="@color/primaryColor"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/button_dialog_book_work"
@@ -136,6 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="@string/book_work"
                     android:textAllCaps="false"
                     android:textColor="@android:color/white"
