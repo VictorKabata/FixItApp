@@ -50,13 +50,15 @@ class BookingsFragment : Fragment(), StateListener {
 
     override fun onSuccess(message: String) {
         binding.progressBarBookings.hide()
-        requireActivity().log(message)
+        if (isAdded) requireActivity().log(message)
     }
 
     override fun onFailure(message: String) {
         binding.progressBarBookings.hide()
-        requireActivity().toast(message)
-        requireActivity().log(message)
+        if (isAdded){
+            requireActivity().toast(message)
+            requireActivity().log(message)
+        }
 
     }
 }

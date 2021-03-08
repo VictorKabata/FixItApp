@@ -23,6 +23,7 @@ import com.vickikbt.fixitapp.models.entity.Work
 import com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel
 import com.vickikbt.fixitapp.utils.Constants.COMPLETED
 import com.vickikbt.fixitapp.utils.DataFormatter
+import com.vickikbt.fixitapp.utils.DataFormatter.Companion.phoneNumberFormatter
 import com.vickikbt.fixitapp.utils.StateListener
 import com.vickikbt.fixitapp.utils.log
 import com.vickikbt.fixitapp.utils.toast
@@ -50,23 +51,33 @@ class WorkFragment : Fragment(), StateListener {
             completeWork()
         }
 
+        binding.buttonStartWork.setOnClickListener {
+            createWork()
+        }
+
         initUI()
 
         return binding.root
     }
 
-    private fun initUI() {
-        val postId = args.PostId
-
-        userViewModel.getCurrentUser.observe(viewLifecycleOwner, { currentUser ->
-            currentUserX = currentUser
-        })
-
-        workViewModel.getWork(postId).observe(viewLifecycleOwner, { work ->
-            workX = work
-
+    private fun initUserData(work: Work){
+        if (work.createdAt.isEmpty()){
+            userViewModel.fetchUser(args.UserId).observe(viewLifecycleOwner,{user->
+                if (currentUserX!!.id == args.UserId) {
+                    binding.workUsername.text = user.username
+                    binding.workEmailAddress.text = user.email
+                    binding.workPhoneNumber.text =phoneNumberFormatter(user.phoneNumber)
+                    Glide.with(requireActivity()).load(user.imageUrl).into(binding.workImageView)
+                } else {
+                    //Show the user/employer detail
+                    binding.workUsername.text = work.user.username
+                    binding.workEmailAddress.text = work.user.email
+                    binding.workPhoneNumber.text = work.user.phoneNumber
+                    Glide.with(requireActivity()).load(work.user.imageUrl).into(binding.workImageView)
+                }
+            })
+        }else{
             if (currentUserX!!.id == work.user.id) {
-                //Show the worker detail
                 binding.workUsername.text = work.worker.username
                 binding.workEmailAddress.text = work.worker.email
                 binding.workPhoneNumber.text = work.worker.phoneNumber
@@ -80,6 +91,20 @@ class WorkFragment : Fragment(), StateListener {
                 Glide.with(requireActivity()).load(work.user.imageUrl)
                     .into(binding.workImageView)
             }
+        }
+    }
+
+    private fun initUI() {
+        val postId = args.PostId
+
+        userViewModel.getCurrentUser.observe(viewLifecycleOwner, { currentUser ->
+            currentUserX = currentUser
+        })
+
+        workViewModel.getWork(postId).observe(viewLifecycleOwner, { work ->
+            workX = work
+
+            initUserData(work)
 
             binding.workStarted.text = DataFormatter.dateFormatter(work.createdAt)
 
@@ -143,7 +168,7 @@ class WorkFragment : Fragment(), StateListener {
     }
 
     private fun createWork(){
-        //workViewModel.createWork(args.PostId, )
+        workViewModel.createWork(args.PostId, args.UserId)
     }
 
 
@@ -155,14 +180,14 @@ class WorkFragment : Fragment(), StateListener {
     override fun onSuccess(message: String) {
         binding.shimmerWorkFragment.hideShimmer()
         binding.shimmerWorkFragment.stopShimmer()
-        binding.shimmerWorkFragment.visibility = View.GONE
+        binding.shimmerWorkFragment.visibility = GONE
         requireActivity().log(message)
     }
 
     override fun onFailure(message: String) {
         binding.shimmerWorkFragment.hideShimmer()
         binding.shimmerWorkFragment.stopShimmer()
-        binding.shimmerWorkFragment.visibility = View.GONE
+        binding.shimmerWorkFragment.visibility = GONE
 
         requireActivity().toast(message)
         requireActivity().log("Network Error: $message")

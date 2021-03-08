@@ -88,7 +88,8 @@
             android:defaultValue="0" />
         <action
             android:id="@+id/post_bookings_to_work"
-            app:destination="@id/work_fragment" />
+            app:destination="@id/work_fragment"
+            app:popUpTo="@id/home_fragment" />
         <argument
             android:name="Budget"
             app:argType="integer"
@@ -108,7 +109,8 @@
             android:defaultValue="0" />
         <action
             android:id="@+id/work_to_payment"
-            app:destination="@id/payment_fragment" />
+            app:destination="@id/payment_fragment"
+            app:popUpTo="@id/home_fragment" />
         <action
             android:id="@+id/work_fragment_to_user_profile"
             app:destination="@id/user_profile_fragment" />
