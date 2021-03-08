@@ -71,6 +71,7 @@ class PostBookingRecyclerviewAdapter constructor(
             val action = BookingsFragmentDirections.postBookingsToWork(postId)
             view.findNavController().navigate(action)
         } catch (e: Exception) {
+            context.toast("${e.message}")
         }
     }
 

@@ -112,6 +112,9 @@
         <action
             android:id="@+id/work_fragment_to_user_profile"
             app:destination="@id/user_profile_fragment" />
+        <argument android:name="UserId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/messages_fragment"

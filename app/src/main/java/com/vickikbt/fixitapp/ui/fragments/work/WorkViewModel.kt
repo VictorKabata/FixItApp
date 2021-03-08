@@ -40,6 +40,28 @@ class WorkViewModel @ViewModelInject constructor(private val workRepository: Wor
         }
     }
 
+    fun createWork(postId: Int, userId: Int) = liveData {
+        stateListener?.onLoading()
+
+        try {
+            val work = workRepository.createWork(postId, workerId = userId)
+            work.let {
+                emit(it)
+                stateListener?.onSuccess("Created work")
+            }
+            return@liveData
+        } catch (e: ApiException) {
+            stateListener?.onFailure("${e.message}")
+            return@liveData
+        } catch (e: UnknownHostException) {
+            stateListener?.onFailure("${e.message}")
+            return@liveData
+        } catch (e: Exception) {
+            stateListener?.onFailure("${e.message}")
+            return@liveData
+        }
+    }
+
     fun updateWork(work:Work)= liveData {
         stateListener?.onLoading()
 

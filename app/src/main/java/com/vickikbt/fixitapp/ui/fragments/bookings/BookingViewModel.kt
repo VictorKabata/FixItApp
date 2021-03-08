@@ -47,7 +47,6 @@ class BookingViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             try {
                 bookingRepository.acceptBooking(bookingId, postId, userId)
-                workRepository.createWork(postId, workerId = userId)
                 stateListener?.onSuccess("To start soon")
                 return@launch
             } catch (e: ApiException) {

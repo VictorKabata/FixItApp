@@ -4,6 +4,8 @@ import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
@@ -58,36 +60,44 @@ class WorkFragment : Fragment(), StateListener {
 
         userViewModel.getCurrentUser.observe(viewLifecycleOwner, { currentUser ->
             currentUserX = currentUser
+        })
 
-            workViewModel.getWork(postId).observe(viewLifecycleOwner, { work ->
-                workX = work
+        workViewModel.getWork(postId).observe(viewLifecycleOwner, { work ->
+            workX = work
 
-                if (currentUser.id == work.user.id) {
-                    //Show the worker detail
-                    binding.workUsername.text = work.worker.username
-                    binding.workEmailAddress.text = work.worker.email
-                    binding.workPhoneNumber.text = work.worker.phoneNumber
-                    Glide.with(requireActivity()).load(work.worker.imageUrl)
-                        .into(binding.workImageView)
-                } else {
-                    //Show the user/employer detail
-                    binding.workUsername.text = work.user.username
-                    binding.workEmailAddress.text = work.user.email
-                    binding.workPhoneNumber.text = work.user.phoneNumber
-                    Glide.with(requireActivity()).load(work.user.imageUrl)
-                        .into(binding.workImageView)
-                }
+            if (currentUserX!!.id == work.user.id) {
+                //Show the worker detail
+                binding.workUsername.text = work.worker.username
+                binding.workEmailAddress.text = work.worker.email
+                binding.workPhoneNumber.text = work.worker.phoneNumber
+                Glide.with(requireActivity()).load(work.worker.imageUrl)
+                    .into(binding.workImageView)
+            } else {
+                //Show the user/employer detail
+                binding.workUsername.text = work.user.username
+                binding.workEmailAddress.text = work.user.email
+                binding.workPhoneNumber.text = work.user.phoneNumber
+                Glide.with(requireActivity()).load(work.user.imageUrl)
+                    .into(binding.workImageView)
+            }
 
-                binding.workStarted.text = DataFormatter.dateFormatter(work.createdAt)
+            binding.workStarted.text = DataFormatter.dateFormatter(work.createdAt)
 
-                if (work.status == COMPLETED) {
-                    binding.workFinished.text = DataFormatter.dateFormatter(work.updatedAt)
-                    binding.buttonComplete.text =
-                        requireActivity().resources.getString(R.string.completed)
-                    binding.buttonComplete.setBackgroundColor(resources.getColor(R.color.button_disabled))
-                    binding.buttonComplete.isEnabled = false
-                }
-            })
+            if (work.createdAt.isEmpty()) {
+                binding.buttonStartWork.visibility = VISIBLE
+            } else {
+                binding.buttonStartWork.visibility = GONE
+                binding.buttonComplete.visibility = VISIBLE
+            }
+
+            if (work.status == COMPLETED) {
+                binding.workFinished.text = DataFormatter.dateFormatter(work.updatedAt)
+                binding.buttonComplete.text = requireActivity().resources.getString(R.string.completed)
+                binding.buttonComplete.setBackgroundColor(resources.getColor(R.color.button_disabled))
+                binding.buttonComplete.isEnabled = false
+                binding.buttonStartWork.visibility = GONE
+            }
+
         })
     }
 
@@ -132,6 +142,10 @@ class WorkFragment : Fragment(), StateListener {
         dialog.show()
     }
 
+    private fun createWork(){
+        //workViewModel.createWork(args.PostId, )
+    }
+
 
     override fun onLoading() {
         //requireActivity().log(message) TODO: Show progressbar
@@ -141,14 +155,14 @@ class WorkFragment : Fragment(), StateListener {
     override fun onSuccess(message: String) {
         binding.shimmerWorkFragment.hideShimmer()
         binding.shimmerWorkFragment.stopShimmer()
-        binding.shimmerWorkFragment.visibility=View.GONE
+        binding.shimmerWorkFragment.visibility = View.GONE
         requireActivity().log(message)
     }
 
     override fun onFailure(message: String) {
         binding.shimmerWorkFragment.hideShimmer()
         binding.shimmerWorkFragment.stopShimmer()
-        binding.shimmerWorkFragment.visibility=View.GONE
+        binding.shimmerWorkFragment.visibility = View.GONE
 
         requireActivity().toast(message)
         requireActivity().log("Network Error: $message")
