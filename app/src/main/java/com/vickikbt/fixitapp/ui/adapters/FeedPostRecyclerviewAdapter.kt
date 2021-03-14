@@ -58,7 +58,10 @@ class FeedPostRecyclerviewViewHolder(private val binding: ItemFeedPostBinding) :
 
     @SuppressLint("SetTextI18n")
     fun bind(post: Post, context: Context) {
-        Glide.with(context).load(post.imageUrl).into(binding.postImageView)
+        Glide.with(context).load(post.imageUrl)
+            .placeholder(R.drawable.imageview_placeholder)
+            .error(R.drawable.imageview_placeholder)
+            .into(binding.postImageView)
         binding.postDate.text = dateFormatter(post.createdAt)
         binding.postLocationTextView.text = "${post.region}, ${post.country}"
         binding.postCategoryTextView.text = post.category

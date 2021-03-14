@@ -44,10 +44,14 @@ class FeedWorkRecyclerviewViewHolder(private val binding: ItemHomeBinding) :
 
     @SuppressLint("SetTextI18n")
     fun bind(work: Work, context: Context) {
+        Glide.with(context).load(work.post.imageUrl)
+            .placeholder(R.drawable.imageview_placeholder)
+            .error(R.drawable.imageview_placeholder)
+            .into(binding.postImageView)
+
         Glide.with(context).load(work.user.imageUrl).into(binding.postUserImageView)
         binding.postUserUsername.text = work.user.username
         binding.postDate.text = dateFormatter(work.createdAt)
-        Glide.with(context).load(work.post.imageUrl).into(binding.postImageView)
         binding.postLocationTextView.text = "${work.post.region}, ${work.post.country}"
         binding.postCategoryTextView.text = work.post.category
         binding.postDescriptionTextView.text = work.post.description

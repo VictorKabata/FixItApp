@@ -21,9 +21,9 @@ import com.vickikbt.fixitapp.databinding.FragmentWorkBinding
 import com.vickikbt.fixitapp.models.entity.User
 import com.vickikbt.fixitapp.models.entity.Work
 import com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel
-import com.vickikbt.fixitapp.utils.Constants.COMPLETED
-import com.vickikbt.fixitapp.utils.DataFormatter
-import com.vickikbt.fixitapp.utils.DataFormatter.Companion.phoneNumberFormatter
+import com.vickikbt.fixitapp.utils.Constants
+import com.vickikbt.fixitapp.utils.DataFormatter.Companion.dateFormatter
+import com.vickikbt.fixitapp.utils.DataFormatter.Companion.sanitizePhoneNumber
 import com.vickikbt.fixitapp.utils.StateListener
 import com.vickikbt.fixitapp.utils.log
 import com.vickikbt.fixitapp.utils.toast
@@ -52,75 +52,69 @@ class WorkFragment : Fragment(), StateListener {
         }
 
         binding.buttonStartWork.setOnClickListener {
-            createWork()
+            startWork()
         }
+
+        getCurrentUser()
 
         initUI()
 
         return binding.root
     }
 
-    private fun initUserData(work: Work){
-        if (work.createdAt.isEmpty()){
-            userViewModel.fetchUser(args.UserId).observe(viewLifecycleOwner,{user->
-                if (currentUserX!!.id == args.UserId) {
-                    binding.workUsername.text = user.username
-                    binding.workEmailAddress.text = user.email
-                    binding.workPhoneNumber.text =phoneNumberFormatter(user.phoneNumber)
-                    Glide.with(requireActivity()).load(user.imageUrl).into(binding.workImageView)
-                } else {
-                    //Show the user/employer detail
-                    binding.workUsername.text = work.user.username
-                    binding.workEmailAddress.text = work.user.email
-                    binding.workPhoneNumber.text = work.user.phoneNumber
-                    Glide.with(requireActivity()).load(work.user.imageUrl).into(binding.workImageView)
-                }
-            })
-        }else{
-            if (currentUserX!!.id == work.user.id) {
-                binding.workUsername.text = work.worker.username
-                binding.workEmailAddress.text = work.worker.email
-                binding.workPhoneNumber.text = work.worker.phoneNumber
-                Glide.with(requireActivity()).load(work.worker.imageUrl)
-                    .into(binding.workImageView)
-            } else {
-                //Show the user/employer detail
-                binding.workUsername.text = work.user.username
-                binding.workEmailAddress.text = work.user.email
-                binding.workPhoneNumber.text = work.user.phoneNumber
-                Glide.with(requireActivity()).load(work.user.imageUrl)
-                    .into(binding.workImageView)
-            }
-        }
+    private fun getCurrentUser() {
+        userViewModel.getCurrentUser.observe(viewLifecycleOwner, { user ->
+            currentUserX = user
+        })
     }
 
     private fun initUI() {
-        val postId = args.PostId
+        initWork()
 
-        userViewModel.getCurrentUser.observe(viewLifecycleOwner, { currentUser ->
-            currentUserX = currentUser
-        })
+        if (workX == null) {
+            userViewModel.fetchUser(args.UserId).observe(viewLifecycleOwner, { user ->
+                Glide.with(requireActivity()).load(user.imageUrl).into(binding.workImageView)
+                binding.workUsername.text = user.username
+                binding.workEmailAddress.text = user.email
+                binding.workPhoneNumber.text = sanitizePhoneNumber(user.phoneNumber)
+            })
+            requireActivity().log("WorkX is null")
+        } else {
+            requireActivity().log("Something else")
+        }
+    }
 
-        workViewModel.getWork(postId).observe(viewLifecycleOwner, { work ->
-            workX = work
+    private fun initWork() {
+        workViewModel.getWork(args.PostId).observe(viewLifecycleOwner, { work ->
+            if (work != null) {
+                workX = work
 
-            initUserData(work)
+                if (currentUserX?.id == args.UserId) {
+                    //Check if is current user, then display worker's photo
+                    Glide.with(requireActivity()).load(work.worker.imageUrl).into(binding.workImageView)
+                    binding.workUsername.text = work.worker.username
+                    binding.workEmailAddress.text = work.worker.email
+                    binding.workPhoneNumber.text = sanitizePhoneNumber(work.worker.phoneNumber)
+                } else {
+                    //Check if is not current user then display employer's info
+                    Glide.with(requireActivity()).load(work.user.imageUrl).into(binding.workImageView)
+                    binding.workUsername.text = work.user.username
+                    binding.workEmailAddress.text = work.user.email
+                    binding.workPhoneNumber.text = sanitizePhoneNumber(work.user.phoneNumber)
+                }
+                binding.workStarted.text = dateFormatter(work.createdAt)
 
-            binding.workStarted.text = DataFormatter.dateFormatter(work.createdAt)
-
-            if (work.createdAt.isEmpty()) {
-                binding.buttonStartWork.visibility = VISIBLE
-            } else {
-                binding.buttonStartWork.visibility = GONE
-                binding.buttonComplete.visibility = VISIBLE
-            }
-
-            if (work.status == COMPLETED) {
-                binding.workFinished.text = DataFormatter.dateFormatter(work.updatedAt)
-                binding.buttonComplete.text = requireActivity().resources.getString(R.string.completed)
-                binding.buttonComplete.setBackgroundColor(resources.getColor(R.color.button_disabled))
-                binding.buttonComplete.isEnabled = false
-                binding.buttonStartWork.visibility = GONE
+                if (work.status == Constants.COMPLETED) {
+                    binding.buttonComplete.visibility = VISIBLE
+                    binding.buttonStartWork.visibility = GONE
+                    binding.buttonComplete.isEnabled = false
+                    binding.buttonComplete.setBackgroundColor(resources.getColor(R.color.button_disabled))
+                    binding.buttonComplete.text = resources.getString(R.string.completed)
+                    binding.workFinished.text= dateFormatter(work.updatedAt)
+                }else{
+                    binding.buttonComplete.visibility = GONE
+                    binding.buttonStartWork.visibility = VISIBLE
+                }
             }
 
         })
@@ -159,7 +153,7 @@ class WorkFragment : Fragment(), StateListener {
 
                     dialog.dismiss()
                 } else
-
+                    requireActivity().toast("Await payment from employer")
                     dialog.dismiss()
             })
         }
@@ -167,8 +161,12 @@ class WorkFragment : Fragment(), StateListener {
         dialog.show()
     }
 
-    private fun createWork(){
-        workViewModel.createWork(args.PostId, args.UserId)
+    private fun startWork() {
+        workViewModel.createWork(args.PostId, args.UserId).observe(viewLifecycleOwner, { work ->
+            binding.workStarted.text = dateFormatter(work.createdAt)
+        })
+        binding.buttonStartWork.visibility = GONE
+        binding.buttonComplete.visibility = VISIBLE
     }
 
 

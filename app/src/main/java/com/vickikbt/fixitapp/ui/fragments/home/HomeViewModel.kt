@@ -62,7 +62,7 @@ class HomeViewModel @ViewModelInject constructor(private val postRepository: Pos
                 stateListener?.onFailure("${e.message}")
                 return@launch
             } catch (e: UnknownHostException) {
-                stateListener?.onFailure("${Constants.INTERNET_MESSAGE}")
+                stateListener?.onFailure(Constants.INTERNET_MESSAGE)
                 return@launch
             } catch (e: Exception) {
                 stateListener?.onFailure("Error loading posts")
