@@ -35,8 +35,7 @@ class FeedsPostFragment : Fragment(), StateListener {
         viewModel.posts.observe(viewLifecycleOwner, { posts ->
             if (posts.isNullOrEmpty()) requireActivity().toast("No posts")
             else {
-                binding.recyclerviewFeedPosts.adapter =
-                    FeedPostRecyclerviewAdapter(requireActivity(), posts)
+                binding.recyclerviewFeedPosts.adapter = FeedPostRecyclerviewAdapter(requireActivity(), posts)
             }
         })
     }

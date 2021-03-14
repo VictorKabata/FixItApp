@@ -30,9 +30,8 @@ class FeedViewModel @ViewModelInject constructor(
     val works: LiveData<List<Work>> = _works
 
     init {
-        getUserPosts()
-
         getUserWorks()
+        getUserPosts()
     }
 
     private fun getUserPosts() {

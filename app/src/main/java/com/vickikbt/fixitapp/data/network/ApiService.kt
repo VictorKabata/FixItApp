@@ -59,9 +59,11 @@ interface ApiService {
         @Body reviewUserRequest: ReviewUserRequest
     ): Response<Any>
 
+    //Get list of user's posts
     @GET("posts/user/{id}")
     suspend fun getUserPosts(@Path("id") userId: Int): Response<List<Post>>
 
+    //Get list of user's posts
     @GET("work/user/{id}")
     suspend fun getUserWorks(@Path("id") userId: Int): Response<List<Work>>
 
@@ -100,6 +102,7 @@ interface ApiService {
         @Path("id") id: Int,
         @Body workUpdateRequestRequestBody: WorkUpdateRequest
     ): Response<Work>
+
 
     //Get user transactions
     @GET("/transaction/user/{id}")
