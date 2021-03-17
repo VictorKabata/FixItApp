@@ -44,9 +44,11 @@ class HomeFragment : Fragment(), StateListener {
 
     private fun initUI() {
         viewModel.posts.observe(viewLifecycleOwner, { posts ->
-            if (posts.isNullOrEmpty()) requireActivity().toast("No posts") //TODO: Replace with no post imageview
+            if (posts.isNullOrEmpty()) binding.layoutNoPosts.visibility=View.VISIBLE
 
             else {
+                binding.layoutNoPosts.visibility=View.GONE
+                
                 userViewModel.getCurrentUser.observe(viewLifecycleOwner, { user ->
                     binding.recyclerViewHome.adapter = HomeRecyclerviewAdapter(requireActivity(), posts, user.id)
                 })
