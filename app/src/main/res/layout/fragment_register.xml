@@ -12,8 +12,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.activities.RegistrationActivity">
+        android:layout_height="match_parent">
 
         <com.github.florent37.shapeofview.shapes.ArcView
             android:layout_width="match_parent"
@@ -81,6 +80,7 @@
                             android:id="@+id/username_registration"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
                             android:hint="@string/username"
                             android:inputType="textPersonName"
                             android:maxLines="1"
@@ -105,6 +105,7 @@
                             android:id="@+id/email_registration"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
                             android:hint="@string/email"
                             android:inputType="textEmailAddress"
                             android:maxLines="1"
@@ -129,6 +130,7 @@
                             android:id="@+id/phone_registration"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
                             android:hint="@string/phone_number"
                             android:inputType="phone"
                             android:maxLines="1"
@@ -137,19 +139,29 @@
                             android:textSize="18sp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <Spinner
-                        android:id="@+id/spinner_specialisation"
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/textInputLayout_specialisation"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="16dp"
+                        android:hint="@string/specialisation"
                         android:layout_marginEnd="8dp"
-                        android:background="@drawable/custom_spinner_background"
-                        android:entries="@array/specialisations"
-                        android:padding="10dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5" />
+                        app:layout_constraintTop_toBottomOf="@+id/textInputLayout5">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/textView_specialisation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:inputType="none" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/textInputLayout6"
@@ -161,13 +173,14 @@
                         android:layout_marginEnd="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/spinner_specialisation"
+                        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_specialisation"
                         app:passwordToggleEnabled="true">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/password_registration"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
                             android:hint="@string/password"
                             android:inputType="textPassword"
                             android:maxLines="1"
@@ -211,21 +224,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
                 android:gravity="center_horizontal"
                 android:text="@string/already_have_an_account"
                 android:textColor="@color/secondaryColor"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/roboto_bold"
                 android:text="@string/login"
                 android:textColor="@color/colorAccent"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="16sp" />
 
         </LinearLayout>
 

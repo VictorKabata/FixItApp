@@ -8,12 +8,12 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.*
 import com.vickikbt.fixitapp.R
@@ -74,10 +74,18 @@ class RegisterFragment : Fragment(), StateListener {
 
         binding.linearlayoutRegister.setOnClickListener { findNavController().navigateUp() }
 
+        initUI()
+
         requestPermission()
         getMyLocation()
 
         return binding.root
+    }
+
+    private fun initUI() {
+        val specialisations = resources.getStringArray(R.array.specialisations)
+        val arrayAdapter = ArrayAdapter(requireActivity(), R.layout.dropdown_item, specialisations)
+        binding.textViewSpecialisation.setAdapter(arrayAdapter)
     }
 
     //Register user
@@ -93,18 +101,14 @@ class RegisterFragment : Fragment(), StateListener {
             return
         }
 
-        val category = binding.spinnerSpecialisation.selectedItem.toString()
-        if (binding.spinnerSpecialisation.selectedItemPosition == 0) {
-            requireActivity().toast("Please select your specialisation")
-            return
-        }
+        val specialisation = binding.textViewSpecialisation.text.toString()
 
         val body = ImageHelpers(requireActivity()).getImageBody(selectedImage!!)
 
-        viewModel.uploadProfilePic(body).observe(viewLifecycleOwner, Observer { imageUrl ->
+        viewModel.uploadProfilePic(body).observe(viewLifecycleOwner, { imageUrl ->
             viewModel.registerUser(
                 imageUrl!!,
-                category,
+                specialisation,
                 latitude,
                 longitude,
                 address,

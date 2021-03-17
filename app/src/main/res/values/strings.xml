@@ -62,26 +62,6 @@
     <string name="from">From:</string>
     <string name="no_transactions">No Transactions</string>
 
-    <string-array name="specialisations">
-        <item>Select Specialisation</item>
-        <item>Computer Repair</item>
-        <item>Automotive Repair</item>
-        <item>Furniture Repair</item>
-        <item>Plumbing</item>
-        <item>Electrical Repair</item>
-        <item>Phone Repair</item>
-    </string-array>
-
-    <string-array name="categories">
-        <item>Select Category</item>
-        <item>Computer Repair</item>
-        <item>Automotive Repair</item>
-        <item>Furniture Repair</item>
-        <item>Plumbing</item>
-        <item>Electrical Repair</item>
-        <item>Phone Repair</item>
-    </string-array>
-
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDbEEHz3vTzgRd9aGWypOCqDWHeMmHF1uc</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
