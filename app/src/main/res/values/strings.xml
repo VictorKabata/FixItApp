@@ -88,5 +88,6 @@
     <string name="no_posts">Oops! No Posts</string>
     <string name="no_transactions">Oops! No Transactions</string>
     <string name="no_work">Oops! No Work</string>
+    <string name="oops_no_internet">Oops! No Internet.</string>
 </resources>
 
