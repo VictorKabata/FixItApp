@@ -9,7 +9,7 @@
         android:id="@+id/imageView"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:src="@drawable/no_post"
+        android:src="@drawable/no_work"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,6 +25,6 @@
         app:layout_constraintStart_toStartOf="@id/imageView"
         app:layout_constraintEnd_toEndOf="@id/imageView"
         android:layout_marginTop="8dp"
-        android:text="@string/no_posts"/>
+        android:text="@string/no_work"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

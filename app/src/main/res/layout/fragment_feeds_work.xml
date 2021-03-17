@@ -15,6 +15,11 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_home" />
 
+        <include
+            android:id="@+id/layout_no_work"
+            layout="@layout/error_no_work"
+            android:visibility="gone" />
+
         <ProgressBar
             android:id="@+id/progressBar_feed_works"
             android:layout_width="wrap_content"

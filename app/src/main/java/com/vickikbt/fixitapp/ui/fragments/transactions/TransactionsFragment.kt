@@ -3,6 +3,7 @@ package com.vickikbt.fixitapp.ui.fragments.transactions
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -11,7 +12,10 @@ import androidx.fragment.app.viewModels
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentTransactionsBinding
 import com.vickikbt.fixitapp.ui.adapters.TransactionsRecyclerviewAdapter
-import com.vickikbt.fixitapp.utils.*
+import com.vickikbt.fixitapp.utils.StateListener
+import com.vickikbt.fixitapp.utils.hide
+import com.vickikbt.fixitapp.utils.log
+import com.vickikbt.fixitapp.utils.show
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,9 +39,11 @@ class TransactionsFragment : Fragment(), StateListener {
 
     private fun initUI() {
         viewModel.getUserTransactions().observe(viewLifecycleOwner, { transactions ->
-            if (transactions.isNullOrEmpty()) binding.textViewTransactions.visibility = VISIBLE
-
-            binding.recyclerviewTransactions.adapter = TransactionsRecyclerviewAdapter(transactions)
+            if (transactions.isNullOrEmpty()) binding.layoutNoTransactions.visibility = VISIBLE
+            else {
+                binding.layoutNoTransactions.visibility = GONE
+                binding.recyclerviewTransactions.adapter = TransactionsRecyclerviewAdapter(transactions)
+            }
         })
 
     }

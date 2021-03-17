@@ -3,6 +3,8 @@ package com.vickikbt.fixitapp.ui.fragments.feeds
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -33,10 +35,10 @@ class FeedsWorkFragment : Fragment(), StateListener {
 
     private fun initRecyclerview() {
         viewModel.works.observe(viewLifecycleOwner, { works ->
-            if (works.isNullOrEmpty()) requireActivity().toast("No Works")
+            if (works.isNullOrEmpty()) binding.layoutNoWork.visibility=VISIBLE
             else {
-                binding.recyclerviewFeedWork.adapter =
-                    FeedWorksRecyclerviewAdapter(requireActivity(), works)
+                binding.layoutNoWork.visibility= GONE
+                binding.recyclerviewFeedWork.adapter = FeedWorksRecyclerviewAdapter(requireActivity(), works)
             }
         })
     }
