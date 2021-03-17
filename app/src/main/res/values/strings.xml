@@ -85,5 +85,6 @@
     <string name="logout">Logout</string>
     <string name="category_placeholder">Electrical Repair</string>
     <string name="start_work">Start Work</string>
+    <string name="no_posts">Ooops! No Posts</string>
 </resources>
 
