@@ -199,8 +199,7 @@
                         android:text="@string/complete"
                         android:textAllCaps="false"
                         android:textColor="@android:color/white"
-                        android:textSize="20sp"
-                        android:visibility="gone" />
+                        android:textSize="20sp" />
 
                 </RelativeLayout>
 

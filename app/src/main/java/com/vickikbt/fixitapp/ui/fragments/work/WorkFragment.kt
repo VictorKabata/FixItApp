@@ -93,24 +93,27 @@ class WorkFragment : Fragment(), StateListener {
                 //Check if work is already started to hide the start work button
                 if (!workX?.createdAt.isNullOrEmpty()) {
                     binding.buttonStartWork.visibility = GONE
-                    binding.buttonComplete.visibility= VISIBLE
+                    binding.buttonComplete.visibility = VISIBLE
                     requireActivity().log("Work created at is no null or empty")
                 } //else binding.buttonStartWork.visibility = VISIBLE
 
                 if (currentUserX?.id == args.UserId) {
                     //Check if is current user, then display worker's photo
-                    Glide.with(requireActivity()).load(work.worker.imageUrl).into(binding.workImageView)
+                    Glide.with(requireActivity()).load(work.worker.imageUrl)
+                        .into(binding.workImageView)
                     binding.workUsername.text = work.worker.username
                     binding.workEmailAddress.text = work.worker.email
-                    binding.workPhoneNumber.text = "+${sanitizePhoneNumber(work.worker.phoneNumber)}"
+                    binding.workPhoneNumber.text =
+                        "+${sanitizePhoneNumber(work.worker.phoneNumber)}"
                 } else {
                     //Check if is not current user then display employer's info
-                    Glide.with(requireActivity()).load(work.user.imageUrl).into(binding.workImageView)
+                    Glide.with(requireActivity()).load(work.user.imageUrl)
+                        .into(binding.workImageView)
                     binding.workUsername.text = work.user.username
                     binding.workEmailAddress.text = work.user.email
                     binding.workPhoneNumber.text = "+${sanitizePhoneNumber(work.user.phoneNumber)}"
                 }
-                binding.workStarted.text = workDateFormatter(work.createdAt)
+                binding.workStarted.text = dateFormatter(work.createdAt)
 
                 if (work.status == Constants.STATUS_COMPLETED) {
                     binding.buttonComplete.visibility = VISIBLE
@@ -119,9 +122,12 @@ class WorkFragment : Fragment(), StateListener {
                     binding.buttonComplete.setBackgroundColor(resources.getColor(R.color.button_disabled))
                     binding.buttonComplete.text = resources.getString(R.string.completed)
                     binding.workFinished.text = dateFormatter(work.updatedAt)
+                } else if (work.status == Constants.STATUS_IN_PROGRESS) {
+                    binding.buttonStartWork.visibility = GONE
+                    binding.buttonComplete.visibility = VISIBLE
                 } else {
+                    binding.buttonStartWork.visibility = VISIBLE
                     binding.buttonComplete.visibility = GONE
-                    //binding.buttonStartWork.visibility = VISIBLE
                 }
             }
 

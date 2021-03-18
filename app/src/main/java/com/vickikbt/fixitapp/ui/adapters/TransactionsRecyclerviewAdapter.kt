@@ -28,8 +28,8 @@ class TransactionsRecyclerviewAdapter constructor(private val transactionList: L
         holder.bind(transaction)
 
         holder.userName.setOnClickListener {
-            val action = TransactionsFragmentDirections.transactionToUserProfile(transaction.worker.id)
-            it.findNavController().navigate(action)
+            //val action = TransactionsFragmentDirections.transactionToUserProfile(transaction.worker.id)
+            //it.findNavController().navigate(action)
         }
     }
 

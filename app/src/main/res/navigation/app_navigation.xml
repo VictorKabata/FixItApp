@@ -77,6 +77,9 @@
         <action
             android:id="@+id/post_detail_to_user_profile"
             app:destination="@id/user_profile_fragment" />
+        <action
+            android:id="@+id/post_detail_to_user_profile"
+            app:destination="@id/user_profile_fragment" />
     </fragment>
     <fragment
         android:id="@+id/post_booking_fragment"
@@ -94,9 +97,6 @@
             android:name="Budget"
             app:argType="integer"
             android:defaultValue="0" />
-        <action
-            android:id="@+id/post_bookings_to_user_profile"
-            app:destination="@id/user_profile_fragment" />
     </fragment>
     <fragment
         android:id="@+id/work_fragment"
@@ -111,9 +111,6 @@
             android:id="@+id/work_to_payment"
             app:destination="@id/payment_fragment"
             app:popUpTo="@id/home_fragment" />
-        <action
-            android:id="@+id/work_fragment_to_user_profile"
-            app:destination="@id/user_profile_fragment" />
         <argument android:name="UserId"
             app:argType="integer"
             android:defaultValue="0" />
@@ -186,21 +183,19 @@
         <action
             android:id="@+id/transactions_to_home"
             app:destination="@id/home_fragment" />
-        <action
-            android:id="@+id/transaction_to_user_profile"
-            app:destination="@id/user_profile_fragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/user_profile_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.profile.UserProfileFragment"
-        android:label="User Profile">
-        <argument
-            android:name="userId"
-            android:defaultValue="0"
-            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/settings_fragment"
         android:name="com.vickikbt.fixitapp.ui.fragments.settings.SettingsFragment"
         android:label="@string/settings" />
+    <fragment
+        android:id="@+id/user_profile_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.profile.UserProfileFragment"
+        android:label="User Profile"
+        tools:layout="@layout/fragment_user_profile" >
+        <argument
+            android:name="userId"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>

@@ -67,6 +67,9 @@ class ProfileFragment : Fragment() {
 
         val buttonYes: Button = dialog.findViewById(R.id.button_dialog_yes)
         val buttonNo: TextView = dialog.findViewById(R.id.textView_dialog_no)
+        val dialogMessage: TextView = dialog.findViewById(R.id.textView_dialog_message)
+
+        dialogMessage.text=requireActivity().resources.getString(R.string.logout_message)
 
         buttonNo.setOnClickListener { dialog.dismiss() }
 

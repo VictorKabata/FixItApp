@@ -45,6 +45,7 @@ class PostDetailFragment : Fragment(), StateListener, OnMapReadyCallback {
     private lateinit var currentUserName: String
     private lateinit var postUserName: String
     private lateinit var postUserPhoneNumber: String
+    private lateinit var userId:String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,6 +70,11 @@ class PostDetailFragment : Fragment(), StateListener, OnMapReadyCallback {
             sendSms()
         }
 
+        binding.userImageView.setOnClickListener {
+            //val action=PostDetailFragmentDirections.postDetailToUserProfile(userId.toInt())
+            //findNavController().navigate(action)
+        }
+
         //initAnimations()
 
         initUI()
@@ -81,6 +87,7 @@ class PostDetailFragment : Fragment(), StateListener, OnMapReadyCallback {
 
         postViewModel.getPost(postId).observe(viewLifecycleOwner, { post ->
             val user = post.user
+            userId=user.id.toString()
 
             postUserName = user.username
             postUserPhoneNumber = user.phoneNumber
@@ -97,8 +104,8 @@ class PostDetailFragment : Fragment(), StateListener, OnMapReadyCallback {
             val currentUserId = userViewModel.getCurrentUser.value!!.id
             if (currentUserId != user.id) {
                 binding.userImageView.setOnClickListener {
-                    val action = PostDetailFragmentDirections.postDetailToUserProfile(user.id)
-                    findNavController().navigate(action)
+                    //val action = PostDetailFragmentDirections.postDetailToUserProfile(user.id)
+                    //findNavController().navigate(action)
                 }
             } else {
                 binding.buttonBook.visibility = View.GONE
@@ -106,9 +113,10 @@ class PostDetailFragment : Fragment(), StateListener, OnMapReadyCallback {
             }
 
             binding.userImageView.setOnClickListener {
-                val action = PostDetailFragmentDirections.postDetailToUserProfile(user.id)
-                findNavController().navigate(action)
+                //val action = PostDetailFragmentDirections.postDetailToUserProfile(user.id)
+                //findNavController().navigate(action)
             }
+
 
 
             //setUpMap(post)

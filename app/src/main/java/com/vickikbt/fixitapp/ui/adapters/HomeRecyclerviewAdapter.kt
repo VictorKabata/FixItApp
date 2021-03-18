@@ -17,6 +17,7 @@ import com.vickikbt.fixitapp.models.entity.Post
 import com.vickikbt.fixitapp.ui.fragments.home.HomeFragmentDirections
 import com.vickikbt.fixitapp.utils.Constants
 import com.vickikbt.fixitapp.utils.DataFormatter.Companion.dateFormatter
+import com.vickikbt.fixitapp.utils.log
 import com.vickikbt.fixitapp.utils.toast
 
 class HomeRecyclerviewAdapter constructor(
@@ -27,8 +28,7 @@ class HomeRecyclerviewAdapter constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeRecyclerviewViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ItemHomeBinding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.item_home, parent, false)
+        val binding: ItemHomeBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_home, parent, false)
 
         return HomeRecyclerviewViewHolder(binding)
     }
@@ -40,15 +40,16 @@ class HomeRecyclerviewAdapter constructor(
 
         holder.bind(post, context)
 
-        //TODO: Load animation
         holder.itemView.animation = AnimationUtils.loadAnimation(
             holder.itemView.context,
             R.anim.recyclerview_load_animation
         )
 
         holder.profilePic.setOnClickListener {
-            val action = HomeFragmentDirections.homeToUserProfile(post.userId)
-            it.findNavController().navigate(action)
+            if (currentUserId!=post.userId){
+                val action = HomeFragmentDirections.homeToUserProfile(post.userId)
+                it.findNavController().navigate(action)
+            }
         }
 
         holder.userName.setOnClickListener {
@@ -71,6 +72,7 @@ class HomeRecyclerviewAdapter constructor(
             val action = HomeFragmentDirections.homeToWork(post.id,post.userId)
             view.findNavController().navigate(action)
         } else if (post.status == Constants.STATUS_IN_PROGRESS && post.userId == currentUserId) {
+            context.log("${post.userId}")
             val action = HomeFragmentDirections.homeToWork(post.id,post.workerId)
             view.findNavController().navigate(action)
         } else if (post.status == Constants.STATUS_IN_PROGRESS && post.workerId != currentUserId || post.user.id != currentUserId) {
