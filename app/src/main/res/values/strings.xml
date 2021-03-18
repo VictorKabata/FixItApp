@@ -46,6 +46,7 @@
     <string name="select_photo">Select Photo</string>
     <string name="upload">Upload</string>
     <string name="logout_message">Are you sure you want to logout?</string>
+    <string name="start_work_message">Are you sure you want to start this work?</string>
     <string name="complete_work_message">Mark this work as complete?</string>
     <string name="rating_dialog_title">How would you rate </string>
     <string name="no_works">Work applications closed</string>
@@ -89,5 +90,6 @@
     <string name="no_transactions">Oops! No Transactions</string>
     <string name="no_work">Oops! No Work</string>
     <string name="oops_no_internet">Oops! No Internet.</string>
+    <string name="till_number">Till Number</string>
 </resources>
 

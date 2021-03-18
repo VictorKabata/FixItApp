@@ -119,11 +119,6 @@
             android:defaultValue="0" />
     </fragment>
     <fragment
-        android:id="@+id/messages_fragment"
-        android:name="com.vickikbt.fixitapp.ui.fragments.messages.MessagesFragment"
-        android:label="@string/messages"
-        tools:layout="@layout/fragment_messages" />
-    <fragment
         android:id="@+id/feeds_fragment"
         android:name="com.vickikbt.fixitapp.ui.fragments.feeds.FeedsFragment"
         android:label="@string/feeds"

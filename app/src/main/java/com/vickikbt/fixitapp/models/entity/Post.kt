@@ -43,6 +43,9 @@ data class Post(
     @ColumnInfo(name = "Status")
     val status: String,
 
+    @ColumnInfo(name="Paid")
+    val paid:Boolean,
+
     @ColumnInfo(name = "Address")
     val address: String,
 

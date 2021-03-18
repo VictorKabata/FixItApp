@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.vickikbt.fixitapp.repositories.BookingRepository
 import com.vickikbt.fixitapp.repositories.WorkRepository
 import com.vickikbt.fixitapp.utils.ApiException
+import com.vickikbt.fixitapp.utils.Constants
 import com.vickikbt.fixitapp.utils.Constants.INTERNET_MESSAGE
 import com.vickikbt.fixitapp.utils.StateListener
 import kotlinx.coroutines.launch
@@ -46,6 +47,7 @@ class BookingViewModel @ViewModelInject constructor(
 
         viewModelScope.launch {
             try {
+                bookingRepository.updateBookedPost(postId, workerId = userId, Constants.STATUS_IN_PROGRESS, false)
                 bookingRepository.acceptBooking(bookingId, postId, userId)
                 stateListener?.onSuccess("To start soon")
                 return@launch

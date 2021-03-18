@@ -5,7 +5,7 @@ object Constants {
     //const val BASE_URL: String = "https://fix-it-server.herokuapp.com/"
     //const val BASE_URL: String = "http://10.0.2.2:8081/"
 
-    const val BASE_URL: String = "http://192.168.137.94:8081/"
+    const val BASE_URL: String = "http://192.168.43.125:8081/"
     //const val SAF_BASE_URL = "https://sandbox.safaricom.co.ke/"
 
     const val PERMISSION_ID = 69
@@ -23,8 +23,6 @@ object Constants {
 
     const val ACCEPT = "Accepted"
     const val REJECT = "Rejected"
-    const val IN_PROGRESS = "In-Progress"
-    const val COMPLETED = "Completed"
 
     const val INTERNET_MESSAGE = "Ensure you have an internet connection"
 
@@ -41,4 +39,7 @@ object Constants {
 
     const val TYPE_MPESA = "M-Pesa"
     const val TYPE_CASH = "Cash"
+
+    const val STATUS_COMPLETED = "Completed"
+    const val STATUS_IN_PROGRESS="In-Progress"
 }

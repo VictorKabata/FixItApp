@@ -5,14 +5,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.vickikbt.fixitapp.models.entity.Work
+import com.vickikbt.fixitapp.repositories.BookingRepository
 import com.vickikbt.fixitapp.repositories.UserRepository
 import com.vickikbt.fixitapp.repositories.WorkRepository
 import com.vickikbt.fixitapp.utils.ApiException
+import com.vickikbt.fixitapp.utils.Constants
 import com.vickikbt.fixitapp.utils.StateListener
 import kotlinx.coroutines.launch
 import java.net.UnknownHostException
 
-class WorkViewModel @ViewModelInject constructor(private val workRepository: WorkRepository,private val userRepository: UserRepository) :
+class WorkViewModel @ViewModelInject constructor(
+    private val workRepository: WorkRepository,
+    private val userRepository: UserRepository,
+    private val bookingRepository: BookingRepository
+) :
     ViewModel() {
 
     var stateListener: StateListener? = null
@@ -29,7 +35,7 @@ class WorkViewModel @ViewModelInject constructor(private val workRepository: Wor
             return@liveData
 
         } catch (e: ApiException) {
-            stateListener?.onFailure("${e.message}")
+            //stateListener?.onFailure("${e.message}")
             return@liveData
         } catch (e: UnknownHostException) {
             stateListener?.onFailure("${e.message}")
@@ -62,29 +68,35 @@ class WorkViewModel @ViewModelInject constructor(private val workRepository: Wor
         }
     }
 
-    fun updateWork(work:Work)= liveData {
+    fun updateWork(work: Work) = liveData {
         stateListener?.onLoading()
 
         try {
-            val workUpdateResponse=workRepository.updateWork(work)
-            workUpdateResponse.let {work->
+            val workUpdateResponse = workRepository.updateWork(work)
+            workUpdateResponse.let { work ->
+                bookingRepository.updateBookedPost(
+                    work.postId,
+                    work.workerId,
+                    Constants.STATUS_COMPLETED,
+                    false
+                )
                 emit(work)
                 stateListener?.onSuccess("Updated work to complete")
                 return@liveData
             }
-        }catch (e:ApiException){
+        } catch (e: ApiException) {
             stateListener?.onFailure("${e.message}")
             return@liveData
-        }catch (e:UnknownHostException){
+        } catch (e: UnknownHostException) {
             stateListener?.onFailure("${e.message}")
             return@liveData
-        }catch (e:Exception){
+        } catch (e: Exception) {
             stateListener?.onFailure("${e.message}")
             return@liveData
         }
     }
 
-    fun reviewUser(work: Work,rating:Int,comment:String){
+    fun reviewUser(work: Work, rating: Int, comment: String) {
         stateListener?.onLoading()
 
         viewModelScope.launch {
@@ -93,13 +105,13 @@ class WorkViewModel @ViewModelInject constructor(private val workRepository: Wor
                 //stateListener?.onSuccess("Rated ${work.worker.username} with $rating because: $comment")
                 stateListener?.onSuccess("Rated")
                 return@launch
-            }catch (e:ApiException){
+            } catch (e: ApiException) {
                 stateListener?.onFailure("${e.message}")
                 return@launch
-            }catch (e:UnknownHostException){
+            } catch (e: UnknownHostException) {
                 stateListener?.onFailure("${e.message}")
                 return@launch
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 stateListener?.onFailure("${e.message}")
                 return@launch
             }

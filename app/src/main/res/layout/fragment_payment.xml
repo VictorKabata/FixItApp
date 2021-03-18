@@ -8,45 +8,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.rilixtech.widget.countrycodepicker.CountryCodePicker
-            android:id="@+id/country_code_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:background="@drawable/border"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="15dp"
-            android:paddingVertical="12dp"
-            app:ccp_countryPreference="KE"
-            app:ccp_defaultNameCode="KE"
-            app:ccp_hideNameCode="true"
-            app:ccp_hidePhoneCode="true"
-            app:ccp_showFlag="true"
-            app:ccp_showFullName="false"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             app:hintEnabled="true"
-            app:layout_constraintBottom_toBottomOf="@id/country_code_picker"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/country_code_picker"
-            app:layout_constraintTop_toTopOf="@id/country_code_picker">
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText_payment_phone"
+                android:id="@+id/editText_paybill"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/phone_number"
-                android:inputType="phone"
+                android:hint="@string/till_number"
+                android:text="174379"
+                android:inputType="number"
                 android:maxLines="1"
                 android:padding="10dp"
                 android:textSize="18sp"
@@ -63,7 +42,7 @@
             android:layout_marginEnd="8dp"
             app:hintEnabled="true"
             app:layout_constraintEnd_toEndOf="@id/textInputLayout"
-            app:layout_constraintStart_toStartOf="@id/country_code_picker"
+            app:layout_constraintStart_toStartOf="@id/textInputLayout"
             app:layout_constraintTop_toBottomOf="@id/textInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -84,12 +63,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/roboto_bold"
             android:padding="10dp"
             android:text="@string/pay_with_mpesa"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            android:fontFamily="@font/roboto_bold"
             app:layout_constraintEnd_toEndOf="@id/textInputLayout2"
             app:layout_constraintStart_toStartOf="@id/textInputLayout2"
             app:layout_constraintTop_toBottomOf="@id/textInputLayout2" />
@@ -101,12 +80,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="6dp"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/roboto_bold"
             android:padding="10dp"
             android:text="@string/pay_with_cash"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textSize="20sp"
-            android:fontFamily="@font/roboto_bold"
             app:layout_constraintEnd_toEndOf="@id/button_payment_mpesa"
             app:layout_constraintStart_toStartOf="@id/button_payment_mpesa"
             app:layout_constraintTop_toBottomOf="@id/button_payment_mpesa" />

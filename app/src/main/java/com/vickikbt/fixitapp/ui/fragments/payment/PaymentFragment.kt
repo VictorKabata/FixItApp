@@ -81,7 +81,7 @@ class PaymentFragment : Fragment(), StateListener {
     }
 
     private fun initUI() {
-        binding.editTextPaymentPhone.setText(phoneNumberFormatter(args.phoneNumber))
+        //binding.editTextPaymentPhone.setText(phoneNumberFormatter(args.phoneNumber))
         binding.editTextPaymentAmount.setText(args.budget)
 
         workViewModel.getWork(args.postId).observe(viewLifecycleOwner, {
@@ -91,8 +91,8 @@ class PaymentFragment : Fragment(), StateListener {
 
     private fun validate() {
         when {
-            binding.editTextPaymentPhone.text.isNullOrEmpty() -> {
-                requireActivity().toast("Enter phone number.")
+            binding.editTextPaybill.text.isNullOrEmpty() -> {
+                requireActivity().toast("Enter paybill number.")
             }
             binding.editTextPaymentAmount.text.isNullOrEmpty() -> {
                 requireActivity().toast("Enter amount.")
@@ -119,20 +119,18 @@ class PaymentFragment : Fragment(), StateListener {
     }
 
     private fun makePayment() {
-        val phoneEt = binding.editTextPaymentPhone.text.toString()
-        val countryCode = binding.countryCodePicker.selectedCountryCode
-        val phoneNumber = countryCode + phoneEt
+        val paybill = binding.editTextPaybill.text.toString()
         val amount = binding.editTextPaymentAmount.text.toString()
 
         validate()
 
         val lnmExpress = LNMExpress(
-            Constants.BUSINESS_SHORT_CODE,
+            paybill,
             Constants.PASSKEY,
             amount,
             userPhoneNumber,
-            Constants.PARTYB,
-            phoneNumber,
+            paybill,
+            userPhoneNumber,
             Constants.CALLBACKURL,
             Constants.ACCOUNT_REFERENCE,
             Constants.ACCOUNT_REFERENCE
@@ -142,6 +140,7 @@ class PaymentFragment : Fragment(), StateListener {
             object : DarajaListener<LNMResult> {
                 override fun onResult(lnmResult: LNMResult) {
                     requireActivity().log("STKPush Successful")
+                    createTransaction(Constants.TYPE_MPESA)
                 }
 
                 override fun onError(error: String) {

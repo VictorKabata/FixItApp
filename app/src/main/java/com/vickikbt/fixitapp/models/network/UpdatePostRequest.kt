@@ -10,24 +10,7 @@ data class UpdatePostRequest(
     @SerializedName("worker_id")
     val workerId: Int,
 
-    val category: String,
-
-    val description: String,
-
-    @SerializedName("image_url")
-    val imageUrl: String,
-
-    val budget: String,
-
     val status: String,
 
-    val latitude: Double,
-
-    val longitude: Double,
-
-    val address: String,
-
-    val region: String,
-
-    val country: String
+    val paid: Boolean
 )

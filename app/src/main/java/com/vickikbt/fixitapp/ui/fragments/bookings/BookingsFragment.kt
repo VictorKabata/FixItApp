@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.FragmentPostBookingBinding
+import com.vickikbt.fixitapp.models.entity.Review
 import com.vickikbt.fixitapp.ui.adapters.PostBookingRecyclerviewAdapter
+import com.vickikbt.fixitapp.ui.fragments.auth.UserViewModel
 import com.vickikbt.fixitapp.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,7 +21,10 @@ class BookingsFragment : Fragment(), StateListener {
 
     private lateinit var binding: FragmentPostBookingBinding
     private val viewModel by viewModels<BookingViewModel>()
+    private val userViewModel by viewModels<UserViewModel>()
     private val args: BookingsFragmentArgs by navArgs()
+
+    private lateinit var review: List<Review>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +42,10 @@ class BookingsFragment : Fragment(), StateListener {
     private fun initUI() {
         val postId = args.PostId
         val budget = args.Budget
+
+        /*userViewModel.fetchUserReviews().observe(viewLifecycleOwner,{reviews->
+            review=reviews
+        })*/
 
         viewModel.getPostBooking(postId).observe(viewLifecycleOwner, { bookings ->
             binding.recyclerViewBookings.adapter =

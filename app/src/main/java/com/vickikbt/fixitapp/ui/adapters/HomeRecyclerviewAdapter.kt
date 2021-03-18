@@ -15,6 +15,7 @@ import com.vickikbt.fixitapp.R
 import com.vickikbt.fixitapp.databinding.ItemHomeBinding
 import com.vickikbt.fixitapp.models.entity.Post
 import com.vickikbt.fixitapp.ui.fragments.home.HomeFragmentDirections
+import com.vickikbt.fixitapp.utils.Constants
 import com.vickikbt.fixitapp.utils.DataFormatter.Companion.dateFormatter
 import com.vickikbt.fixitapp.utils.toast
 
@@ -66,14 +67,13 @@ class HomeRecyclerviewAdapter constructor(
         } else if (post.status.isEmpty() && post.user.id == currentUserId) {
             val action = HomeFragmentDirections.homeToPostBookings(post.id, post.budget.toInt())
             view.findNavController().navigate(action)
-        } else if (post.status == "In-Progress" && post.workerId == currentUserId) {
-            val action = HomeFragmentDirections.homeToWork(post.id)
+        } else if (post.status == Constants.STATUS_IN_PROGRESS && post.workerId == currentUserId) {
+            val action = HomeFragmentDirections.homeToWork(post.id,post.userId)
             view.findNavController().navigate(action)
-        } else if (post.status == "In-Progress" && post.user.id == currentUserId) {
-            val action = HomeFragmentDirections.homeToWork(post.id)
+        } else if (post.status == Constants.STATUS_IN_PROGRESS && post.userId == currentUserId) {
+            val action = HomeFragmentDirections.homeToWork(post.id,post.workerId)
             view.findNavController().navigate(action)
-        } else if (post.status == "In-Progress" && post.workerId != currentUserId || post.user.id != currentUserId) {
-            //context.toast("No more application for this work")
+        } else if (post.status == Constants.STATUS_IN_PROGRESS && post.workerId != currentUserId || post.user.id != currentUserId) {
             context.toast(context.getString(R.string.no_work))
         } //TODO: Add check for if is paid field==true
     }

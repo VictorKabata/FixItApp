@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class UpdateBookingRequest(
     @SerializedName("user_id")
-    val userId: Int,
+    val workerId: Int,
 
     @SerializedName("status")
     val status: String

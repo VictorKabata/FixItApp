@@ -8,8 +8,8 @@ import com.vickikbt.fixitapp.models.entity.Booking
 import com.vickikbt.fixitapp.models.network.BookWorkRequest
 import com.vickikbt.fixitapp.models.network.UpdateBookingRequest
 import com.vickikbt.fixitapp.models.network.UpdatePostRequest
+import com.vickikbt.fixitapp.utils.Constants
 import com.vickikbt.fixitapp.utils.Constants.ACCEPT
-import com.vickikbt.fixitapp.utils.Constants.IN_PROGRESS
 import com.vickikbt.fixitapp.utils.Constants.REJECT
 import com.vickikbt.fixitapp.utils.SafeApiRequest
 import javax.inject.Inject
@@ -39,12 +39,9 @@ class BookingRepository @Inject constructor(
         safeApiRequest { apiService.bookWork(token, bookWorkRequestBody) }
     }
 
-    suspend fun acceptBooking(bookingId: Int,postId: Int, userId: Int): Booking {
-        val updateBookingRequest = UpdateBookingRequest(userId, ACCEPT)
+    suspend fun acceptBooking(bookingId: Int, postId: Int, userId: Int): Booking {
+        val updateBookingRequest = UpdateBookingRequest(workerId = userId, ACCEPT)
         val booking = safeApiRequest { apiService.updateBooking(bookingId, updateBookingRequest) }
-        workRepository.createWork(postId,userId)
-
-        updateBookedPost(userId, postId)
 
         return booking
     }
@@ -54,25 +51,12 @@ class BookingRepository @Inject constructor(
         safeApiRequest { apiService.updateBooking(bookingId, updateBookingRequest) }
     }
 
-    suspend fun updateBookedPost(userId:Int,postId: Int) {
+    suspend fun updateBookedPost(postId: Int, workerId: Int, status: String, paid: Boolean) {
         val user = appDatabase.userDAO().getAuthenticatedUser()
-        val post = appDatabase.postDao().getPost(postId)
+        val userId = user.id
 
         val token = "Bearer: ${user.token}"
-        val updatePostRequestBody = UpdatePostRequest(
-            user.id,
-            userId,
-            post.category,
-            post.description,
-            post.imageUrl,
-            post.budget,
-            IN_PROGRESS,
-            post.latitude,
-            post.longitude,
-            post.address,
-            post.region,
-            post.country
-        )
+        val updatePostRequestBody = UpdatePostRequest(userId, workerId, status, paid)
 
         Log.e("VickiKbt", "Updating Booking Post")
         safeApiRequest { apiService.updatePost(token, postId, updatePostRequestBody) }
