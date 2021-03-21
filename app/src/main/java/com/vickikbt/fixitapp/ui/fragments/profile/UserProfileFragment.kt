@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.vickikbt.fixitapp.R
@@ -57,5 +58,10 @@ class UserProfileFragment : Fragment() {
             binding.userProfileRegion.text=user.region
             binding.userProfileCountry.text=user.country
         })
+
+        binding.textViewSeeReviews.setOnClickListener {
+            val action=UserProfileFragmentDirections.userProfileToReviews(userId)
+            findNavController().navigate(action)
+        }
     }
 }

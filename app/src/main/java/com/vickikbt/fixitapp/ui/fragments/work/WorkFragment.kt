@@ -30,6 +30,7 @@ import com.vickikbt.fixitapp.utils.StateListener
 import com.vickikbt.fixitapp.utils.log
 import com.vickikbt.fixitapp.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class WorkFragment : Fragment(), StateListener {
@@ -56,6 +57,9 @@ class WorkFragment : Fragment(), StateListener {
         binding.buttonStartWork.setOnClickListener {
             startWorkDialog()
         }
+
+        val currentTime=Calendar.getInstance().time
+        requireActivity().log(currentTime.toString())
 
         getCurrentUser()
 
@@ -103,8 +107,7 @@ class WorkFragment : Fragment(), StateListener {
                         .into(binding.workImageView)
                     binding.workUsername.text = work.worker.username
                     binding.workEmailAddress.text = work.worker.email
-                    binding.workPhoneNumber.text =
-                        "+${sanitizePhoneNumber(work.worker.phoneNumber)}"
+                    binding.workPhoneNumber.text = "+${sanitizePhoneNumber(work.worker.phoneNumber)}"
                 } else {
                     //Check if is not current user then display employer's info
                     Glide.with(requireActivity()).load(work.user.imageUrl)
@@ -113,6 +116,7 @@ class WorkFragment : Fragment(), StateListener {
                     binding.workEmailAddress.text = work.user.email
                     binding.workPhoneNumber.text = "+${sanitizePhoneNumber(work.user.phoneNumber)}"
                 }
+
                 binding.workStarted.text = dateFormatter(work.createdAt)
 
                 if (work.status == Constants.STATUS_COMPLETED) {

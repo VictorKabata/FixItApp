@@ -3,6 +3,8 @@ package com.vickikbt.fixitapp.ui.fragments.bookings
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -21,7 +23,6 @@ class BookingsFragment : Fragment(), StateListener {
 
     private lateinit var binding: FragmentPostBookingBinding
     private val viewModel by viewModels<BookingViewModel>()
-    private val userViewModel by viewModels<UserViewModel>()
     private val args: BookingsFragmentArgs by navArgs()
 
     private lateinit var review: List<Review>
@@ -29,7 +30,7 @@ class BookingsFragment : Fragment(), StateListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_post_booking, container, false)
         viewModel.stateListener = this
@@ -43,13 +44,13 @@ class BookingsFragment : Fragment(), StateListener {
         val postId = args.PostId
         val budget = args.Budget
 
-        /*userViewModel.fetchUserReviews().observe(viewLifecycleOwner,{reviews->
-            review=reviews
-        })*/
 
         viewModel.getPostBooking(postId).observe(viewLifecycleOwner, { bookings ->
-            binding.recyclerViewBookings.adapter =
-                PostBookingRecyclerviewAdapter(requireActivity(), bookings, budget, viewModel)
+            if (bookings.isNullOrEmpty()) binding.layoutNoTransactions.visibility=VISIBLE
+            else {
+                binding.layoutNoTransactions.visibility= GONE
+                binding.recyclerViewBookings.adapter = PostBookingRecyclerviewAdapter(requireActivity(), bookings, budget, viewModel)
+            }
         })
     }
 

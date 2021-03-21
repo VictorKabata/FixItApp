@@ -48,8 +48,8 @@ class PostBookingRecyclerviewAdapter constructor(
         holder.bind(booking, context, budget)
 
         holder.profilePic.setOnClickListener {
-            //val action = BookingsFragmentDirections.postBookingsToUserProfile(booking.userId)
-            //it.findNavController().navigate(action)
+            val action = BookingsFragmentDirections.postBookingToUserProfile(booking.userId)
+            it.findNavController().navigate(action)
         }
 
         holder.acceptButton.setOnClickListener {

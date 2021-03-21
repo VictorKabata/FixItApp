@@ -94,6 +94,9 @@
             android:name="Budget"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/post_booking_to_user_profile"
+            app:destination="@id/user_profile_fragment" />
     </fragment>
     <fragment
         android:id="@+id/work_fragment"
@@ -146,6 +149,9 @@
             app:destination="@id/login_fragment"
             app:popUpTo="@id/login_fragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/profile_to_reviews"
+            app:destination="@id/review_fragment" />
     </fragment>
     <fragment
         android:id="@+id/payment_fragment"
@@ -190,6 +196,19 @@
         android:name="com.vickikbt.fixitapp.ui.fragments.profile.UserProfileFragment"
         android:label="User Profile"
         tools:layout="@layout/fragment_user_profile" >
+        <argument
+            android:name="userId"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/user_profile_to_reviews"
+            app:destination="@id/review_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/review_fragment"
+        android:name="com.vickikbt.fixitapp.ui.fragments.review.ReviewFragment"
+        android:label="@string/review"
+        tools:layout="@layout/fragment_review" >
         <argument
             android:name="userId"
             app:argType="integer"

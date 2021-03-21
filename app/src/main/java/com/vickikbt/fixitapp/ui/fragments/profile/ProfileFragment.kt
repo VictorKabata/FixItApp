@@ -53,10 +53,17 @@ class ProfileFragment : Fragment() {
                 requireActivity().log("Rating: $ratings")
             }
             binding.ratingBarProfile.rating=ratings.toFloat()
+
         })
 
         viewModel.getCurrentUser.observe(viewLifecycleOwner,{user->
             Glide.with(requireActivity()).load(user.imageUrl).into(binding.profileImageView)
+
+            binding.textViewSeeReviews.setOnClickListener {
+                val action=ProfileFragmentDirections.profileToReviews(user.id)
+                findNavController().navigate(action)
+
+            }
         })
     }
 

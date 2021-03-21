@@ -92,5 +92,6 @@
     <string name="oops_no_internet">Oops! No Internet.</string>
     <string name="till_number">Till Number</string>
     <string name="see_reviews">See reviews</string>
+    <string name="oops_no_bookings">Oops! No Bookings</string>
 </resources>
 
