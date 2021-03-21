@@ -58,9 +58,6 @@ class WorkFragment : Fragment(), StateListener {
             startWorkDialog()
         }
 
-        val currentTime=Calendar.getInstance().time
-        requireActivity().log(currentTime.toString())
-
         getCurrentUser()
 
         initUI()
@@ -107,7 +104,8 @@ class WorkFragment : Fragment(), StateListener {
                         .into(binding.workImageView)
                     binding.workUsername.text = work.worker.username
                     binding.workEmailAddress.text = work.worker.email
-                    binding.workPhoneNumber.text = "+${sanitizePhoneNumber(work.worker.phoneNumber)}"
+                    binding.workPhoneNumber.text =
+                        "+${sanitizePhoneNumber(work.worker.phoneNumber)}"
                 } else {
                     //Check if is not current user then display employer's info
                     Glide.with(requireActivity()).load(work.user.imageUrl)
@@ -202,7 +200,9 @@ class WorkFragment : Fragment(), StateListener {
 
     private fun startWork() {
         workViewModel.createWork(args.PostId, args.UserId).observe(viewLifecycleOwner, { work ->
-            binding.workStarted.text = workDateFormatter(work.createdAt)
+            val currentTime = Calendar.getInstance().time
+            binding.workStarted.text = workDateFormatter(currentTime.toString())
+            //TODO: Auto here
         })
         binding.buttonStartWork.visibility = GONE
         binding.buttonComplete.visibility = VISIBLE

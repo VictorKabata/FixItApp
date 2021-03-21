@@ -16,27 +16,6 @@
             android:layout_height="match_parent"
             android:padding="10dp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageView_user"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:src="@color/ic_launcher_background"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:ellipsize="end"
-                android:fontFamily="@font/roboto_medium"
-                android:maxLines="1"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toTopOf="@+id/rating_bar_review"
-                app:layout_constraintStart_toEndOf="@id/imageView_user"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Victor Kabata" />
 
             <RatingBar
                 android:id="@+id/rating_bar_review"
@@ -48,8 +27,8 @@
                 android:numStars="5"
                 android:theme="@style/RatingBar"
                 app:layout_constraintBottom_toTopOf="@+id/view"
-                app:layout_constraintStart_toStartOf="@id/textView_username"
-                app:layout_constraintTop_toBottomOf="@+id/textView_username" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView_rating"
@@ -58,11 +37,10 @@
                 android:layout_marginStart="8dp"
                 android:ellipsize="end"
                 android:fontFamily="@font/roboto_black"
-                android:textColor="@color/primaryColor"
                 android:maxLines="1"
+                android:textColor="@color/primaryColor"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="@id/rating_bar_review"
-                app:layout_constraintEnd_toEndOf="@id/textView_username"
                 app:layout_constraintStart_toEndOf="@id/rating_bar_review"
                 app:layout_constraintTop_toTopOf="@id/rating_bar_review"
                 tools:text="3.6" />
@@ -73,7 +51,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="6dp"
                 android:background="@color/primaryColor"
-                app:layout_constraintTop_toBottomOf="@id/imageView_user" />
+                app:layout_constraintTop_toBottomOf="@id/textView_rating" />
 
             <TextView
                 android:id="@+id/textView_review"

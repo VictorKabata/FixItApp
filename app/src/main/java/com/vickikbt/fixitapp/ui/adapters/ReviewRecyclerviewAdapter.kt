@@ -19,8 +19,7 @@ class ReviewsRecyclerviewAdapter constructor(
         viewType: Int
     ): ReviewRecyclerviewViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding: ItemReviewBinding =
-            DataBindingUtil.inflate(layoutInflater, R.layout.item_review, parent, false)
+        val binding: ItemReviewBinding = DataBindingUtil.inflate(layoutInflater, R.layout.item_review, parent, false)
 
         return ReviewRecyclerviewViewHolder(binding)
     }
@@ -30,7 +29,7 @@ class ReviewsRecyclerviewAdapter constructor(
     override fun onBindViewHolder(holder: ReviewRecyclerviewViewHolder, position: Int) {
         val review = reviewList[position]
 
-        holder.bind(review, holder.itemView.context)
+        holder.bind(review)
     }
 }
 
@@ -38,9 +37,7 @@ class ReviewRecyclerviewViewHolder(private val binding: ItemReviewBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
 
-    fun bind(review: Review, context: Context) {
-        Glide.with(context).load(review.user.imageUrl).into(binding.imageViewUser)
-        binding.textViewUsername.text = review.user.username
+    fun bind(review: Review) {
         binding.ratingBarReview.rating = review.rating.toFloat()
         binding.textViewRating.text=review.rating.toString()
         binding.textViewReview.text = review.comment

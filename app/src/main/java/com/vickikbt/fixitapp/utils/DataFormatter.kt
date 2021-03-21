@@ -19,11 +19,10 @@ class DataFormatter {
             return targetFormat.format(originalFormat)
         }
 
-        //2021-02-16T12:08:45.0409368+03:00
-        //2021-03-18T09:45:27.881089+03:00
+        //Sun Mar 21 20:05:04 GMT+03:00 2021
         @SuppressLint("SimpleDateFormat")
         fun workDateFormatter(date: String): String {
-            val originalFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.ssssssZ").parse(date)
+            val originalFormat = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy").parse(date)
             val targetFormat = SimpleDateFormat("dd-MM-yyyy HH:mm a")
 
             return targetFormat.format(originalFormat)
