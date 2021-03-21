@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
 import android.view.*
+import android.widget.ArrayAdapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
@@ -65,11 +66,18 @@ class UploadFragment : Fragment(), StateListener {
             pickerContent.launch("image/*")
         }
 
+        initUI()
 
         requestPermission()
         getMyLocation()
 
         return binding.root
+    }
+
+    private fun initUI() {
+        val specialisations = resources.getStringArray(R.array.specialisations)
+        val arrayAdapter = ArrayAdapter(requireActivity(), R.layout.dropdown_item, specialisations)
+        binding.textViewCategory.setAdapter(arrayAdapter)
     }
 
     private fun uploadPost(
@@ -84,7 +92,7 @@ class UploadFragment : Fragment(), StateListener {
             return
         }
 
-        val category = binding.spinnerCategoryUpload.selectedItem.toString()
+        val category=binding.textViewCategory.text.toString()
         requireActivity().applicationContext.log(category)
 
         val body = ImageHelpers(requireActivity()).getImageBody(selectedImage!!)

@@ -33,15 +33,15 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:elevation="2dp"
-                    android:text="@string/select_photo"
                     android:fontFamily="@font/roboto_medium"
+                    android:text="@string/select_photo"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
+                    app:drawableTopCompat="@drawable/ic_add"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:drawableTopCompat="@drawable/ic_add" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imageView_upload"
@@ -54,7 +54,29 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Spinner
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout_category"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="@string/category"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_upload">
+
+                <AutoCompleteTextView
+                    android:id="@+id/textView_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:inputType="none"
+                    android:textSize="18sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--<Spinner
                 android:id="@+id/spinner_category_upload"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -66,7 +88,7 @@
                 android:padding="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_upload" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout_upload" />-->
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/descriptionContainer"
@@ -79,7 +101,7 @@
                 app:hintEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/spinner_category_upload">
+                app:layout_constraintTop_toBottomOf="@id/textInputLayout_category">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/editText_description_upload"
