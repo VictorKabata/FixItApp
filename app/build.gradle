@@ -123,7 +123,7 @@ dependencies {
 
     //Daraja(MPesa) API
     //implementation "com.androidstudy:daraja:$daraja_version"
-    implementation 'com.twigafoods:daraja:0.1.2'
+    implementation 'com.twigafoods:daraja:$daraja_version'
 
     //Location Dependency
     implementation "com.google.android.gms:play-services-location:$location_version"
