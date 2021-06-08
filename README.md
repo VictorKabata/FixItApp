@@ -1,6 +1,6 @@
 # FixIt App
 
-🚧 Work In Progress 🚧
+🚧 Needs major refactor 🚧
 
  FixIt App is an android application for my school final year project consuming [FixIt API]("https://github.com/VictorKabata/FixIt-API) that allows users to find repair services for their faulty/broken equipment or help repair technicians find customers who need repiar services near them. 
  It has been built using MVVM Architecture as well as Jetpack Components.
