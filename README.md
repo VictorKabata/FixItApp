@@ -51,7 +51,7 @@ and default parameters.
 - [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) - Library Support for coroutines.
 - [Timber]()-Library for easier logging.
 - [Material Design](https://material.io/develop/android/docs/getting-started/) - Build awesome beautiful UIs.
-- [Glide]()- Image Library from loading images from the database and cacheing in memory.
+- [Glide]()- Image Library from loading resources from the database and cacheing in memory.
 
 ## Related Posts.
 
@@ -60,35 +60,52 @@ and default parameters.
 ### Login and Registration.
 The user will be provides with a login page where they can login if the had previously registered else they can navigate to registration page.
 
-<img src="images/login_dark.png" width="250"/> <img src="images/registration_dark.png" width="250"/> <img src="images/registration_light.png" width="250"/> 
+<img src="resources/login_empty.png" width="180"/>  <img src="resources/registration_light.png" width="180"/> 
 
 
 ### Home.
 The user is presented with a home page where they can see upload made by other users and navigate to various other pages from the navigation drawer, clicking the floating action button to navigate to Upload page or clicking on a post to see post details
 
-<img src="images/home1.png" width="250"/> <img src="images/home2.png" width="250"/>
+<img src="resources/home_no_posts.png" width="180"/> <img src="resources/home_nav_drawer.png" width="180"/> <img src="resources/home_uploads1.png" width="180"/> <img src="resources/home_uploads3.png" width="180"/>
 
 
 ### Upload.
 The user is presented with upload page where they can take a photo of their problem, choose a category, write a brief yet detailed description of their problem and write down their budget for their repair. The app can automaticaly detect your location.
 
-<img src="images/upload_frag1.png" width="250"/> <img src="images/upload_frag2.png" width="250"/> <img src="images/upload_frag3.png" width="250"/> 
+<img src="resources/upload_empty.png" width="180"/> <img src="resources/upload_frag2.png" width="180"/> <img src="resources/upload_frag3.png" width="180"/> 
 
 
 ### Post Details.
 The user is presented with more details about a post, where they can book the work, contact the uploader and see the uploaders' profile.
 
-<img src="images/post_detail1.png" width="250"/> <img src="images/post_detail2.png" width="250"/> 
+<img src="resources/post_detail1.png" width="180"/> <img src="resources/post_detail2.png" width="180"/> 
 
 
 ### User Profile.
 The user is presented with contact information, rating and location of the user.
 
-<img src="images/user_profile1.png" width="250"/> <img src="images/user_profile2.png" width="250"/> 
+<img src="resources/user_profile1.png" width="180"/> <img src="resources/user_profile2.png" width="180"/> 
 
 
 ### Post Bookings.
 The user is presented with a list of other user/repair technicians who have applied for the work of their posts.
 
-<img src="images/applications1.png" width="250"/> <img src="images/applications2.png" width="250"/> 
+<img src="resources/post_booking_no_bookings.png" width="180"/> <img src="resources/post_bookings1.png" width="180"/> <img src="resources/post_bookings2.png" width="180"/> 
+
+### Work Progress.
+The user is presented with a details page where they can see when the work started and how long the work has been going on for.
+
+<img src="resources/work_not_started.png" width="180"/> <img src="resources/work_started.png" width="180"/> 
+
+### Feed.
+
+### Payment.
+The user is presented with a form to enter payment amount and till number of recipient.
+
+<img src="resources/payment.png" width="180"/> 
+
+### Transactions.
+The user is presented with a list of transactions that they have made or money that they have paid to repair technicians.
+
+<img src="resources/transaction_no_transaction.png" width="180"/> <img src="resources/transaction1.png" width="180"/> 
 
