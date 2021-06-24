@@ -2,7 +2,7 @@
 
 🚧 Needs major refactor 🚧
 
- FixIt App is an android application for my school final year project consuming [FixIt API]("https://github.com/VictorKabata/FixIt-API) that allows users to find repair services for their faulty/broken equipment or help repair technicians find customers who need repiar services near them. 
+ FixIt App is an android application for my school final year project consuming [FixIt API](https://github.com/VictorKabata/FixIt-API) that allows users to find repair services for their faulty/broken equipment or help repair technicians find customers who need repiar services near them. 
  It has been built using MVVM Architecture as well as Jetpack Components.
 
  Min API Level: 21 [Supports Over 87% Devices ](https://developer.android.com/about/dashboards)
@@ -17,7 +17,7 @@
 - [Screenshots](#screenshots)
 
 ## Prerequisite.
-- In order to run the application, you need to [clone]("link_to_clone)/[fork]("link_to_fork) the [FixIt API]("https://github.com/VictorKabata/FixIt-API).
+- In order to run the application, you need to [clone]("link_to_clone)/[fork]("link_to_fork) the [FixIt API](https://github.com/VictorKabata/FixIt-API).
 
 - Download the [Go Programming Language SDK]("https://golang.org/dl/) in your computer.
 
